@@ -15,6 +15,7 @@ declare(strict_types=1);
 return ['Navigation' => [
     'Applications' => 'Anwendungen',
     'CMS'          => 'CMS',
+    'Content'      => 'Inhalt',
     'Create'       => 'Erstellen',
     'Pages'        => 'Seiten',
     'Permissions'  => 'Rechnte',
