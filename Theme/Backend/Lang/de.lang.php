@@ -16,4 +16,5 @@ return ['CMS' => [
     'Application' => 'Anwendung',
     'Applications' => 'Anwendungen',
     'Name' => 'Name',
+    'Templates' => 'Templates',
 ],];

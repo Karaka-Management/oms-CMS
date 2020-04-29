@@ -6,7 +6,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/task(\?.*|$)' => [
+    '^.*/cms/application$' => [
         [
             'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationCreate',
             'verb' => RouteVerb::PUT,
@@ -16,6 +16,30 @@ return [
                 'state' => PermissionState::APPLICATION,
             ],
         ],
+    ],
+    '^.*/cms/application\?.*?id=.*$' => [
+        [
+            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationSet',
+            'verb' => RouteVerb::SET,
+            'permission' => [
+                'module' => ApiController::MODULE_NAME,
+                'type'  => PermissionType::MODIFY,
+                'state' => PermissionState::APPLICATION,
+            ],
+        ],
+    ],
+    '^.*/cms/application/template((?!tpl=).)*$' => [
+        [
+            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationSet',
+            'verb' => RouteVerb::PUT,
+            'permission' => [
+                'module' => ApiController::MODULE_NAME,
+                'type'  => PermissionType::MODIFY,
+                'state' => PermissionState::APPLICATION,
+            ],
+        ],
+    ],
+    '^.*/cms/application/template\?.*?tpl=.*?$' => [
         [
             'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationSet',
             'verb' => RouteVerb::SET,

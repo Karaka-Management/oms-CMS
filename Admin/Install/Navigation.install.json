@@ -107,7 +107,7 @@
                                 "type": 3,
                                 "subtype": 1,
                                 "name": "Templates",
-                                "uri": "{/prefix}cms/application/template",
+                                "uri": "{/prefix}cms/application/template?id={?id}",
                                 "target": "self",
                                 "icon": null,
                                 "order": 20,

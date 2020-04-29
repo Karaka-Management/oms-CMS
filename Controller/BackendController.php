@@ -14,12 +14,14 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Controller;
 
+use Modules\CMS\Models\Application;
 use Modules\CMS\Models\ApplicationMapper;
 
 use phpOMS\Views\View;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\System\File\Local\Directory;
 
 /**
  * CMS class.
@@ -90,12 +92,72 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplication(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationContents(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $view->setTemplate('/Modules/CMS/Theme/Backend/application-single');
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-contents');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+
+        return $view;
+    }
+
+    /**
+     * Routing end-point for application behaviour.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return RenderableInterface
+     *
+     * @since 1.0.0
+     */
+    public function viewApplicationTemplates(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    {
+        $view = new View($this->app->l11nManager, $request, $response);
+
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-templates');
+        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+
+        /** @var Application $app */
+        $app  = ApplicationMapper::get($request->getData('id'));
+        $tpls = Directory::list(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl', '.*tpl\.php');
+
+        $view->addData('templates', $tpls);
+
+        return $view;
+    }
+
+    /**
+     * Routing end-point for application behaviour.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return RenderableInterface
+     *
+     * @since 1.0.0
+     */
+    public function viewApplicationTemplate(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    {
+        $view = new View($this->app->l11nManager, $request, $response);
+
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-template');
+        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+
+        /** @var Application $app */
+        $app  = ApplicationMapper::get($request->getData('id'));
+        $view->addData('app', $app);
+
+        if (($path = \realpath(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl/' . $request->getDatA('tpl'))) === false
+            || \stripos($path, \realpath(__DIR__ . '/../../../Web/')) !== 0
+        ) {
+            return $view;
+        }
+
+        $view->addData('template', $path);
 
         return $view;
     }

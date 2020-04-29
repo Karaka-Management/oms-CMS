@@ -20,4 +20,3 @@ use phpOMS\Uri\UriFactory;
 
 echo $this->getData('nav')->render();
 ?>
-asdfasdf

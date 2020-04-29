@@ -120,27 +120,10 @@ final class ApiController extends Controller
             return;
         }
 
-        if (!\file_exists(__DIR__ . '/../tmp')) {
-            \mkdir(__DIR__ . '/../tmp');
-        }
-
-        $upload = new UploadFile();
-        $upload->setOutputDir(__DIR__ . '/../tmp');
-
-        $status = $upload->upload($request->getFiles());
-
-        if ($status[0]['status'] !== UploadStatus::OK) {
+        $app = $this->upploadApplication($request);
+        if (empty($app)) {
             return;
         }
-
-        $app = \ucfirst(
-            \strtolower(
-                $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
-            )
-        );
-
-        Zip::unpack(__DIR__ . '/../tmp/' . $status[0]['filename'], __DIR__ . '/../tmp/' . $app);
-        \unlink(__DIR__ . '/../tmp/' . $status[0]['filename']);
 
         $request->setData('appSrc', 'Modules/CMS/tmp/' . $app);
         $request->setData('appDest', 'Web/' . $app);
@@ -152,6 +135,41 @@ final class ApiController extends Controller
         $application = $this->createApplicationFromRequest($request);
         $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application');
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
+    }
+
+    /**
+     * Upload the application archiv
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return string
+     *
+     * @since 1.0.0
+     */
+    private function upploadApplication(RequestAbstract $request) : string
+    {
+        if (!\file_exists(__DIR__ . '/../tmp')) {
+            \mkdir(__DIR__ . '/../tmp');
+        }
+
+        $upload = new UploadFile();
+        $upload->setOutputDir(__DIR__ . '/../tmp');
+
+        $status = $upload->upload($request->getFiles());
+        if ($status[0]['status'] !== UploadStatus::OK) {
+            return '';
+        }
+
+        $app = \ucfirst(
+            \strtolower(
+                $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
+            )
+        );
+
+        Zip::unpack(__DIR__ . '/../tmp/' . $status[0]['filename'], __DIR__ . '/../tmp/' . $app);
+        \unlink(__DIR__ . '/../tmp/' . $status[0]['filename']);
+
+        return $app;
     }
 
     /**
