@@ -19,7 +19,6 @@ use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
-use phpOMS\Utils\Parser\Markdown\Markdown;
 use Modules\CMS\Models\ApplicationMapper;
 use Modules\Media\Models\UploadFile;
 use Modules\Media\Models\UploadStatus;
@@ -186,6 +185,69 @@ final class ApiController extends Controller
         $val = [];
         if (($val['name'] = empty($request->getData('name')))
             || ($val['files'] = empty($request->getFiles()))
+        ) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Api method to create a task
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    {
+        if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
+            $response->set($request->getUri()->__toString(), new FormValidation($val));
+
+            return;
+        }
+
+        /** @var Application $app */
+        $app  = ApplicationMapper::get($request->getData('id'));
+
+        $basePath = \realpath(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl/');
+        if ($basePath === false
+            || ($path = \realpath($basePath . '/' . $request->getDatA('tpl'))) === false
+            || \stripos($path, \realpath(__DIR__ . '/../../../Web/')) !== 0
+        ) {
+            return;
+        }
+
+        \file_put_contents($path, $request->getData('content'));
+
+        if (!empty($request->getData('name'))) {
+            $old = $path;
+            $new = $basePath . '/' . $request->getData('name') . '.tpl.php';
+            \rename($old, $new);
+        }
+
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application Template', 'Template successfully updated', $request->getData('content'));
+    }
+
+    /**
+     * Validate application template update request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool> Returns the validation array of the request
+     *
+     * @since 1.0.0
+     */
+    private function validateApplicationTemplateUpdate(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['content'] = empty($request->getData('content')))
         ) {
             return $val;
         }

@@ -19,7 +19,7 @@ return [
     ],
     '^.*/cms/application\?.*?id=.*$' => [
         [
-            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationSet',
+            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationUpdate',
             'verb' => RouteVerb::SET,
             'permission' => [
                 'module' => ApiController::MODULE_NAME,
@@ -30,7 +30,7 @@ return [
     ],
     '^.*/cms/application/template((?!tpl=).)*$' => [
         [
-            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationSet',
+            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateCreate',
             'verb' => RouteVerb::PUT,
             'permission' => [
                 'module' => ApiController::MODULE_NAME,
@@ -41,7 +41,7 @@ return [
     ],
     '^.*/cms/application/template\?.*?tpl=.*?$' => [
         [
-            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationSet',
+            'dest' => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateUpdate',
             'verb' => RouteVerb::SET,
             'permission' => [
                 'module' => ApiController::MODULE_NAME,
