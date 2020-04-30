@@ -151,8 +151,10 @@ final class BackendController extends Controller
         $app = ApplicationMapper::get($request->getData('id'));
         $view->addData('app', $app);
 
-        if (($path = \realpath(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl/' . $request->getDatA('tpl'))) === false
-            || \stripos($path, \realpath(__DIR__ . '/../../../Web/')) !== 0
+        $basePath = \realpath(__DIR__ . '/../../../Web/');
+        if ($basePath === false
+            || ($path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())) . '/tpl/' . $request->getDatA('tpl'))) === false
+            || \stripos($path, $basePath) !== 0
         ) {
             return $view;
         }
