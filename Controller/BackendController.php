@@ -148,7 +148,7 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
 
         /** @var Application $app */
-        $app  = ApplicationMapper::get($request->getData('id'));
+        $app = ApplicationMapper::get($request->getData('id'));
         $view->addData('app', $app);
 
         if (($path = \realpath(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl/' . $request->getDatA('tpl'))) === false
