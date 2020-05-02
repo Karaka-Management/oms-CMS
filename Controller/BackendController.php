@@ -53,8 +53,10 @@ final class BackendController extends Controller
 
         if ($request->getData('ptype') === '-') {
             $view->setData('applications', ApplicationMapper::getBeforePivot((int) ($request->getData('id') ?? 0), null, 25));
-        } else {
+        } elseif ($request->getData('ptype') === '+') {
             $view->setData('applications', ApplicationMapper::getAfterPivot((int) ($request->getData('id') ?? 0), null, 25));
+        } else {
+            $view->setData('applications', ApplicationMapper::getAfterPivot(0, null, 25));
         }
 
         return $view;
