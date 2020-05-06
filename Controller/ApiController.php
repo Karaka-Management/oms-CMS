@@ -214,7 +214,7 @@ final class ApiController extends Controller
         }
 
         /** @var Application $app */
-        $app  = ApplicationMapper::get($request->getData('id'));
+        $app = ApplicationMapper::get($request->getData('id'));
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
         $basePath = \realpath(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl/');
