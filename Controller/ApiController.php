@@ -256,4 +256,38 @@ final class ApiController extends Controller
 
         return [];
     }
+
+    /**
+     * Api method to create a task
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiApplicationUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    {
+    }
+
+    /**
+     * Api method to create a task
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    {
+    }
 }
