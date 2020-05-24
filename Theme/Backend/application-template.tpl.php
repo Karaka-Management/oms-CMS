@@ -26,8 +26,8 @@ echo $this->getData('nav')->render();
 <div class="row">
     <div class="box col-xs-12">
         <section id="tplFile" class="box wf-100"
-            data-ui-content=".inner"
-            data-ui-element="#tplFile .textTitle, #tplFile .textContent"
+            data-update-content=".inner"
+            data-update-element="#tplFile .textTitle, #tplFile .textContent"
             data-tag="form"
             data-method="POST"
             data-uri="<?= \phpOMS\Uri\UriFactory::build('{/api}cms/application/template?id={?id}&tpl={?tpl}&csrf={$CSRF}'); ?>">
