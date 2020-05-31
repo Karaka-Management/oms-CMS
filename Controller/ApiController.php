@@ -77,7 +77,7 @@ final class ApiController extends Controller
         }
 
         $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application');
+        $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
@@ -132,7 +132,7 @@ final class ApiController extends Controller
         Directory::delete(__DIR__ . '/../tmp');
 
         $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application');
+        $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
