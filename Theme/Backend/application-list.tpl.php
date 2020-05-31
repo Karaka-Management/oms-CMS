@@ -37,7 +37,7 @@ echo $this->getData('nav')->render();
                 <tbody>
                 <?php $count = 0; foreach ($applications as $key => $application) : ++$count;
                 $url = UriFactory::build('{/prefix}cms/application/content?{?}&id=' . $application->getId()); ?>
-                    <tr data-href="<?= $url; ?>">
+                    <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name') ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->getName()); ?></a>
                 <?php endforeach; ?>
