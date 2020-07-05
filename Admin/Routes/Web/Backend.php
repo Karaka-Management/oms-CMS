@@ -28,9 +28,9 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/template((?!tpl=).)*$' => [
+    '^.*/cms/application/file((?!tpl=).)*$' => [
         [
-            'dest' => '\Modules\CMS\Controller\BackendController:viewApplicationTemplates',
+            'dest' => '\Modules\CMS\Controller\BackendController:viewApplicationFiles',
             'verb' => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,
@@ -39,9 +39,9 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/template\?.*?tpl=.*?$' => [
+    '^.*/cms/application/file\?.*?tpl=.*?$' => [
         [
-            'dest' => '\Modules\CMS\Controller\BackendController:viewApplicationTemplate',
+            'dest' => '\Modules\CMS\Controller\BackendController:viewApplicationFile',
             'verb' => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,

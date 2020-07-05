@@ -115,7 +115,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationTemplates(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationFiles(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
@@ -126,7 +126,7 @@ final class BackendController extends Controller
         $app  = ApplicationMapper::get($request->getData('id'));
         $tpls = Directory::list(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl', '.*tpl\.php');
 
-        $view->addData('templates', $tpls);
+        $view->addData('files', $tpls);
 
         return $view;
     }
@@ -142,7 +142,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationTemplate(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationFile(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 

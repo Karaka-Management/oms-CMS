@@ -20,7 +20,7 @@ return ['Navigation' => [
     'Pages'        => 'Pages',
     'Permissions'  => 'Permissions',
     'Settings'     => 'Settings',
-    'Templates'    => 'Templates',
+    'Files'        => 'Files',
     'Themes'       => 'Themes',
     'Widgets'      => 'Widgets',
 ]];
