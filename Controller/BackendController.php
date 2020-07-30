@@ -51,9 +51,9 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-list');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response));
 
-        if ($request->getData('ptype') === '-') {
+        if ($request->getData('ptype') === 'p') {
             $view->setData('applications', ApplicationMapper::getBeforePivot((int) ($request->getData('id') ?? 0), null, 25));
-        } elseif ($request->getData('ptype') === '+') {
+        } elseif ($request->getData('ptype') === 'n') {
             $view->setData('applications', ApplicationMapper::getAfterPivot((int) ($request->getData('id') ?? 0), null, 25));
         } else {
             $view->setData('applications', ApplicationMapper::getAfterPivot(0, null, 25));
