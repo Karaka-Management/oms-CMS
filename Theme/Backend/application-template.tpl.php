@@ -32,9 +32,9 @@ echo $this->getData('nav')->render();
             data-uri="<?= \phpOMS\Uri\UriFactory::build('{/api}cms/application/template?id={?id}&tpl={?tpl}&csrf={$CSRF}'); ?>">
             <div class="inner">
                 <div class="vC">
-                    <button class="save hidden"><?= $this->getHtml('Save', '0', '0') ?></button>
-                    <button class="cancel hidden"><?= $this->getHtml('Cancel', '0', '0') ?></button>
-                    <button class="update"><?= $this->getHtml('Edit', '0', '0') ?></button>
+                    <button class="save hidden"><?= $this->getHtml('Save', '0', '0'); ?></button>
+                    <button class="cancel hidden"><?= $this->getHtml('Cancel', '0', '0'); ?></button>
+                    <button class="update"><?= $this->getHtml('Edit', '0', '0'); ?></button>
                 </div>
                 <template></template><!-- todo: this is required because of selectorLength + i in Form.js = first element = add template, second element = edit element. Fix -->
                 <template></template><!-- todo: this is required because of selectorLength + i in Form.js = first element = add template, second element = edit element. Fix -->

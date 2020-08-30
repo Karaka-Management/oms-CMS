@@ -28,18 +28,18 @@ echo $this->getData('nav')->render();
 <div class="row">
     <div class="col-xs-12">
         <div class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Applications') ?><i class="fa fa-download floatRight download btn"></i></div>
+            <div class="portlet-head"><?= $this->getHtml('Applications'); ?><i class="fa fa-download floatRight download btn"></i></div>
             <table id="applicationList" class="default">
                 <thead>
                 <tr>
                     <td>
-                    <td class="wf-100"><?= $this->getHtml('Name') ?>
+                    <td class="wf-100"><?= $this->getHtml('Name'); ?>
                 <tbody>
                 <?php $count = 0; foreach ($applications as $key => $application) : ++$count;
                 $url = UriFactory::build('{/prefix}cms/application/content?{?}&id=' . $application->getId()); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
-                        <td data-label="<?= $this->getHtml('Name') ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->getName()); ?></a>
+                        <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->getName()); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                 <tr><td colspan="3" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>

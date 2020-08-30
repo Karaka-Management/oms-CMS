@@ -24,7 +24,7 @@ namespace Modules\CMS\Models;
  */
 class Application
 {
-        /**
+    /**
      * ID.
      *
      * @var int
