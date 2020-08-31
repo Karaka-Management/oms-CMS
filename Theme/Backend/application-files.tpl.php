@@ -33,7 +33,7 @@ echo $this->getData('nav')->render();
                     <td class="wf-100"><?= $this->getHtml('Name'); ?>
                 <tbody>
                 <?php $count = 0; foreach ($templates as $key => $tpl) : ++$count;
-                $url = UriFactory::build('{/prefix}cms/application/template?{?}&tpl=' . $tpl); ?>
+                $url         = UriFactory::build('{/prefix}cms/application/template?{?}&tpl=' . $tpl); ?>
                     <tr data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($tpl); ?></a>

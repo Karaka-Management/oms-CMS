@@ -13,8 +13,8 @@
 declare(strict_types=1);
 
 return ['CMS' => [
-    'Application' => 'Application',
+    'Application'  => 'Application',
     'Applications' => 'Applications',
-    'Name' => 'Name',
-    'Templates' => 'Templates',
+    'Name'         => 'Name',
+    'Templates'    => 'Templates',
 ],];
