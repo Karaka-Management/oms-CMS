@@ -16,7 +16,6 @@ namespace Modules\CMS\Controller;
 
 use Modules\CMS\Models\Application;
 use Modules\CMS\Models\ApplicationMapper;
-
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
