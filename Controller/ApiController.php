@@ -24,6 +24,7 @@ use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
 use phpOMS\System\File\Local\Directory;
 use phpOMS\Utils\IO\Zip\Zip;
+use phpOMS\Utils\MbStringUtils;
 
 /**
  * Api controller for the CMS module.
@@ -159,8 +160,8 @@ final class ApiController extends Controller
             return '';
         }
 
-        $app = \ucfirst(
-            \strtolower(
+        $app = MbStringUtils::mb_ucfirst(
+            \mb_strtolower(
                 $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
             )
         );
@@ -217,7 +218,7 @@ final class ApiController extends Controller
         $app = ApplicationMapper::get($request->getData('id'));
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
-        $basePath = \realpath(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl/');
+        $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())) . '/tpl/');
         if ($basePath === false
             || $webPath === false
             || ($path = \realpath($basePath . '/' . $request->getDatA('tpl'))) === false
@@ -289,5 +290,33 @@ final class ApiController extends Controller
      */
     public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
+    }
+
+    /**
+     * Api method to list files of a application
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    {
+        /** @var Application $app */
+        $app  = ApplicationMapper::get((int) $request->getData('id'));
+        $path = (string) $request->getData('path') ?? '/';
+
+        $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())), $path);
+
+        if ($content === false) {
+            $content = [];
+        }
+
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application Content', 'Directory content successfull returned', $content);
     }
 }

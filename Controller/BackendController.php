@@ -114,38 +114,11 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationFiles(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
-    {
-        $view = new View($this->app->l11nManager, $request, $response);
-
-        $view->setTemplate('/Modules/CMS/Theme/Backend/application-templates');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
-
-        /** @var Application $app */
-        $app  = ApplicationMapper::get($request->getData('id'));
-        $tpls = Directory::list(__DIR__ . '/../../../Web/' . \ucfirst(\strtolower($app->getName())) . '/tpl', '.*tpl\.php');
-
-        $view->addData('files', $tpls);
-
-        return $view;
-    }
-
-    /**
-     * Routing end-point for application behaviour.
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return RenderableInterface
-     *
-     * @since 1.0.0
-     */
     public function viewApplicationFile(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $view->setTemplate('/Modules/CMS/Theme/Backend/application-template');
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-file');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
 
         /** @var Application $app */

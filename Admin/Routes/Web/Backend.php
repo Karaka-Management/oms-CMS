@@ -28,18 +28,7 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/file((?!tpl=).)*$' => [
-        [
-            'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationFiles',
-            'verb'       => RouteVerb::GET,
-            'permission' => [
-                'module' => BackendController::MODULE_NAME,
-                'type'   => PermissionType::READ,
-                'state'  => PermissionState::APPLICATION,
-            ],
-        ],
-    ],
-    '^.*/cms/application/file\?.*?tpl=.*?$' => [
+    '^.*/cms/application/file.*$' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationFile',
             'verb'       => RouteVerb::GET,
