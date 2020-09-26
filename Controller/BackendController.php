@@ -19,7 +19,6 @@ use Modules\CMS\Models\ApplicationMapper;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
-use phpOMS\System\File\Local\Directory;
 use phpOMS\Views\View;
 
 /**

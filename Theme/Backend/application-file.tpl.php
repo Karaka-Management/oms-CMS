@@ -20,7 +20,7 @@ use phpOMS\Uri\UriFactory;
  */
 $templates = $this->getData('templates') ?? [];
 
-$doc = null;
+$doc      = null;
 $isNewDoc = false;
 
 echo $this->getData('nav')->render();
@@ -32,7 +32,7 @@ echo $this->getData('nav')->render();
             <div class="portlet-body">
                 <form id="fEditor" method="<?= $isNewDoc ? 'PUT' : 'POST'; ?>" action="<?= UriFactory::build('{/api}editor?{?}&csrf={$CSRF}'); ?>">
                     <div class="ipt-wrap">
-                        <div class="ipt-first"><input name="title" type="text" class="wf-100" value="<?= /*$doc->getTitle();*/ 1 ?>"></div>
+                        <div class="ipt-first"><input name="title" type="text" class="wf-100" value="<?= /*$doc->getTitle();*/ 1; ?>"></div>
                         <div class="ipt-second"><input type="submit" value="<?= $this->getHtml('Save'); ?>"></div>
                     </div>
                 </form>
