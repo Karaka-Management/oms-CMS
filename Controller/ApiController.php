@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Orange Management
  *
@@ -10,6 +11,7 @@
  * @version   1.0.0
  * @link      https://orange-management.org
  */
+
 declare(strict_types=1);
 
 namespace Modules\CMS\Controller;
@@ -25,6 +27,7 @@ use phpOMS\Model\Message\FormValidation;
 use phpOMS\System\File\Local\Directory;
 use phpOMS\Utils\IO\Zip\Zip;
 use phpOMS\Utils\MbStringUtils;
+use phpOMS\Message\Http\RequestStatusCode;
 
 /**
  * Api controller for the CMS module.
@@ -45,11 +48,10 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function validateApplicationCreate(RequestAbstract $request) : array
+    private function validateApplicationCreate(RequestAbstract $request): array
     {
         $val = [];
-        if (($val['name'] = empty($request->getData('name')))
-        ) {
+        if (($val['name'] = empty($request->getData('name')))) {
             return $val;
         }
 
@@ -69,10 +71,11 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationCreate(RequestAbstract $request, ResponseAbstract $response, $data = null): void
     {
         if (!empty($val = $this->validateApplicationCreate($request))) {
             $response->set($request->getUri()->__toString(), new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }
@@ -91,7 +94,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function createApplicationFromRequest(RequestAbstract $request) : Application
+    private function createApplicationFromRequest(RequestAbstract $request): Application
     {
         $app = new Application();
         $app->setName((string) ($request->getData('name') ?? ''));
@@ -112,10 +115,11 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, $data = null): void
     {
         if (!empty($val = $this->validateApplicationInstall($request))) {
             $response->set($request->getUri()->__toString(), new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }
@@ -146,7 +150,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function upploadApplication(RequestAbstract $request) : string
+    private function upploadApplication(RequestAbstract $request): string
     {
         if (!\file_exists(__DIR__ . '/../tmp')) {
             \mkdir(__DIR__ . '/../tmp');
@@ -181,7 +185,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function validateApplicationInstall(RequestAbstract $request) : array
+    private function validateApplicationInstall(RequestAbstract $request): array
     {
         $val = [];
         if (($val['name'] = empty($request->getData('name')))
@@ -206,10 +210,11 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null): void
     {
         if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
             $response->set($request->getUri()->__toString(), new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }
@@ -219,7 +224,8 @@ final class ApiController extends Controller
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
         $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())) . '/tpl/');
-        if ($basePath === false
+        if (
+            $basePath === false
             || $webPath === false
             || ($path = \realpath($basePath . '/' . $request->getDatA('tpl'))) === false
             || \stripos($path, $webPath) !== 0
@@ -247,11 +253,10 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function validateApplicationTemplateUpdate(RequestAbstract $request) : array
+    private function validateApplicationTemplateUpdate(RequestAbstract $request): array
     {
         $val = [];
-        if (($val['content'] = empty($request->getData('content')))
-        ) {
+        if (($val['content'] = empty($request->getData('content')))) {
             return $val;
         }
 
@@ -271,7 +276,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null): void
     {
     }
 
@@ -288,7 +293,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, $data = null): void
     {
     }
 
@@ -305,7 +310,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null): void
     {
         /** @var Application $app */
         $app  = ApplicationMapper::get((int) $request->getData('id'));
