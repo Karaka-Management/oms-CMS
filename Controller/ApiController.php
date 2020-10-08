@@ -152,7 +152,7 @@ final class ApiController extends Controller
      */
     private function upploadApplication(RequestAbstract $request) : string
     {
-        if (!\file_exists(__DIR__ . '/../tmp')) {
+        if (!\is_dir(__DIR__ . '/../tmp')) {
             \mkdir(__DIR__ . '/../tmp');
         }
 
