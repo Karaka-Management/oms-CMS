@@ -224,8 +224,8 @@ final class ApiController extends Controller
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
         $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())) . '/tpl/');
-        if (
-            $basePath === false
+
+        if ($basePath === false
             || $webPath === false
             || ($path = \realpath($basePath . '/' . $request->getDatA('tpl'))) === false
             || \stripos($path, $webPath) !== 0
@@ -316,7 +316,7 @@ final class ApiController extends Controller
         $app  = ApplicationMapper::get((int) $request->getData('id'));
         $path = (string) $request->getData('path') ?? '/';
 
-        $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())), $path);
+        $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())) . $path);
 
         if ($content === false) {
             $content = [];
