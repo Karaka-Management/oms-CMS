@@ -12,13 +12,16 @@
  */
 declare(strict_types=1);
 
+use phpOMS\System\File\FileUtils;
 use phpOMS\Uri\UriFactory;
 
 /**
- * @var \phpOMS\Views\View                $this
- * @var \Modules\CMS\Models\Application[] $templates
+ * @var \phpOMS\Views\View $this
+ * @var string[]           $file
  */
-$templates = $this->getData('templates') ?? [];
+$file    = $this->getData('file') ?? [];
+$content = $this->getData('content') ?? [];
+$list    = $this->getData('list') ?? [];
 
 $doc      = null;
 $isNewDoc = false;
@@ -28,19 +31,8 @@ echo $this->getData('nav')->render();
 
 <div class="row">
     <div class="col-xs-12 col-md-8">
-        <div class="portlet">
-            <div class="portlet-body">
-                <form id="fEditor" method="<?= $isNewDoc ? 'PUT' : 'POST'; ?>" action="<?= UriFactory::build('{/api}editor?{?}&csrf={$CSRF}'); ?>">
-                    <div class="ipt-wrap">
-                        <div class="ipt-first"><input name="title" type="text" class="wf-100" value="<?= /*$doc->getTitle();*/ 1; ?>"></div>
-                        <div class="ipt-second"><input type="submit" value="<?= $this->getHtml('Save'); ?>"></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="box">
-            <textarea></textarea>
+        <div class="box" style="height: 100%; display: flex; align-items: stretch;">
+            <textarea style="height: 100%;"><?= \str_replace("\n", '&#13;&#10;', $content); ?></textarea>
         </div>
     </div>
 
@@ -55,7 +47,12 @@ echo $this->getData('nav')->render();
         <div class="portlet">
             <div class="portlet-head">Files</div>
             <div class="portlet-body">
-                <!-- Show all files of the application -->
+                <ul>
+                    <li><a href="<?= UriFactory::build('{/prefix}cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="fa fa-folder-o"></i> ..</a>
+                <?php foreach ($list as $element) : ?>
+                    <li><a href="<?= UriFactory::build('{/prefix}cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="fa fa-folder-o"></i>' : '<i class="fa fa-file-o"></i>' ?> <?= $element['name']; ?></a>
+                <?php endforeach; ?>
+                </ul>
             </div>
         </div>
     </div>

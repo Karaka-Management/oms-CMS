@@ -125,14 +125,44 @@ final class BackendController extends Controller
         $view->addData('app', $app);
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');
-        if ($basePath === false
-            || ($path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())) . '/tpl/' . $request->getDatA('tpl'))) === false
-            || \stripos($path, $basePath) !== 0
-        ) {
-            return $view;
+        $path     = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())) . '/' . $request->getData('file') ?? '');
+
+        if ($path === false || \stripos($path, $basePath . '/') !== 0 || $basePath === false) {
+            $path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())));
         }
 
-        $view->addData('template', $path);
+        if (!\is_dir($path)) {
+            $path = \dirname($path);
+        }
+
+        $tempList = \scandir($path);
+
+        $temp1    = [];
+        $temp2    = [];
+        $fileList = [];
+
+        foreach ($tempList as $element) {
+            if ($element === '.' || $element === '..') {
+                continue;
+            } elseif (\is_file($path . '/' . $element)) {
+                $temp2[] = ['name' => $element, 'type' => 0];
+            } else {
+                $temp1[] = ['name' => $element, 'type' => 1];
+            }
+        }
+
+        $file   = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())) . '/' . $request->getData('file') ?? '');
+        $parent = $file === false || \is_dir($file) ? $request->getData('file') ?? '' : \dirname($request->getData('file') ?? '');
+
+        if ($file === false || !\is_file($file) || \stripos($file, $basePath) !== 0) {
+            $file = !empty($temp2) ? \realpath(\rtrim($path, '/') . '/' . $temp2[0]['name']) : false;
+        }
+
+        $fileList = \array_merge($temp1, $temp2);
+
+        $view->addData('content', $file === false ? '' : \file_get_contents($file));
+        $view->addData('parent', $parent);
+        $view->addData('list', $fileList);
 
         return $view;
     }
