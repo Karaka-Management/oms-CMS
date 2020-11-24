@@ -96,7 +96,7 @@ final class ApiController extends Controller
      */
     private function createApplicationFromRequest(RequestAbstract $request) : Application
     {
-        $app = new Application();
+        $app       = new Application();
         $app->name = (string) ($request->getData('name') ?? '');
 
         return $app;

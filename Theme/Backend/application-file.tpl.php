@@ -50,7 +50,7 @@ echo $this->getData('nav')->render();
                 <ul>
                     <li><a href="<?= UriFactory::build('{/prefix}cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="fa fa-folder-o"></i> ..</a>
                 <?php foreach ($list as $element) : ?>
-                    <li><a href="<?= UriFactory::build('{/prefix}cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="fa fa-folder-o"></i>' : '<i class="fa fa-file-o"></i>' ?> <?= $element['name']; ?></a>
+                    <li><a href="<?= UriFactory::build('{/prefix}cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="fa fa-folder-o"></i>' : '<i class="fa fa-file-o"></i>'; ?> <?= $element['name']; ?></a>
                 <?php endforeach; ?>
                 </ul>
             </div>
