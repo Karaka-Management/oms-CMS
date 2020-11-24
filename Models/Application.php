@@ -38,7 +38,7 @@ class Application
      * @var string
      * @since 1.0.0
      */
-    private string $name = '';
+    public string $name = '';
 
     /**
      * Get id
@@ -50,31 +50,5 @@ class Application
     public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name Name
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setName(string $name) : void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     *
-     * @since 1.0.0
-     */
-    public function getName() : string
-    {
-        return $this->name;
     }
 }

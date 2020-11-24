@@ -74,14 +74,14 @@ final class ApiController extends Controller
     public function apiApplicationCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         if (!empty($val = $this->validateApplicationCreate($request))) {
-            $response->set($request->getUri()->__toString(), new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
 
         $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application', $request->getOrigin());
+        $this->createModel($request->header->account, $application, ApplicationMapper::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
@@ -97,7 +97,7 @@ final class ApiController extends Controller
     private function createApplicationFromRequest(RequestAbstract $request) : Application
     {
         $app = new Application();
-        $app->setName((string) ($request->getData('name') ?? ''));
+        $app->name = (string) ($request->getData('name') ?? '');
 
         return $app;
     }
@@ -118,8 +118,8 @@ final class ApiController extends Controller
     public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         if (!empty($val = $this->validateApplicationInstall($request))) {
-            $response->set($request->getUri()->__toString(), new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
@@ -137,7 +137,7 @@ final class ApiController extends Controller
         Directory::delete(__DIR__ . '/../tmp');
 
         $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $application, ApplicationMapper::class, 'application', $request->getOrigin());
+        $this->createModel($request->header->account, $application, ApplicationMapper::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
@@ -213,8 +213,8 @@ final class ApiController extends Controller
     public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
-            $response->set($request->getUri()->__toString(), new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
@@ -223,7 +223,7 @@ final class ApiController extends Controller
         $app = ApplicationMapper::get($request->getData('id'));
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
-        $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())) . '/tpl/');
+        $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . '/tpl/');
 
         if ($basePath === false
             || $webPath === false
@@ -316,7 +316,7 @@ final class ApiController extends Controller
         $app  = ApplicationMapper::get((int) $request->getData('id'));
         $path = (string) $request->getData('path') ?? '/';
 
-        $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->getName())) . $path);
+        $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . $path);
 
         if ($content === false) {
             $content = [];

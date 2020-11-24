@@ -125,10 +125,10 @@ final class BackendController extends Controller
         $view->addData('app', $app);
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');
-        $path     = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())) . '/' . $request->getData('file') ?? '');
+        $path     = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . $request->getData('file') ?? '');
 
         if ($path === false || \stripos($path, $basePath . '/') !== 0 || $basePath === false) {
-            $path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())));
+            $path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)));
         }
 
         if (!\is_dir($path)) {
@@ -151,7 +151,7 @@ final class BackendController extends Controller
             }
         }
 
-        $file   = \realpath($basePath . '/' . \ucfirst(\strtolower($app->getName())) . '/' . $request->getData('file') ?? '');
+        $file   = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . $request->getData('file') ?? '');
         $parent = $file === false || \is_dir($file) ? $request->getData('file') ?? '' : \dirname($request->getData('file') ?? '');
 
         if ($file === false || !\is_file($file) || \stripos($file, $basePath) !== 0) {
