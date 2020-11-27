@@ -19,6 +19,7 @@ use Modules\CMS\Models\ApplicationMapper;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
+use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Views\View;
 
 /**
@@ -131,11 +132,18 @@ final class BackendController extends Controller
             $path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)));
         }
 
+        if ($path === false || $basePath === false) {
+            $view->setTemplate('/Web/Backend/Error/404');
+            $response->header->status = RequestStatusCode::R_404;
+
+            return $view;
+        }
+
         if (!\is_dir($path)) {
             $path = \dirname($path);
         }
 
-        $tempList = \scandir($path);
+        $tempList = ($dirs = \scandir($path)) === false ? [] : $dirs;
 
         $temp1    = [];
         $temp2    = [];
