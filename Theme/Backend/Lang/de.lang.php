@@ -4,7 +4,6 @@
  *
  * PHP Version 8.0
  *
- * @package   Modules\CMS
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -13,8 +12,8 @@
 declare(strict_types=1);
 
 return ['CMS' => [
-    'Application'  => 'Anwendung',
+    'Application' => 'Anwendung',
     'Applications' => 'Anwendungen',
-    'Name'         => 'Name',
-    'Templates'    => 'Templates',
-],];
+    'Name' => 'Name',
+    'Templates' => 'Templates',
+]];
