@@ -19,6 +19,7 @@ use phpOMS\Uri\UriFactory;
  * @var \phpOMS\Views\View $this
  * @var string[]           $file
  */
+$app     = $this->getDatA('app');
 $file    = $this->getData('file') ?? [];
 $content = $this->getData('content') ?? [];
 $list    = $this->getData('list') ?? [];
@@ -37,6 +38,10 @@ echo $this->getData('nav')->render();
     </div>
 
     <div class="col-xs-12 col-md-4">
+        <div class="box">
+            <a href="<?= UriFactory::build('{/prefix}' . $app->name); ?>" class="button">Application</a>
+        </div>
+
         <div class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Upload'); ?></div>
                 <div class="portlet-body">

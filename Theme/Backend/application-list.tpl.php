@@ -34,12 +34,14 @@ echo $this->getData('nav')->render();
                 <tr>
                     <td>
                     <td class="wf-100"><?= $this->getHtml('Name'); ?>
+                    <td><?= $this->getHtml('Link'); ?>
                 <tbody>
                 <?php $count = 0; foreach ($applications as $key => $application) : ++$count;
                 $url         = UriFactory::build('{/prefix}cms/application/content?{?}&id=' . $application->getId()); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->name); ?></a>
+                        <td><a href="<?= UriFactory::build('{/prefix}' . $application->name); ?>"><?= $this->getHtml('Link'); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                 <tr><td colspan="3" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
@@ -47,6 +49,7 @@ echo $this->getData('nav')->render();
             </table>
             <div class="portlet-foot">
                 <a tabindex="0" class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
+                <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
                 <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
             </div>
         </div>
