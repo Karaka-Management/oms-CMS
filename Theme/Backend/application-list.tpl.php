@@ -29,7 +29,7 @@ echo $this->getData('nav')->render();
     <div class="col-xs-12">
         <div class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Applications'); ?><i class="fa fa-download floatRight download btn"></i></div>
-            <table id="applicationList" class="default">
+            <table id="applicationList" class="default sticky">
                 <thead>
                 <tr>
                     <td>
