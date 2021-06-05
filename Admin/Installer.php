@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Admin;
 
-use phpOMS\Module\InstallerAbstract;
-use phpOMS\Message\Http\HttpRequest;
-use phpOMS\Message\Http\HttpResponse;
 use Modules\CMS\Models\Application;
 use Modules\CMS\Models\ApplicationMapper;
+use phpOMS\Message\Http\HttpRequest;
+use phpOMS\Message\Http\HttpResponse;
+use phpOMS\Module\InstallerAbstract;
 
 /**
  * Installer class.
@@ -30,7 +30,7 @@ use Modules\CMS\Models\ApplicationMapper;
  */
 final class Installer extends InstallerAbstract
 {
-	/**
+    /**
      * Install data from providing modules.
      *
      * @param DatabasePool $dbPool Database pool
@@ -61,7 +61,7 @@ final class Installer extends InstallerAbstract
     	}
 
         $response = new HttpResponse();
-		$request  = new HttpRequest(new HttpUri(''));
+		$request        = new HttpRequest(new HttpUri(''));
 
 		$request->header->account = 1;
 		$request->setData('name', $cmsData['name']);
