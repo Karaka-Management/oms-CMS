@@ -124,7 +124,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $app = $this->upploadApplication($request);
+        $app = self::uploadApplication($request);
         if (empty($app)) {
             return;
         }
@@ -132,7 +132,7 @@ final class ApiController extends Controller
         $request->setData('appSrc', 'Modules/CMS/tmp/' . $app);
         $request->setData('appDest', 'Web/' . $app);
         $request->setData('theme', $request->getData('theme') ?? 'Default', true);
-        $this->app->moduleManager->get('Admin')->apiInstallApplication($request, $response);
+        $this->app->moduleManager->get('Admin')::apiInstallApplication($request, $response);
 
         Directory::delete(__DIR__ . '/../tmp');
 
@@ -150,7 +150,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function upploadApplication(RequestAbstract $request) : string
+    public static function uploadApplication(RequestAbstract $request) : string
     {
         if (!\is_dir(__DIR__ . '/../tmp')) {
             \mkdir(__DIR__ . '/../tmp');
