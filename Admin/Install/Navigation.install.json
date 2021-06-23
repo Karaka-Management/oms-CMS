@@ -33,7 +33,7 @@
                         "type": 3,
                         "subtype": 1,
                         "name": "List",
-                        "uri": "{/prefix}cms/application/content",
+                        "uri": "{/prefix}cms/application/list?u={?u}",
                         "target": "self",
                         "icon": null,
                         "order": 1,
