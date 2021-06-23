@@ -156,7 +156,7 @@ final class ApiController extends Controller
             \mkdir(__DIR__ . '/../tmp');
         }
 
-        $upload = new UploadFile();
+        $upload            = new UploadFile();
         $upload->outputDir = __DIR__ . '/../tmp';
 
         $status = $upload->upload($request->getFiles());
