@@ -132,7 +132,7 @@ final class ApiController extends Controller
         $request->setData('appSrc', 'Modules/CMS/tmp/' . $app);
         $request->setData('appDest', 'Web/' . $app);
         $request->setData('theme', $request->getData('theme') ?? 'Default', true);
-        $this->app->moduleManager->get('Admin')::apiInstallApplication($request, $response);
+        $this->app->moduleManager->get('Admin')->apiInstallApplication($request, $response);
 
         Directory::delete(__DIR__ . '/../tmp');
 
@@ -157,7 +157,7 @@ final class ApiController extends Controller
         }
 
         $upload = new UploadFile();
-        $upload->setOutputDir(__DIR__ . '/../tmp');
+        $upload->outputDir = __DIR__ . '/../tmp';
 
         $status = $upload->upload($request->getFiles());
         if ($status[0]['status'] !== UploadStatus::OK) {
