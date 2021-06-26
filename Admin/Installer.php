@@ -36,8 +36,8 @@ final class Installer extends InstallerAbstract
     /**
      * Install data from providing modules.
      *
-     * @param DatabasePool $dbPool Database pool
-     * @param array        $data   Module info
+     * @param ApplicationAbstract $app  Application
+     * @param array               $data Additional data
      *
      * @return array
      *
@@ -45,7 +45,7 @@ final class Installer extends InstallerAbstract
      */
     public static function installExternal(ApplicationAbstract $app, array $data) : array
     {
-    	if (!\is_file($data['path'] ?? '')) {
+        if (!\is_file($data['path'] ?? '')) {
             throw new PathException($data['path'] ?? '');
         }
 
@@ -59,15 +59,15 @@ final class Installer extends InstallerAbstract
             throw new \Exception(); // @codeCoverageIgnore
         }
 
-    	if (!isset($cmsData[0]['name'], $cmsData[0]['src'], $cmsData[0]['dest'])) {
-    		return [];
-    	}
+        if (!isset($cmsData[0]['name'], $cmsData[0]['src'], $cmsData[0]['dest'])) {
+            return [];
+        }
 
         $response = new HttpResponse();
-		$request        = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest(new HttpUri(''));
 
-		$request->header->account = 1;
-		$request->setData('name', $cmsData[0]['name']);
+        $request->header->account = 1;
+        $request->setData('name', $cmsData[0]['name']);
         $request->setData('appSrc', $cmsData[0]['src']);
         $request->setData('appDest', $cmsData[0]['dest']);
         $request->setData('theme', $cmsData[0]['theme'] ?? 'Default', true);
