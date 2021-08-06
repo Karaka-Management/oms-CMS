@@ -36,8 +36,9 @@ echo $this->getData('nav')->render();
                     <td class="wf-100"><?= $this->getHtml('Name'); ?>
                     <td><?= $this->getHtml('Link'); ?>
                 <tbody>
-                <?php $count = 0; foreach ($applications as $key => $application) : ++$count;
-                $url         = UriFactory::build('{/prefix}cms/application/content?{?}&id=' . $application->getId()); ?>
+                <?php $count = 0;
+                    foreach ($applications as $key => $application) : ++$count;
+                        $url = UriFactory::build('{/prefix}cms/application/content?{?}&id=' . $application->getId()); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->name); ?></a>
@@ -49,7 +50,6 @@ echo $this->getData('nav')->render();
             </table>
             <div class="portlet-foot">
                 <a tabindex="0" class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
-                <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
                 <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
             </div>
         </div>
