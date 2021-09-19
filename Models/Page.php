@@ -79,6 +79,6 @@ class Page
      */
     public function __construct()
     {
-        $this->$l11n = new NullPageL11n();
+        $this->{$l11n} = new NullPageL11n();
     }
 }

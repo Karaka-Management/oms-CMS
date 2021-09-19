@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Modules\CMS\Admin;
 
 use Modules\CMS\Models\Application;
-use Modules\CMS\Models\ApplicationMapper;
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Message\Http\HttpResponse;

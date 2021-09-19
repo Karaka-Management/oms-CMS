@@ -69,16 +69,16 @@ class PageL11n
     /**
      * Constructor.
      *
-     * @param string $name Name
+     * @param string $name    Name
      * @param string $content Content
      *
      * @since 1.0.0
      */
     public function __construct(string $name = '', string $content = '', string $language = ISO639x1Enum::_EN)
     {
-        $this->name    = $name;
+        $this->name       = $name;
         $this->content    = $content;
-        $this->language = $language;
+        $this->language   = $language;
     }
 
     /**

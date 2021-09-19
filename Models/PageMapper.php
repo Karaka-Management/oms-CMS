@@ -33,10 +33,10 @@ final class PageL11nMapper extends DataMapperAbstract
      * @since 1.0.0
      */
     protected static array $columns = [
-        'cms_page_id'       => ['name' => 'cms_page_id',       'type' => 'int',    'internal' => 'id'],
-        'cms_page_name'    => ['name' => 'cms_page_name',    'type' => 'string', 'internal' => 'name'],
+        'cms_page_id'        => ['name' => 'cms_page_id',       'type' => 'int',    'internal' => 'id'],
+        'cms_page_name'      => ['name' => 'cms_page_name',    'type' => 'string', 'internal' => 'name'],
         'cms_page_status'    => ['name' => 'cms_page_status',    'type' => 'int', 'internal' => 'status'],
-        'cms_page_app'    => ['name' => 'cms_page_app',    'type' => 'int', 'internal' => 'app'],
+        'cms_page_app'       => ['name' => 'cms_page_app',    'type' => 'int', 'internal' => 'app'],
     ];
 
     /**
@@ -63,7 +63,7 @@ final class PageL11nMapper extends DataMapperAbstract
      */
     protected static array $hasMany = [
         'l11n' => [
-            'mapper'            => PageL11nMapper::class,
+            'mapper'            => self::class,
             'table'             => 'cms_page_l11n',
             'self'              => 'cms_page_l11n_page',
             'conditional'       => true,
