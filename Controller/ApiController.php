@@ -16,8 +16,8 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Controller;
 
-use Modules\CMS\Models\Application;
-use Modules\CMS\Models\ApplicationMapper;
+use Model\App;
+use Model\AppMapper;
 use Modules\Media\Models\UploadFile;
 use Modules\Media\Models\UploadStatus;
 use phpOMS\Message\Http\RequestStatusCode;
@@ -81,7 +81,7 @@ final class ApiController extends Controller
         }
 
         $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->header->account, $application, ApplicationMapper::class, 'application', $request->getOrigin());
+        $this->createModel($request->header->account, $application, App::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
@@ -90,13 +90,13 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract $request Request
      *
-     * @return Application Returns the created application from the request
+     * @return App Returns the created application from the request
      *
      * @since 1.0.0
      */
-    private function createApplicationFromRequest(RequestAbstract $request) : Application
+    private function createApplicationFromRequest(RequestAbstract $request) : App
     {
-        $app       = new Application();
+        $app       = new App();
         $app->name = (string) ($request->getData('name') ?? '');
 
         return $app;
@@ -131,6 +131,7 @@ final class ApiController extends Controller
 
         $request->setData('appSrc', 'Modules/CMS/tmp/' . $app);
         $request->setData('appDest', 'Web/' . $app);
+        $request->setData('appName', $app);
         $request->setData('theme', $request->getData('theme') ?? 'Default', true);
         $this->app->moduleManager->get('Admin')->apiInstallApplication($request, $response);
 
@@ -220,7 +221,7 @@ final class ApiController extends Controller
         }
 
         /** @var Application $app */
-        $app = ApplicationMapper::get($request->getData('id'));
+        $app = AppMapper::get($request->getData('id'));
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
         $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . '/tpl/');
@@ -313,7 +314,7 @@ final class ApiController extends Controller
     public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         /** @var Application $app */
-        $app  = ApplicationMapper::get((int) $request->getData('id'));
+        $app  = AppMapper::get((int) $request->getData('id'));
         $path = (string) $request->getData('path') ?? '/';
 
         $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . $path);

@@ -4,7 +4,7 @@
  *
  * PHP Version 8.0
  *
- * @package   Modules\CMS\Models
+ * @package   Modules\Admin\Models
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -12,16 +12,21 @@
  */
 declare(strict_types=1);
 
-namespace Modules\CMS\Models;
+namespace Modules\Admin\Models;
+
+use phpOMS\Stdlib\Base\Enum;
 
 /**
- * Application class.
+ * Account status enum.
  *
- * @package Modules\CMS\Models
+ * @package Modules\Admin\Models
  * @license OMS License 1.0
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class NullApplication extends Application
+abstract class PageStatus extends Enum
 {
+    public const ACTIVE = 1;
+
+    public const INACTIVE = 2;
 }

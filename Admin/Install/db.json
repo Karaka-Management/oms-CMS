@@ -1,21 +1,4 @@
 {
-    "cms_application": {
-        "name": "cms_application",
-        "fields": {
-            "cms_application_id": {
-                "name": "cms_application_id",
-                "type": "INT",
-                "null": false,
-                "primary": true,
-                "autoincrement": true
-            },
-            "cms_application_name": {
-                "name": "cms_application_name",
-                "type": "VARCHAR(254)",
-                "null": false
-            }
-        }
-    },
     "cms_post": {
         "name": "cms_post",
         "fields": {
@@ -49,8 +32,111 @@
                 "type": "INT",
                 "null": true,
                 "default": null,
-                "foreignTable": "cms_application",
-                "foreignKey": "cms_application_id"
+                "foreignTable": "app",
+                "foreignKey": "app_id"
+            }
+        }
+    },
+    "cms_page": {
+        "name": "cms_page",
+        "fields": {
+            "cms_page_id": {
+                "name": "cms_page_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+             "cms_page_l11n_name": {
+                "name": "cms_page_l11n_name",
+                "type": "VARCHAR(255)",
+                "null": false
+            },
+            "cms_page_status": {
+                "name": "cms_page_status",
+                "type": "TINYINT(1)",
+                "null": false
+            },
+            "cms_page_app": {
+                "name": "cms_page_app",
+                "type": "INT",
+                "null": true,
+                "default": null,
+                "foreignTable": "app",
+                "foreignKey": "app_id"
+            }
+        }
+    },
+    "cms_page_l11n": {
+        "name": "cms_page_l11n",
+        "fields": {
+            "cms_page_l11n_id": {
+                "name": "cms_page_l11n_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "cms_page_l11n_name": {
+                "name": "cms_page_l11n_name",
+                "type": "VARCHAR(255)",
+                "null": false
+            },
+            "cms_page_l11n_content": {
+                "name": "cms_page_l11n_content",
+                "type": "VARCHAR(255)",
+                "null": false
+            },
+            "cms_page_l11n_page": {
+                "name": "cms_page_l11n_page",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "cms_page",
+                "foreignKey": "cms_page_id"
+            },
+            "cms_page_l11n_language": {
+                "name": "cms_page_l11n_language",
+                "type": "VARCHAR(2)",
+                "default": null,
+                "null": true,
+                "foreignTable": "language",
+                "foreignKey": "language_639_1"
+            }
+        }
+    },
+    "cms_page_permission": {
+        "name": "cms_page_permission",
+        "fields": {
+            "cms_page_permission_id": {
+                "name": "cms_page_permission_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            }
+        }
+    },
+    "cms_nav_ref": {
+        "name": "cms_nav_ref",
+        "fields": {
+            "cms_nav_ref_id": {
+                "name": "cms_nav_ref_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            }
+        }
+    },
+    "cms_route": {
+        "name": "cms_route",
+        "fields": {
+            "cms_route_id": {
+                "name": "cms_route_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
             }
         }
     }
