@@ -21,6 +21,7 @@ use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Views\View;
+use Modules\Admin\Models\AppMapper;
 
 /**
  * CMS class.
@@ -51,11 +52,11 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response));
 
         if ($request->getData('ptype') === 'p') {
-            $view->setData('applications', ApplicationMapper::getBeforePivot((int) ($request->getData('id') ?? 0), null, 25));
+            $view->setData('applications', AppMapper::getBeforePivot((int) ($request->getData('id') ?? 0), null, 25));
         } elseif ($request->getData('ptype') === 'n') {
-            $view->setData('applications', ApplicationMapper::getAfterPivot((int) ($request->getData('id') ?? 0), null, 25));
+            $view->setData('applications', AppMapper::getAfterPivot((int) ($request->getData('id') ?? 0), null, 25));
         } else {
-            $view->setData('applications', ApplicationMapper::getAfterPivot(0, null, 25));
+            $view->setData('applications', AppMapper::getAfterPivot(0, null, 25));
         }
 
         return $view;
@@ -122,7 +123,7 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
 
         /** @var Application $app */
-        $app = ApplicationMapper::get($request->getData('id'));
+        $app = AppMapper::get($request->getData('id'));
         $view->addData('app', $app);
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');

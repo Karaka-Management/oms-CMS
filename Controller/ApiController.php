@@ -16,8 +16,6 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Controller;
 
-use Model\App;
-use Model\AppMapper;
 use Modules\Media\Models\UploadFile;
 use Modules\Media\Models\UploadStatus;
 use phpOMS\Message\Http\RequestStatusCode;
@@ -28,6 +26,8 @@ use phpOMS\Model\Message\FormValidation;
 use phpOMS\System\File\Local\Directory;
 use phpOMS\Utils\IO\Zip\Zip;
 use phpOMS\Utils\MbStringUtils;
+use Modules\Admin\Models\App;
+use Modules\Admin\Models\AppMapper;
 
 /**
  * Api controller for the CMS module.
@@ -81,7 +81,7 @@ final class ApiController extends Controller
         }
 
         $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->header->account, $application, App::class, 'application', $request->getOrigin());
+        $this->createModel($request->header->account, $application, AppMapper::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
@@ -135,10 +135,10 @@ final class ApiController extends Controller
         $request->setData('theme', $request->getData('theme') ?? 'Default', true);
         $this->app->moduleManager->get('Admin')->apiInstallApplication($request, $response);
 
+        $application = $this->createApplicationFromRequest($request);
         Directory::delete(__DIR__ . '/../tmp');
 
-        $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->header->account, $application, ApplicationMapper::class, 'application', $request->getOrigin());
+        $this->createModel($request->header->account, $application, AppMapper::class, 'application', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
@@ -153,12 +153,14 @@ final class ApiController extends Controller
      */
     public static function uploadApplication(RequestAbstract $request) : string
     {
+        Directory::delete(__DIR__ . '/../tmp');
         if (!\is_dir(__DIR__ . '/../tmp')) {
             \mkdir(__DIR__ . '/../tmp');
         }
 
         $upload            = new UploadFile();
         $upload->outputDir = __DIR__ . '/../tmp';
+        $upload->preserveFileName = true;
 
         $status = $upload->upload($request->getFiles());
         if ($status[0]['status'] !== UploadStatus::OK) {
