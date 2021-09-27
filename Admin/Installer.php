@@ -20,10 +20,10 @@ use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Module\InstallerAbstract;
 use phpOMS\System\File\PathException;
-use phpOMS\Uri\HttpUri;
 use phpOMS\System\File\PermissionException;
-use phpOMS\Utils\Parser\Php\ArrayParser;
+use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\ArrayUtils;
+use phpOMS\Utils\Parser\Php\ArrayParser;
 
 /**
  * Installer class.
