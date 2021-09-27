@@ -32,7 +32,7 @@ class PageL11n
      * @var int
      * @since 1.0.0
      */
-    private int $id = 0;
+    protected int $id = 0;
 
     /**
      * Page ID.
@@ -79,6 +79,18 @@ class PageL11n
         $this->name       = $name;
         $this->content    = $content;
         $this->language   = $language;
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     *
+     * @since 1.0.0
+     */
+    public function getId() : int
+    {
+        return $this->id;
     }
 
     /**

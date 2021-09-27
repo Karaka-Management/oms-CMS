@@ -24,7 +24,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class PageL11nMapper extends DataMapperAbstract
+final class PageMapper extends DataMapperAbstract
 {
     /**
      * Columns.
@@ -45,7 +45,7 @@ final class PageL11nMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'cms_page_l11n';
+    protected static string $table = 'cms_page';
 
     /**
      * Primary field name.
@@ -53,7 +53,7 @@ final class PageL11nMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'cms_page_l11n_id';
+    protected static string $primaryField = 'cms_page_id';
 
     /**
      * Has many relation.
@@ -63,7 +63,7 @@ final class PageL11nMapper extends DataMapperAbstract
      */
     protected static array $hasMany = [
         'l11n' => [
-            'mapper'            => self::class,
+            'mapper'            => PageL11nMapper::class,
             'table'             => 'cms_page_l11n',
             'self'              => 'cms_page_l11n_page',
             'conditional'       => true,

@@ -47,8 +47,8 @@
                 "primary": true,
                 "autoincrement": true
             },
-             "cms_page_l11n_name": {
-                "name": "cms_page_l11n_name",
+             "cms_page_name": {
+                "name": "cms_page_name",
                 "type": "VARCHAR(255)",
                 "null": false
             },
@@ -84,7 +84,7 @@
             },
             "cms_page_l11n_content": {
                 "name": "cms_page_l11n_content",
-                "type": "VARCHAR(255)",
+                "type": "TEXT",
                 "null": false
             },
             "cms_page_l11n_page": {

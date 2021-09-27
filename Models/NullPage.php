@@ -14,19 +14,25 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Models;
 
-use phpOMS\Stdlib\Base\Enum;
-
 /**
- * Account status enum.
+ * Null model
  *
  * @package Modules\CMS\Models
  * @license OMS License 1.0
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-abstract class PageStatus extends Enum
+final class NullPage extends Page
 {
-    public const ACTIVE = 1;
-
-    public const INACTIVE = 2;
+    /**
+     * Constructor
+     *
+     * @param int $id Model id
+     *
+     * @since 1.0.0
+     */
+    public function __construct(int $id = 0)
+    {
+        $this->id = $id;
+    }
 }

@@ -4,7 +4,7 @@
  *
  * PHP Version 8.0
  *
- * @package   Modules\Admin\Models
+ * @package   Modules\CMS\Models
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -12,12 +12,12 @@
  */
 declare(strict_types=1);
 
-namespace Modules\Admin\Models;
+namespace Modules\CMS\Models;
 
 /**
  * Page class.
  *
- * @package Modules\Admin\Models
+ * @package Modules\CMS\Models
  * @license OMS License 1.0
  * @link    https://orange-management.org
  * @since   1.0.0
@@ -30,7 +30,7 @@ class Page
      * @var int
      * @since 1.0.0
      */
-    private int $id = 0;
+    protected int $id = 0;
 
     /**
      * Page name.
@@ -70,7 +70,7 @@ class Page
      * @var int
      * @since 1.0.0
      */
-    private int $app = 0;
+    public int $app = 0;
 
     /**
      * Construct.
@@ -79,6 +79,23 @@ class Page
      */
     public function __construct()
     {
-        $this->{$l11n} = new NullPageL11n();
+        $this->l11n = new NullPageL11n();
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     *
+     * @since 1.0.0
+     */
+    public function getId() : int
+    {
+        return $this->id;
+    }
+
+    public function getL11n() : PageL11n
+    {
+        return $this->l11n;
     }
 }

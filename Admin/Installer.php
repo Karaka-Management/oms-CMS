@@ -21,6 +21,9 @@ use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Module\InstallerAbstract;
 use phpOMS\System\File\PathException;
 use phpOMS\Uri\HttpUri;
+use phpOMS\System\File\PermissionException;
+use phpOMS\Utils\Parser\Php\ArrayParser;
+use phpOMS\Utils\ArrayUtils;
 
 /**
  * Installer class.
@@ -64,6 +67,8 @@ final class Installer extends InstallerAbstract
                     self::installApplication($app, $cms);
                     break;
                 case 'page':
+                    $cms['path'] = $data['path'];
+
                     self::installPage($app, $cms);
                     break;
                 case 'route':
@@ -71,10 +76,6 @@ final class Installer extends InstallerAbstract
                         \dirname($data['path']) . '/' . $cms['src'] . '/Routes.php',
                         __DIR__ . '/../../../Web/' . $cms['dest'] . '/Routes.php'
                     );
-                    break;
-                case 'navigation':
-                    // @todo: do we really need this, navigation is installed as a providing component
-                    //self::installNavigation($app, $cms);
                     break;
                 default:
             }
@@ -132,6 +133,7 @@ final class Installer extends InstallerAbstract
 
         $request->header->account = 1;
         $request->setData('name', $data['id']);
+        $request->setData('app', $data['app'] ?? 2);
         $app->moduleManager->get('CMS')->apiPageCreate($request, $response);
         $id = $response->get('')['response']->getId();
 
@@ -150,7 +152,7 @@ final class Installer extends InstallerAbstract
 
             $request->header->account = 1;
 
-            $request->setData('id', $id);
+            $request->setData('page', $id);
             $request->setData('name', $lang[$langCode][$data['name']] ?? $data['name']);
             $request->setData('language', $langCode);
             $request->setDatA('content', \file_get_contents(\dirname($data['path']) . '/' . $data['src'] . '/' . $l11n));
