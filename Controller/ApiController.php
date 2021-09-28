@@ -16,6 +16,12 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Controller;
 
+use Modules\Admin\Models\App;
+use Modules\Admin\Models\AppMapper;
+use Modules\CMS\Models\Page;
+use Modules\CMS\Models\PageL11n;
+use Modules\CMS\Models\PageL11nMapper;
+use Modules\CMS\Models\PageMapper;
 use Modules\Media\Models\UploadFile;
 use Modules\Media\Models\UploadStatus;
 use phpOMS\Message\Http\RequestStatusCode;
@@ -26,12 +32,6 @@ use phpOMS\Model\Message\FormValidation;
 use phpOMS\System\File\Local\Directory;
 use phpOMS\Utils\IO\Zip\Zip;
 use phpOMS\Utils\MbStringUtils;
-use Modules\Admin\Models\App;
-use Modules\Admin\Models\AppMapper;
-use Modules\CMS\Models\Page;
-use Modules\CMS\Models\PageL11n;
-use Modules\CMS\Models\PageL11nMapper;
-use Modules\CMS\Models\PageMapper;
 
 /**
  * Api controller for the CMS module.
@@ -162,8 +162,8 @@ final class ApiController extends Controller
             \mkdir(__DIR__ . '/../tmp');
         }
 
-        $upload            = new UploadFile();
-        $upload->outputDir = __DIR__ . '/../tmp';
+        $upload                   = new UploadFile();
+        $upload->outputDir        = __DIR__ . '/../tmp';
         $upload->preserveFileName = true;
 
         $status = $upload->upload($request->getFiles());
@@ -394,7 +394,7 @@ final class ApiController extends Controller
     {
         $page        = new Page();
         $page->name  = $request->getData('name') ?? '';
-        $page->app  = $request->getData('app') ?? 2;
+        $page->app   = $request->getData('app') ?? 2;
 
         return $page;
     }
@@ -459,12 +459,12 @@ final class ApiController extends Controller
      */
     private function createPageL11nFromRequest(RequestAbstract $request) : PageL11n
     {
-        $pageL11n = new PageL11n();
+        $pageL11n       = new PageL11n();
         $pageL11n->page = (int) ($request->getData('page') ?? 0);
         $pageL11n->setLanguage((string) (
             $request->getData('language') ?? $request->getLanguage()
         ));
-        $pageL11n->name = (string) ($request->getData('name') ?? '');
+        $pageL11n->name    = (string) ($request->getData('name') ?? '');
         $pageL11n->content = (string) ($request->getData('content') ?? '');
 
         return $pageL11n;
