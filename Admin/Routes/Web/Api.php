@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationCreate',
             'verb'       => RouteVerb::PUT,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
                 'state'  => PermissionState::APPLICATION,
             ],
@@ -34,7 +34,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationUpdate',
             'verb'       => RouteVerb::SET,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::MODIFY,
                 'state'  => PermissionState::APPLICATION,
             ],
@@ -45,7 +45,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateCreate',
             'verb'       => RouteVerb::PUT,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::MODIFY,
                 'state'  => PermissionState::APPLICATION,
             ],
@@ -56,7 +56,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateUpdate',
             'verb'       => RouteVerb::SET,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::MODIFY,
                 'state'  => PermissionState::APPLICATION,
             ],

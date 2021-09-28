@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationList',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::APPLICATION,
             ],
@@ -34,7 +34,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationContents',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::APPLICATION,
             ],
@@ -45,7 +45,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationFile',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::APPLICATION,
             ],
@@ -56,7 +56,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationCreate',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::CREATE,
                 'state'  => PermissionState::APPLICATION,
             ],

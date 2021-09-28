@@ -19,7 +19,7 @@ namespace Modules\CMS\tests\Admin;
  */
 class AdminTest extends \PHPUnit\Framework\TestCase
 {
-    protected const MODULE_NAME = 'CMS';
+    protected const NAME = 'CMS';
 
     protected const URI_LOAD = 'http://127.0.0.1/en/backend/cms';
 
