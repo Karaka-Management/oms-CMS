@@ -76,9 +76,9 @@ class PageL11n
      */
     public function __construct(string $name = '', string $content = '', string $language = ISO639x1Enum::_EN)
     {
-        $this->name       = $name;
-        $this->content    = $content;
-        $this->language   = $language;
+        $this->name     = $name;
+        $this->content  = $content;
+        $this->language = $language;
     }
 
     /**

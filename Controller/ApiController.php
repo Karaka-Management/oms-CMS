@@ -226,7 +226,7 @@ final class ApiController extends Controller
             return;
         }
 
-        /** @var Application $app */
+        /** @var App $app */
         $app = AppMapper::get($request->getData('id'));
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
@@ -319,7 +319,7 @@ final class ApiController extends Controller
      */
     public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
-        /** @var Application $app */
+        /** @var App $app */
         $app  = AppMapper::get((int) $request->getData('id'));
         $path = (string) $request->getData('path') ?? '/';
 
@@ -392,9 +392,9 @@ final class ApiController extends Controller
      */
     private function createPageFromRequest(RequestAbstract $request) : Page
     {
-        $page        = new Page();
-        $page->name  = $request->getData('name') ?? '';
-        $page->app   = $request->getData('app') ?? 2;
+        $page       = new Page();
+        $page->name = $request->getData('name') ?? '';
+        $page->app  = $request->getData('app') ?? 2;
 
         return $page;
     }

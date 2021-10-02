@@ -90,7 +90,7 @@ final class Installer extends InstallerAbstract
      * @param ApplicationAbstract $app  Application
      * @param array               $data Additional data
      *
-     * @return array
+     * @return void
      *
      * @since 1.0.0
      */
@@ -116,7 +116,7 @@ final class Installer extends InstallerAbstract
      * @param ApplicationAbstract $app  Application
      * @param array               $data Additional data
      *
-     * @return array
+     * @return void
      *
      * @since 1.0.0
      */
@@ -139,6 +139,10 @@ final class Installer extends InstallerAbstract
 
         $lang  = include \dirname($data['path']) . '/' . $data['src'] . '/lang.php';
         $l11ns = \scandir(\dirname($data['path']) . '/' . $data['src']);
+
+        if ($l11ns === false) {
+            return; // @codeCoverageIgnore
+        }
 
         foreach ($l11ns as $l11n) {
             $langCode = \explode('.', $l11n)[0];
