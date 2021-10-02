@@ -72,7 +72,7 @@ final class Installer extends InstallerAbstract
                     self::installPage($app, $cms);
                     break;
                 case 'route':
-                    self::installRoutes(
+                    self::installRoutesHooks(
                         \dirname($data['path']) . '/' . $cms['src'] . '/Routes.php',
                         __DIR__ . '/../../../Web/' . $cms['dest'] . '/Routes.php'
                     );
@@ -173,7 +173,7 @@ final class Installer extends InstallerAbstract
      *
      * @since 1.0.0
      */
-    protected static function installRoutes(string $destRoutePath, string $srcRoutePath) : void
+    protected static function installRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
     {
         if (!\is_file($destRoutePath)) {
             \file_put_contents($destRoutePath, '<?php return [];');
@@ -202,47 +202,6 @@ final class Installer extends InstallerAbstract
     }
 
     /**
-     * Install hooks.
-     *
-     * @param string $destHookPath Destination hook path
-     * @param string $srcHookPath  Source hook path
-     *
-     * @return void
-     *
-     * @throws PathException       This exception is thrown if the hook file doesn't exist
-     * @throws PermissionException This exception is thrown if the hook file couldn't be updated (no write permission)
-     *
-     * @since 1.0.0
-     */
-    protected static function installHooks(string $destHookPath, string $srcHookPath) : void
-    {
-        if (!\is_file($destHookPath)) {
-            \file_put_contents($destHookPath, '<?php return [];');
-        }
-
-        if (!\is_file($srcHookPath)) {
-            return;
-        }
-
-        if (!\is_file($destHookPath)) {
-            throw new PathException($destHookPath);
-        }
-
-        if (!\is_writable($destHookPath)) {
-            throw new PermissionException($destHookPath);
-        }
-
-        /** @noinspection PhpIncludeInspection */
-        $appHooks = include $destHookPath;
-        /** @noinspection PhpIncludeInspection */
-        $moduleHooks = include $srcHookPath;
-
-        $appHooks = \array_merge_recursive($appHooks, $moduleHooks);
-
-        \file_put_contents($destHookPath, '<?php return ' . ArrayParser::serializeArray($appHooks) . ';', \LOCK_EX);
-    }
-
-    /**
      * Uninstall routes.
      *
      * @param string $destRoutePath Destination route path
@@ -254,7 +213,7 @@ final class Installer extends InstallerAbstract
      *
      * @since 1.0.0
      */
-    public static function uninstallRoutes(string $destRoutePath, string $srcRoutePath) : void
+    public static function uninstallRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
     {
         if (!\is_file($destRoutePath)
             || !\is_file($srcRoutePath)
@@ -278,43 +237,5 @@ final class Installer extends InstallerAbstract
         $appRoutes = ArrayUtils::array_diff_assoc_recursive($appRoutes, $moduleRoutes);
 
         \file_put_contents($destRoutePath, '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
-    }
-
-    /**
-     * Uninstall hooks.
-     *
-     * @param string $destHookPath Destination hook path
-     * @param string $srcHookPath  Source hook path
-     *
-     * @return void
-     *
-     * @throws PermissionException
-     *
-     * @since 1.0.0
-     */
-    protected static function uninstallHooks(string $destHookPath, string $srcHookPath) : void
-    {
-        if (!\is_file($destHookPath)
-            || !\is_file($srcHookPath)
-        ) {
-            return;
-        }
-
-        if (!\is_file($destHookPath)) {
-            throw new PathException($destHookPath);
-        }
-
-        if (!\is_writable($destHookPath)) {
-            throw new PermissionException($destHookPath);
-        }
-
-        /** @noinspection PhpIncludeInspection */
-        $appHooks = include $destHookPath;
-        /** @noinspection PhpIncludeInspection */
-        $moduleHooks = include $srcHookPath;
-
-        $appHooks = ArrayUtils::array_diff_assoc_recursive($appHooks, $moduleHooks);
-
-        \file_put_contents($destHookPath, '<?php return ' . ArrayParser::serializeArray($appHooks) . ';', \LOCK_EX);
     }
 }
