@@ -36,6 +36,14 @@ use phpOMS\Utils\Parser\Php\ArrayParser;
 final class Installer extends InstallerAbstract
 {
     /**
+     * Path of the file
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    public const PATH = __DIR__;
+
+    /**
      * Install data from providing modules.
      *
      * @param ApplicationAbstract $app  Application
