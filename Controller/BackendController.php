@@ -122,7 +122,7 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-file');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
 
-        /** @var App $app */
+        /** @var \Modules\Admin\Models\App $app */
         $app = AppMapper::get($request->getData('id'));
         $view->addData('app', $app);
 
