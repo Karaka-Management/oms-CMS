@@ -185,7 +185,7 @@ final class Installer extends InstallerAbstract
      *
      * @since 1.0.0
      */
-    protected static function installRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
+    private static function installRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
     {
         if (!\is_file($destRoutePath)) {
             \file_put_contents($destRoutePath, '<?php return [];');
@@ -225,7 +225,7 @@ final class Installer extends InstallerAbstract
      *
      * @since 1.0.0
      */
-    public static function uninstallRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
+    private static function uninstallRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
     {
         if (!\is_file($destRoutePath)
             || !\is_file($srcRoutePath)
