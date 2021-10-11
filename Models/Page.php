@@ -94,6 +94,13 @@ class Page
         return $this->id;
     }
 
+    /**
+     * Get localization
+     *
+     * @return PageL11n
+     *
+     * @since 1.0.0
+     */
     public function getL11n() : PageL11n
     {
         return $this->l11n;
