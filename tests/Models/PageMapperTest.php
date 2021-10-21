@@ -21,7 +21,7 @@ use phpOMS\Localization\ISO639x1Enum;
 /**
  * @internal
  */
-class PageMapperTest extends \PHPUnit\Framework\TestCase
+final class PageMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\CMS\Models\PageMapper

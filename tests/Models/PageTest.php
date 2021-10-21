@@ -20,7 +20,7 @@ use phpOMS\Localization\ISO639x1Enum;
 /**
  * @internal
  */
-class PageTest extends \PHPUnit\Framework\TestCase
+final class PageTest extends \PHPUnit\Framework\TestCase
 {
     private Page $page;
 
