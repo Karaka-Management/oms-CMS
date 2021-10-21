@@ -35,6 +35,7 @@ final class PageMapper extends DataMapperAbstract
     protected static array $columns = [
         'cms_page_id'        => ['name' => 'cms_page_id',       'type' => 'int',    'internal' => 'id'],
         'cms_page_name'      => ['name' => 'cms_page_name',    'type' => 'string', 'internal' => 'name'],
+        'cms_page_template'      => ['name' => 'cms_page_template',    'type' => 'string', 'internal' => 'template'],
         'cms_page_status'    => ['name' => 'cms_page_status',    'type' => 'int', 'internal' => 'status'],
         'cms_page_app'       => ['name' => 'cms_page_app',    'type' => 'int', 'internal' => 'app'],
     ];

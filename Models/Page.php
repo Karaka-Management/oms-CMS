@@ -54,7 +54,7 @@ class Page
      * @var PageL11n
      * @since 1.0.0
      */
-    protected PageL11n $l11n;
+    public PageL11n $l11n;
 
     /**
      * Page template.
@@ -62,7 +62,7 @@ class Page
      * @var string
      * @since 1.0.0
      */
-    public string $template;
+    public string $template = '';
 
     /**
      * App.
@@ -79,7 +79,7 @@ class Page
      */
     public function __construct()
     {
-        $this->l11n = new NullPageL11n();
+        $this->l11n = new PageL11n();
     }
 
     /**
@@ -92,17 +92,5 @@ class Page
     public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Get localization
-     *
-     * @return PageL11n
-     *
-     * @since 1.0.0
-     */
-    public function getL11n() : PageL11n
-    {
-        return $this->l11n;
     }
 }

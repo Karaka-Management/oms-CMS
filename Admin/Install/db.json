@@ -52,6 +52,11 @@
                 "type": "VARCHAR(255)",
                 "null": false
             },
+            "cms_page_template": {
+                "name": "cms_page_template",
+                "type": "VARCHAR(255)",
+                "null": false
+            },
             "cms_page_status": {
                 "name": "cms_page_status",
                 "type": "TINYINT(1)",

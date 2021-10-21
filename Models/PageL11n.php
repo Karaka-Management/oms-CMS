@@ -118,4 +118,26 @@ class PageL11n
     {
         $this->language = $language;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray() : array
+    {
+        return [
+            'id'              => $this->id,
+            'name'            => $this->name,
+            'content'            => $this->content,
+            'page'      => $this->page,
+            'language'        => $this->language,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
 }
