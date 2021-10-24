@@ -19,7 +19,7 @@ use Modules\CMS\Models\NullPageL11n;
 /**
  * @internal
  */
-final class Null extends \PHPUnit\Framework\TestCase
+final class NullPageL11nTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\CMS\Models\NullPageL11n

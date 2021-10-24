@@ -130,7 +130,12 @@ final class ApiController extends Controller
 
         $app = self::uploadApplication($request);
         if (empty($app)) {
+            // @codeCoverageIgnoreStart
+            $response->set($request->uri->__toString(), new FormValidation());
+            $response->header->status = RequestStatusCode::R_400;
+
             return;
+            // @codeCoverageIgnoreEnd
         }
 
         $request->setData('appSrc', 'Modules/CMS/tmp/' . $app);
@@ -168,7 +173,7 @@ final class ApiController extends Controller
 
         $status = $upload->upload($request->getFiles());
         if ($status[0]['status'] !== UploadStatus::OK) {
-            return '';
+            return ''; // @codeCoverageIgnore
         }
 
         $app = MbStringUtils::mb_ucfirst(
