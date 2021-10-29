@@ -29,12 +29,12 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
      */
     public function testCR() : void
     {
-        $page                    = new Page();
-        $page->name              = 'internal_page_name';
+        $page                        = new Page();
+        $page->name                  = 'internal_page_name';
         $page->template              = 'tpl';
-        $page->app              = 1;
-        $page->l11n->name        = 'Test Page';
-        $page->l11n->content = 'Test content';
+        $page->app                   = 1;
+        $page->l11n->name            = 'Test Page';
+        $page->l11n->content         = 'Test content';
 
         $id = PageMapper::create($page);
         self::assertGreaterThan(0, $page->getId());

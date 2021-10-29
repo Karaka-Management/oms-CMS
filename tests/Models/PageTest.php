@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
-use phpOMS\Localization\ISO639x1Enum;
 
 /**
  * @internal

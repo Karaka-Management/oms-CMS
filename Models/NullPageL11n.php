@@ -24,7 +24,7 @@ namespace Modules\CMS\Models;
  */
 final class NullPageL11n extends PageL11n
 {
-	/**
+    /**
      * Constructor
      *
      * @param int $id Model id

@@ -125,11 +125,11 @@ class PageL11n
     public function toArray() : array
     {
         return [
-            'id'              => $this->id,
-            'name'            => $this->name,
+            'id'                 => $this->id,
+            'name'               => $this->name,
             'content'            => $this->content,
-            'page'      => $this->page,
-            'language'        => $this->language,
+            'page'               => $this->page,
+            'language'           => $this->language,
         ];
     }
 
