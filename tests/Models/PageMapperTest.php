@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
+use Modules\CMS\Models\PageL11n;
 use Modules\CMS\Models\PageMapper;
 use phpOMS\Localization\ISO639x1Enum;
 
@@ -29,12 +30,13 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
      */
     public function testCR() : void
     {
-        $page                        = new Page();
-        $page->name                  = 'internal_page_name';
-        $page->template              = 'tpl';
-        $page->app                   = 1;
-        $page->l11n->name            = 'Test Page';
-        $page->l11n->content         = 'Test content';
+        $page                = new Page();
+        $page->name          = 'internal_page_name';
+        $page->template      = 'tpl';
+        $page->app           = 1;
+
+        $l11n = new PageL11n('Test Page', 'Test content');
+        $page->l11n = $l11n;
 
         $id = PageMapper::create($page);
         self::assertGreaterThan(0, $page->getId());
