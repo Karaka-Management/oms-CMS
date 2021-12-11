@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Models;
 
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
  * CMS mapper class.
@@ -24,7 +24,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class PageL11nMapper extends DataMapperAbstract
+final class PageL11nMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -32,7 +32,7 @@ final class PageL11nMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'cms_page_l11n_id'         => ['name' => 'cms_page_l11n_id',       'type' => 'int',    'internal' => 'id'],
         'cms_page_l11n_name'       => ['name' => 'cms_page_l11n_name',    'type' => 'string', 'internal' => 'name', 'autocomplete' => true],
         'cms_page_l11n_content'    => ['name' => 'cms_page_l11n_content',    'type' => 'string', 'internal' => 'content'],
@@ -46,7 +46,7 @@ final class PageL11nMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'cms_page_l11n';
+    public const TABLE = 'cms_page_l11n';
 
     /**
      * Primary field name.
@@ -54,5 +54,5 @@ final class PageL11nMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'cms_page_l11n_id';
+    public const PRIMARYFIELD ='cms_page_l11n_id';
 }

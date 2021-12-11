@@ -52,11 +52,11 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response));
 
         if ($request->getData('ptype') === 'p') {
-            $view->setData('applications', AppMapper::getBeforePivot((int) ($request->getData('id') ?? 0), null, 25));
+            $view->setData('applications', AppMapper::getAll()->where('id', (int) ($request->getData('id') ?? 0), '<')->limit(25)->execute());
         } elseif ($request->getData('ptype') === 'n') {
-            $view->setData('applications', AppMapper::getAfterPivot((int) ($request->getData('id') ?? 0), null, 25));
+            $view->setData('applications', AppMapper::getAll()->where('id', (int) ($request->getData('id') ?? 0), '>')->limit(25)->execute());
         } else {
-            $view->setData('applications', AppMapper::getAfterPivot(0, null, 25));
+            $view->setData('applications', AppMapper::getAll()->where('id', 0, '>')->limit(25)->execute());
         }
 
         return $view;
@@ -123,7 +123,7 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
 
         /** @var \Modules\Admin\Models\App $app */
-        $app = AppMapper::get($request->getData('id'));
+        $app = AppMapper::get()->where('id', $request->getData('id'))->execute();
         $view->addData('app', $app);
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');

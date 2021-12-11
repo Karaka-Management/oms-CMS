@@ -232,7 +232,7 @@ final class ApiController extends Controller
         }
 
         /** @var App $app */
-        $app = AppMapper::get($request->getData('id'));
+        $app = AppMapper::get()->where('id', $request->getData('id'))->execute();
 
         $webPath  = \realpath(__DIR__ . '/../../../Web/');
         $basePath = \realpath(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . '/tpl/');
@@ -325,7 +325,7 @@ final class ApiController extends Controller
     public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         /** @var App $app */
-        $app  = AppMapper::get((int) $request->getData('id'));
+        $app  = AppMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $path = (string) $request->getData('path') ?? '/';
 
         $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . $path);

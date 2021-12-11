@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Models;
 
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
  * CMS mapper class.
@@ -24,7 +24,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class PageMapper extends DataMapperAbstract
+final class PageMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -32,7 +32,7 @@ final class PageMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'cms_page_id'       => ['name' => 'cms_page_id',       'type' => 'int',    'internal' => 'id'],
         'cms_page_name'     => ['name' => 'cms_page_name',    'type' => 'string', 'internal' => 'name'],
         'cms_page_template' => ['name' => 'cms_page_template',    'type' => 'string', 'internal' => 'template'],
@@ -46,7 +46,7 @@ final class PageMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'cms_page';
+    public const TABLE = 'cms_page';
 
     /**
      * Primary field name.
@@ -54,7 +54,7 @@ final class PageMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'cms_page_id';
+    public const PRIMARYFIELD ='cms_page_id';
 
     /**
      * Has many relation.
@@ -62,12 +62,11 @@ final class PageMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, table:string, self?:?string, external?:?string, column?:string}>
      * @since 1.0.0
      */
-    protected static array $hasMany = [
+    public const HAS_MANY = [
         'l11n' => [
             'mapper'            => PageL11nMapper::class,
             'table'             => 'cms_page_l11n',
             'self'              => 'cms_page_l11n_page',
-            'conditional'       => true,
             'external'          => null,
         ],
     ];

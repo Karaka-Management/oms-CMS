@@ -30,19 +30,19 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
      */
     public function testCR() : void
     {
-        $page                = new Page();
-        $page->name          = 'internal_page_name';
-        $page->template      = 'tpl';
-        $page->app           = 1;
+        $page           = new Page();
+        $page->name     = 'internal_page_name';
+        $page->template = 'tpl';
+        $page->app      = 1;
 
         $l11n = new PageL11n('Test Page', 'Test content');
         $page->l11n = $l11n;
 
-        $id = PageMapper::create($page);
+        $id = PageMapper::create()->execute($page);
         self::assertGreaterThan(0, $page->getId());
         self::assertEquals($id, $page->getId());
 
-        $pageR = PageMapper::with('language', ISO639x1Enum::_EN)::get($page->getId());
+        $pageR = PageMapper::get()->with('l11n')->with('l11n/language', ISO639x1Enum::_EN)->where('id', $page->getId())->execute();
         self::assertEquals($page->name, $pageR->name);
         self::assertEquals($page->template, $pageR->template);
         self::assertEquals($page->app, $pageR->app);
