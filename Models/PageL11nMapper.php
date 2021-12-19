@@ -33,11 +33,11 @@ final class PageL11nMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'cms_page_l11n_id'         => ['name' => 'cms_page_l11n_id',       'type' => 'int',    'internal' => 'id'],
-        'cms_page_l11n_name'       => ['name' => 'cms_page_l11n_name',    'type' => 'string', 'internal' => 'name', 'autocomplete' => true],
-        'cms_page_l11n_content'    => ['name' => 'cms_page_l11n_content',    'type' => 'string', 'internal' => 'content'],
-        'cms_page_l11n_page'       => ['name' => 'cms_page_l11n_page',    'type' => 'int', 'internal' => 'page'],
-        'cms_page_l11n_language'   => ['name' => 'cms_page_l11n_language', 'type' => 'string', 'internal' => 'language'],
+        'cms_page_l11n_id'       => ['name' => 'cms_page_l11n_id',       'type' => 'int',    'internal' => 'id'],
+        'cms_page_l11n_name'     => ['name' => 'cms_page_l11n_name',     'type' => 'string', 'internal' => 'name', 'autocomplete' => true],
+        'cms_page_l11n_content'  => ['name' => 'cms_page_l11n_content',  'type' => 'string', 'internal' => 'content'],
+        'cms_page_l11n_page'     => ['name' => 'cms_page_l11n_page',     'type' => 'int',    'internal' => 'page'],
+        'cms_page_l11n_language' => ['name' => 'cms_page_l11n_language', 'type' => 'string', 'internal' => 'language'],
     ];
 
     /**

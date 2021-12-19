@@ -34,10 +34,10 @@ final class PageMapper extends DataMapperFactory
      */
     public const COLUMNS = [
         'cms_page_id'       => ['name' => 'cms_page_id',       'type' => 'int',    'internal' => 'id'],
-        'cms_page_name'     => ['name' => 'cms_page_name',    'type' => 'string', 'internal' => 'name'],
-        'cms_page_template' => ['name' => 'cms_page_template',    'type' => 'string', 'internal' => 'template'],
-        'cms_page_status'   => ['name' => 'cms_page_status',    'type' => 'int', 'internal' => 'status'],
-        'cms_page_app'      => ['name' => 'cms_page_app',    'type' => 'int', 'internal' => 'app'],
+        'cms_page_name'     => ['name' => 'cms_page_name',     'type' => 'string', 'internal' => 'name'],
+        'cms_page_template' => ['name' => 'cms_page_template', 'type' => 'string', 'internal' => 'template'],
+        'cms_page_status'   => ['name' => 'cms_page_status',   'type' => 'int',    'internal' => 'status'],
+        'cms_page_app'      => ['name' => 'cms_page_app',      'type' => 'int',    'internal' => 'app'],
     ];
 
     /**
@@ -64,10 +64,11 @@ final class PageMapper extends DataMapperFactory
      */
     public const HAS_MANY = [
         'l11n' => [
-            'mapper'            => PageL11nMapper::class,
-            'table'             => 'cms_page_l11n',
-            'self'              => 'cms_page_l11n_page',
-            'external'          => null,
+            'mapper'      => PageL11nMapper::class,
+            'table'       => 'cms_page_l11n',
+            'self'        => 'cms_page_l11n_page',
+            'conditional' => true,
+            'external'    => null,
         ],
     ];
 }
