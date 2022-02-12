@@ -22,5 +22,5 @@ return ['Navigation' => [
     'Permissions'  => 'İzinler',
     'Settings'     => 'Ayarlar',
     'Themes'       => 'Temalar',
-    'Widgets'      => 'Widget\\'lar',
+    'Widgets'      => 'Widget\'lar',
 ]];
