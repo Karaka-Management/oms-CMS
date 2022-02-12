@@ -4,7 +4,7 @@
  *
  * PHP Version 8.0
  *
- * @package   Modules\CMS
+ * @package   Modules\Localization
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -17,10 +17,10 @@ return ['Navigation' => [
     'CMS'          => 'CMS',
     'Content'      => 'Content',
     'Create'       => 'Create',
+    'Files'        => 'Files',
     'Pages'        => 'Pages',
     'Permissions'  => 'Permissions',
     'Settings'     => 'Settings',
-    'Files'        => 'Files',
     'Themes'       => 'Themes',
     'Widgets'      => 'Widgets',
 ]];

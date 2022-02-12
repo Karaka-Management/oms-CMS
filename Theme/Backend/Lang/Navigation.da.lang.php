@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => 'Ansøgning',
+return ['Navigation' => [
     'Applications' => 'Applikationer',
+    'CMS'          => 'CMS.',
+    'Content'      => 'Indhold',
+    'Create'       => 'skab',
     'Files'        => 'Filer.',
-    'Link'         => '#VALUE!',
-    'Name'         => 'Navn',
-    'Templates'    => 'Skabeloner',
-    'Upload'       => 'Upload',
+    'Pages'        => 'sider',
+    'Permissions'  => 'Tilladelser',
+    'Settings'     => 'Indstillinger.',
+    'Themes'       => 'Temaer.',
+    'Widgets'      => 'Widgets.',
 ]];

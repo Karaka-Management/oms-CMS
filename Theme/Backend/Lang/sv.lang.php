@@ -14,9 +14,10 @@ declare(strict_types=1);
 
 return ['CMS' => [
     'Application'  => 'Ansökan',
-    'Applications' => 'tillämpningar',
-    'Files'        => 'filer',
+    'Applications' => 'Applikationer',
+    'Files'        => 'Filer',
+    'Link'         => '#VALUE!',
     'Name'         => 'namn',
-    'Templates'    => 'mallar',
+    'Templates'    => 'Mall',
     'Upload'       => 'Ladda upp',
 ]];

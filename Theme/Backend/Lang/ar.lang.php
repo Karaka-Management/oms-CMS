@@ -13,9 +13,10 @@
 declare(strict_types=1);
 
 return ['CMS' => [
-    'Application'  => 'تطبيق',
-    'Applications' => 'تطبيقات',
-    'Files'        => 'ملفات',
+    'Application'  => 'طلب',
+    'Applications' => 'التطبيقات',
+    'Files'        => 'الملفات',
+    'Link'         => '#VALUE!',
     'Name'         => 'اسم',
     'Templates'    => 'قوالب',
     'Upload'       => 'تحميل',

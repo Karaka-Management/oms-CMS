@@ -13,10 +13,11 @@
 declare(strict_types=1);
 
 return ['CMS' => [
-    'Application'  => 'додаток',
-    'Applications' => 'додатків',
-    'Files'        => 'файли',
-    'Name'         => 'ім\'я',
-    'Templates'    => 'шаблони',
-    'Upload'       => 'Завантажити',
+    'Application'  => 'Заява',
+    'Applications' => 'Заява',
+    'Files'        => 'Файли',
+    'Link'         => '#VALUE!',
+    'Name'         => 'Назва',
+    'Templates'    => 'Шаблони',
+    'Upload'       => 'Завантажувати',
 ]];

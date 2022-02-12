@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => 'aplikace',
+return ['Navigation' => [
     'Applications' => 'Aplikace',
+    'CMS'          => 'Cms.',
+    'Content'      => 'Obsah',
+    'Create'       => 'Vytvořit',
     'Files'        => 'Soubory',
-    'Link'         => '#VALUE!',
-    'Name'         => 'název',
-    'Templates'    => 'Šablony',
-    'Upload'       => 'nahrát',
+    'Pages'        => 'Stránky',
+    'Permissions'  => 'Oprávnění',
+    'Settings'     => 'Nastavení',
+    'Themes'       => 'Témata',
+    'Widgets'      => 'Widgets.',
 ]];

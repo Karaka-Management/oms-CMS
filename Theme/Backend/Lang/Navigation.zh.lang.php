@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => '应用',
+return ['Navigation' => [
     'Applications' => '应用程序',
+    'CMS'          => 'CMS.',
+    'Content'      => '内容',
+    'Create'       => '创建',
     'Files'        => '文件',
-    'Link'         => '#VALUE!',
-    'Name'         => '名称',
-    'Templates'    => '模板',
-    'Upload'       => '上传',
+    'Pages'        => '页面',
+    'Permissions'  => '权限',
+    'Settings'     => '设置',
+    'Themes'       => '主题',
+    'Widgets'      => '小部件',
 ]];

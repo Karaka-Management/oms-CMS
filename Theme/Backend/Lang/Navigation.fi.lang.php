@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => 'Sovellus',
+return ['Navigation' => [
     'Applications' => 'Sovellukset',
+    'CMS'          => 'CMS',
+    'Content'      => 'Sisältö',
+    'Create'       => 'Luoda',
     'Files'        => 'Tiedostot',
-    'Link'         => '#VALUE!',
-    'Name'         => 'Nimi',
-    'Templates'    => 'Malleja',
-    'Upload'       => 'Ladata',
+    'Pages'        => 'Sivut',
+    'Permissions'  => 'Oikeudet',
+    'Settings'     => 'asetukset',
+    'Themes'       => 'Teemat',
+    'Widgets'      => 'Widgetit',
 ]];

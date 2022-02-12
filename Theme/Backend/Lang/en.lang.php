@@ -16,6 +16,7 @@ return ['CMS' => [
     'Application'  => 'Application',
     'Applications' => 'Applications',
     'Files'        => 'Files',
+    'Link'         => '',
     'Name'         => 'Name',
     'Templates'    => 'Templates',
     'Upload'       => 'Upload',

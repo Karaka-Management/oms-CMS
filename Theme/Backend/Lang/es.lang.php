@@ -14,8 +14,9 @@ declare(strict_types=1);
 
 return ['CMS' => [
     'Application'  => 'Solicitud',
-    'Applications' => 'aplicaciones',
-    'Files'        => 'archivos',
+    'Applications' => 'Aplicaciones',
+    'Files'        => 'Archivos',
+    'Link'         => '#VALUE!',
     'Name'         => 'Nombre',
     'Templates'    => 'Plantillas',
     'Upload'       => 'Subir',

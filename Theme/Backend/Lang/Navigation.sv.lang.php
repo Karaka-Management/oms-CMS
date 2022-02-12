@@ -13,14 +13,14 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Applications' => 'Anwendungen',
+    'Applications' => 'Applikationer',
     'CMS'          => 'Cms',
-    'Content'      => 'Inhalt',
-    'Create'       => 'Erstellen',
-    'Files'        => 'Dateien',
-    'Pages'        => 'Seiten',
-    'Permissions'  => 'Berechtigungen',
-    'Settings'     => 'Einstellungen',
-    'Themes'       => 'Themen',
+    'Content'      => 'Innehåll',
+    'Create'       => 'Skapa',
+    'Files'        => 'Filer',
+    'Pages'        => 'Sidor',
+    'Permissions'  => 'Behörighet',
+    'Settings'     => 'inställningar',
+    'Themes'       => 'Teman',
     'Widgets'      => 'Widgets',
 ]];

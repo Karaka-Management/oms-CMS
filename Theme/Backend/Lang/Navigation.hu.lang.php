@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => 'Alkalmazás',
+return ['Navigation' => [
     'Applications' => 'Alkalmazások',
+    'CMS'          => 'Cms',
+    'Content'      => 'Tartalom',
+    'Create'       => 'Teremt',
     'Files'        => 'Fájlok',
-    'Link'         => '#VALUE!',
-    'Name'         => 'Név',
-    'Templates'    => 'Sablonok',
-    'Upload'       => 'Feltöltés',
+    'Pages'        => 'Oldalak',
+    'Permissions'  => 'Engedélyek',
+    'Settings'     => 'Beállítások',
+    'Themes'       => 'Témák',
+    'Widgets'      => 'Widgetek',
 ]];

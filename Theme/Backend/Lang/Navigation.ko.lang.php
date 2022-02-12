@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => '애플리케이션',
+return ['Navigation' => [
     'Applications' => '응용 프로그램',
+    'CMS'          => 'CMS.',
+    'Content'      => '콘텐츠',
+    'Create'       => '만들다',
     'Files'        => '파일',
-    'Link'         => '#VALUE!',
-    'Name'         => '이름',
-    'Templates'    => '템플릿',
-    'Upload'       => '업로드',
+    'Pages'        => '페이지',
+    'Permissions'  => '권한',
+    'Settings'     => '설정',
+    'Themes'       => '테마',
+    'Widgets'      => '위젯',
 ]];

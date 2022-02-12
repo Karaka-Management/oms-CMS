@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => 'Uygulama',
+return ['Navigation' => [
     'Applications' => 'Uygulama',
+    'CMS'          => 'Cms',
+    'Content'      => 'İçerik',
+    'Create'       => 'Yaratmak',
     'Files'        => 'Dosyalar',
-    'Link'         => '#VALUE!',
-    'Name'         => 'İsim',
-    'Templates'    => 'Şablonlar',
-    'Upload'       => 'Yüklemek',
+    'Pages'        => 'Sayfalar',
+    'Permissions'  => 'İzinler',
+    'Settings'     => 'Ayarlar',
+    'Themes'       => 'Temalar',
+    'Widgets'      => 'Widget\\'lar',
 ]];

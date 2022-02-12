@@ -12,12 +12,15 @@
  */
 declare(strict_types=1);
 
-return ['CMS' => [
-    'Application'  => 'Aplicativo',
+return ['Navigation' => [
     'Applications' => 'Formulários',
+    'CMS'          => 'Cms.',
+    'Content'      => 'Contente',
+    'Create'       => 'Crio',
     'Files'        => 'arquivos',
-    'Link'         => '#VALUE!',
-    'Name'         => 'Nome',
-    'Templates'    => 'Modelos',
-    'Upload'       => 'Envio',
+    'Pages'        => 'Páginas',
+    'Permissions'  => 'Permissões',
+    'Settings'     => 'Configurações',
+    'Themes'       => 'Temas',
+    'Widgets'      => 'Widgets.',
 ]];

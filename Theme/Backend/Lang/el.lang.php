@@ -14,9 +14,10 @@ declare(strict_types=1);
 
 return ['CMS' => [
     'Application'  => 'Εφαρμογή',
-    'Applications' => 'εφαρμογές',
-    'Files'        => 'αρχεία',
+    'Applications' => 'Αιτήσεις',
+    'Files'        => 'Αρχεία',
+    'Link'         => '#VALUE!',
     'Name'         => 'Ονομα',
     'Templates'    => 'Πρότυπα',
-    'Upload'       => 'Μεταφόρτωση',
+    'Upload'       => 'Μεταφόρτω',
 ]];
