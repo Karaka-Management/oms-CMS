@@ -85,6 +85,10 @@ final class Installer extends InstallerAbstract
                         __DIR__ . '/../../../Web/' . $cms['dest'] . '/Routes.php'
                     );
                     break;
+                case 'nav':
+                    self::installNavigation($app, $cms);
+
+                    break;
                 default:
             }
         }
@@ -249,5 +253,21 @@ final class Installer extends InstallerAbstract
         $appRoutes = ArrayUtils::array_diff_assoc_recursive($appRoutes, $moduleRoutes);
 
         \file_put_contents($destRoutePath, '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
+    }
+
+    /**
+     * Install navigation.
+     *
+     * @param ApplicationAbstract $app  Application
+     * @param array               $data Additional data
+     *
+     * @return void
+     *
+     * @since 1.0.0
+     */
+    private static function installNavigation(ApplicationAbstract $app, array $data) : void
+    {
+        $class = '\Web\\' . $data['dest'] . '\Admin\Install\Application\Navigation';
+        $class::install('', $app);
     }
 }
