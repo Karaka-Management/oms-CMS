@@ -268,6 +268,6 @@ final class Installer extends InstallerAbstract
     private static function installNavigation(ApplicationAbstract $app, array $data) : void
     {
         $class = '\Web\\' . $data['dest'] . '\Admin\Install\Application\Navigation';
-        $class::install('', $app);
+        $class::install($app, '');
     }
 }

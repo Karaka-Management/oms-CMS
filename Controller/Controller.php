@@ -83,4 +83,12 @@ class Controller extends ModuleAbstract
      * @since 1.0.0
      */
     protected static array $dependencies = [];
+
+    /**
+     * Protected application names.
+     *
+     * @var string[]
+     * @since 1.0.0
+     */
+    protected static array $reservedApplicationNames = ['cli', 'backend', 'api'];
 }

@@ -129,7 +129,7 @@ final class ApiController extends Controller
         }
 
         $app = self::uploadApplication($request);
-        if (empty($app)) {
+        if (empty($app) || $app === '-1') {
             // @codeCoverageIgnoreStart
             $response->set($request->uri->__toString(), new FormValidation());
             $response->header->status = RequestStatusCode::R_400;
@@ -174,6 +174,16 @@ final class ApiController extends Controller
         $status = $upload->upload($request->getFiles());
         if ($status[0]['status'] !== UploadStatus::OK) {
             return ''; // @codeCoverageIgnore
+        }
+
+        // cannot create reserved application name
+        if (\in_array(\mb_strtolower(
+                $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
+            ), self::$reservedApplicationNames)
+        ) {
+            \unlink(__DIR__ . '/../tmp/' . $status[0]['filename']);
+
+            return '-1';
         }
 
         $app = MbStringUtils::mb_ucfirst(
