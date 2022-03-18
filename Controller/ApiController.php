@@ -176,21 +176,20 @@ final class ApiController extends Controller
             return ''; // @codeCoverageIgnore
         }
 
-        // cannot create reserved application name
-        if (\in_array(\mb_strtolower(
-                $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
-            ), self::$reservedApplicationNames)
-        ) {
-            \unlink(__DIR__ . '/../tmp/' . $status[0]['filename']);
-
-            return '-1';
-        }
-
         $app = MbStringUtils::mb_ucfirst(
             \mb_strtolower(
                 $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
             )
         );
+
+        // cannot create existing application name
+        if (\is_dir(__DIR__ . '/../../../' . $app)
+            || \is_dir(__DIR__ . '/../../../Web/' . $app)
+        ) {
+            \unlink(__DIR__ . '/../tmp/' . $status[0]['filename']);
+
+            return '-1';
+        }
 
         Zip::unpack(__DIR__ . '/../tmp/' . $status[0]['filename'], __DIR__ . '/../tmp/' . $app);
         \unlink(__DIR__ . '/../tmp/' . $status[0]['filename']);
