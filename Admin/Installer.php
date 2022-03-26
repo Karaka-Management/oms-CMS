@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Admin;
 
-use Modules\CMS\Models\Application;
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Message\Http\HttpResponse;
@@ -69,15 +68,27 @@ final class Installer extends InstallerAbstract
             throw new \Exception(); // @codeCoverageIgnore
         }
 
+        $apiApp = new class() extends ApplicationAbstract
+        {
+            protected string $appName = 'Api';
+        };
+
+        $apiApp->dbPool = $app->dbPool;
+        $apiApp->orgId = $app->orgId;
+        $apiApp->accountManager = $app->accountManager;
+        $apiApp->appSettings = $app->appSettings;
+        $apiApp->moduleManager = $app->moduleManager;
+        $apiApp->eventManager = $app->eventManager;
+
         foreach ($cmsData as $cms) {
             switch ($cms['type']) {
                 case 'application':
-                    self::installApplication($app, $cms);
+                    self::installApplication($apiApp, $cms);
                     break;
                 case 'page':
                     $cms['path'] = $data['path'];
 
-                    self::installPage($app, $cms);
+                    self::installPage($apiApp, $cms);
                     break;
                 case 'route':
                     self::installRoutesHooks(
@@ -86,7 +97,7 @@ final class Installer extends InstallerAbstract
                     );
                     break;
                 case 'nav':
-                    self::installNavigation($app, $cms);
+                    self::installNavigation($apiApp, $cms);
 
                     break;
                 default:
