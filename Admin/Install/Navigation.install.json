@@ -10,7 +10,7 @@
         "icon": "fa fa-cloud",
         "order": 15,
         "from": "CMS",
-        "permission": { "permission": 2, "type": null, "element": null },
+        "permission": { "permission": 2, "category": null, "element": null },
         "parent": 0,
         "children": [
             {
@@ -24,7 +24,7 @@
                 "icon": null,
                 "order": 1,
                 "from": "CMS",
-                "permission": { "permission": 2, "type": null, "element": null },
+                "permission": { "permission": 2, "category": null, "element": null },
                 "parent": 1007801001,
                 "children": [
                     {
@@ -38,7 +38,7 @@
                         "icon": null,
                         "order": 1,
                         "from": "CMS",
-                        "permission": { "permission": 2, "type": null, "element": null },
+                        "permission": { "permission": 2, "category": null, "element": null },
                         "parent": 1007802001,
                         "children": [
                             {
@@ -52,7 +52,7 @@
                                 "icon": null,
                                 "order": 1,
                                 "from": "CMS",
-                                "permission": { "permission": 2, "type": null, "element": null },
+                                "permission": { "permission": 2, "category": null, "element": null },
                                 "parent": 1007802101,
                                 "children": []
                             },
@@ -67,7 +67,7 @@
                                 "icon": null,
                                 "order": 5,
                                 "from": "CMS",
-                                "permission": { "permission": 2, "type": null, "element": null },
+                                "permission": { "permission": 2, "category": null, "element": null },
                                 "parent": 1007802101,
                                 "children": []
                             },
@@ -82,7 +82,7 @@
                                 "icon": null,
                                 "order": 10,
                                 "from": "CMS",
-                                "permission": { "permission": 2, "type": null, "element": null },
+                                "permission": { "permission": 2, "category": null, "element": null },
                                 "parent": 1007802101,
                                 "children": []
                             },
@@ -97,7 +97,7 @@
                                 "icon": null,
                                 "order": 15,
                                 "from": "CMS",
-                                "permission": { "permission": 2, "type": null, "element": null },
+                                "permission": { "permission": 2, "category": null, "element": null },
                                 "parent": 1007802101,
                                 "children": []
                             },
@@ -112,7 +112,7 @@
                                 "icon": null,
                                 "order": 20,
                                 "from": "CMS",
-                                "permission": { "permission": 2, "type": null, "element": null },
+                                "permission": { "permission": 2, "category": null, "element": null },
                                 "parent": 1007802101,
                                 "children": []
                             },
@@ -127,7 +127,7 @@
                                 "icon": null,
                                 "order": 25,
                                 "from": "CMS",
-                                "permission": { "permission": 2, "type": null, "element": null },
+                                "permission": { "permission": 2, "category": null, "element": null },
                                 "parent": 1007802101,
                                 "children": []
                             }
@@ -144,7 +144,7 @@
                         "icon": null,
                         "order": 10,
                         "from": "CMS",
-                        "permission": { "permission": 2, "type": null, "element": null },
+                        "permission": { "permission": 2, "category": null, "element": null },
                         "parent": 1007802001,
                         "children": []
                     }

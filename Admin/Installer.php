@@ -73,12 +73,12 @@ final class Installer extends InstallerAbstract
             protected string $appName = 'Api';
         };
 
-        $apiApp->dbPool = $app->dbPool;
-        $apiApp->orgId = $app->orgId;
+        $apiApp->dbPool         = $app->dbPool;
+        $apiApp->orgId          = $app->orgId;
         $apiApp->accountManager = $app->accountManager;
-        $apiApp->appSettings = $app->appSettings;
-        $apiApp->moduleManager = $app->moduleManager;
-        $apiApp->eventManager = $app->eventManager;
+        $apiApp->appSettings    = $app->appSettings;
+        $apiApp->moduleManager  = $app->moduleManager;
+        $apiApp->eventManager   = $app->eventManager;
 
         foreach ($cmsData as $cms) {
             switch ($cms['type']) {
