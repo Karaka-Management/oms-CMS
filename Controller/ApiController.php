@@ -335,7 +335,7 @@ final class ApiController extends Controller
     {
         /** @var App $app */
         $app  = AppMapper::get()->where('id', (int) $request->getData('id'))->execute();
-        $path = (string) $request->getData('path') ?? '/';
+        $path = (string) ($request->getData('path') ?? '/');
 
         $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . $path);
 
