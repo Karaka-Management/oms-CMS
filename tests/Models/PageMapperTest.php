@@ -35,7 +35,7 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
         $page->template = 'tpl';
         $page->app      = 1;
 
-        $l11n = new PageL11n('Test Page', 'Test content');
+        $l11n       = new PageL11n('Test Page', 'Test content');
         $page->l11n = $l11n;
 
         $id = PageMapper::create()->execute($page);
