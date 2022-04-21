@@ -44,7 +44,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationList(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationList(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
@@ -73,7 +73,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
@@ -94,7 +94,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationContents(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationContents(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
@@ -115,7 +115,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationFile(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewApplicationFile(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 

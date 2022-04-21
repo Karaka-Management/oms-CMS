@@ -75,7 +75,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateApplicationCreate($request))) {
             $response->set($request->uri->__toString(), new FormValidation($val));
@@ -119,7 +119,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateApplicationInstall($request))) {
             $response->set($request->uri->__toString(), new FormValidation($val));
@@ -231,7 +231,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
             $response->set($request->uri->__toString(), new FormValidation($val));
@@ -297,7 +297,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
     }
 
@@ -314,7 +314,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
     }
 
@@ -331,7 +331,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         /** @var App $app */
         $app  = AppMapper::get()->where('id', (int) $request->getData('id'))->execute();
@@ -359,7 +359,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validatePageCreate($request))) {
             $response->set('page_create', new FormValidation($val));
@@ -426,7 +426,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validatePageL11nCreate($request))) {
             $response->set('page_l11n_create', new FormValidation($val));
