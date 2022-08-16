@@ -172,6 +172,8 @@ final class ApiController extends Controller
         $upload->preserveFileName = true;
 
         $status = $upload->upload($request->getFiles());
+        $status = \array_values($status);
+
         if ($status[0]['status'] !== UploadStatus::OK) {
             return ''; // @codeCoverageIgnore
         }

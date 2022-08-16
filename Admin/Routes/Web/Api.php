@@ -18,6 +18,17 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
+    '^.*/cms/application/upload$' => [
+        [
+            'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationInstall',
+            'verb'       => RouteVerb::PUT,
+            'permission' => [
+                'module' => ApiController::NAME,
+                'type'   => PermissionType::CREATE,
+                'state'  => PermissionCategory::APPLICATION,
+            ],
+        ],
+    ],
     '^.*/cms/application$' => [
         [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationCreate',
