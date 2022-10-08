@@ -33,7 +33,7 @@ echo $this->getData('nav')->render();
 <div class="row">
     <div class="col-xs-12 col-md-8">
         <div class="box" style="height: 100%; display: flex; align-items: stretch;">
-            <textarea style="height: 100%;"><?= \str_replace("\n", '&#13;&#10;', $content); ?></textarea>
+            <textarea name="content" style="height: 100%;"><?= \str_replace("\n", '&#13;&#10;', $content); ?></textarea>
         </div>
     </div>
 
