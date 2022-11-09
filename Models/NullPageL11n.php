@@ -36,4 +36,12 @@ final class NullPageL11n extends PageL11n
         $this->id = $id;
         parent::__construct();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize() : mixed
+    {
+        return ['id' => $this->id];
+    }
 }
