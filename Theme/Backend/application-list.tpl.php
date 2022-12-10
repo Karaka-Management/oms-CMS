@@ -20,8 +20,8 @@ use phpOMS\Uri\UriFactory;
  */
 $applications = $this->getData('applications') ?? [];
 
-$previous = empty($applications) ? 'cms/application/list' : 'cms/application/list?{?}&id=' . \reset($applications)->getId() . '&ptype=p';
-$next     = empty($applications) ? 'cms/application/list' : 'cms/application/list?{?}&id=' . \end($applications)->getId() . '&ptype=n';
+$previous = empty($applications) ? '{/lang}/{/app}/cms/application/list' : '{/lang}/{/app}/cms/application/list?{?}&id=' . \reset($applications)->getId() . '&ptype=p';
+$next     = empty($applications) ? '{/lang}/{/app}/cms/application/list' : '{/lang}/{/app}/cms/application/list?{?}&id=' . \end($applications)->getId() . '&ptype=n';
 
 echo $this->getData('nav')->render();
 ?>
@@ -39,11 +39,11 @@ echo $this->getData('nav')->render();
                 <tbody>
                 <?php $count = 0;
                     foreach ($applications as $key => $application) : ++$count;
-                        $url = UriFactory::build('cms/application/content?{?}&id=' . $application->getId()); ?>
+                        $url = UriFactory::build('{/lang}/{/app}/cms/application/content?{?}&id=' . $application->getId()); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->name); ?></a>
-                        <td><a class="content" href="<?= UriFactory::build('' . $application->name); ?>"><?= $this->getHtml('Link'); ?></a>
+                        <td><a class="content" href="<?= UriFactory::build($application->name); ?>"><?= $this->getHtml('Link'); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                 <tr><td colspan="3" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
