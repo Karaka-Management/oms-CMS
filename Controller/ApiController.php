@@ -63,7 +63,7 @@ final class ApiController extends Controller
     }
 
     /**
-     * Api method to create a task
+     * Api method to create an application
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -107,7 +107,145 @@ final class ApiController extends Controller
     }
 
     /**
-     * Api method to create a task
+     * Api method to create a page
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        if (!empty($val = $this->validatePageCreate($request))) {
+            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->header->status = RequestStatusCode::R_400;
+
+            return;
+        }
+
+        $application = $this->createPageFromRequest($request);
+        $this->createModel($request->header->account, $application, PageMapper::class, 'page', $request->getOrigin());
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Page', 'Page successfully created.', $application);
+    }
+
+    /**
+     * Validate page create request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @since 1.0.0
+     */
+    private function validatePageCreate(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['name'] = empty($request->getData('name')))
+            || ($val['app'] = empty($request->getData('app')))
+        ) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Method to create page from request.
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return Page
+     *
+     * @since 1.0.0
+     */
+    private function createPageFromRequest(RequestAbstract $request) : Page
+    {
+        $page           = new Page();
+        $page->name     = $request->getData('name') ?? '';
+        $page->app      = $request->getData('app') ?? 2;
+        $page->template = $request->getData('template') ?? '';
+
+        return $page;
+    }
+
+    /**
+     * Api method to create a page
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        if (!empty($val = $this->validatePageL11nCreate($request))) {
+            $response->set('page_l11n_create', new FormValidation($val));
+            $response->header->status = RequestStatusCode::R_400;
+
+            return;
+        }
+
+        $l11nPage = $this->createPageL11nFromRequest($request);
+        $this->createModel($request->header->account, $l11nPage, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
+
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Localization', 'Page localization successfully created', $l11nPage);
+    }
+
+    /**
+     * Validate page l11n create request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @since 1.0.0
+     */
+    private function validatePageL11nCreate(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['name'] = empty($request->getData('name')))
+            || ($val['page'] = empty($request->getData('page')))
+        ) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Method to create page localization from request.
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return PageL11n
+     *
+     * @since 1.0.0
+     */
+    private function createPageL11nFromRequest(RequestAbstract $request) : PageL11n
+    {
+        $pageL11n       = new PageL11n();
+        $pageL11n->page = (int) ($request->getData('page') ?? 0);
+        $pageL11n->setLanguage((string) (
+            $request->getData('language') ?? $request->getLanguage()
+        ));
+        $pageL11n->name    = (string) ($request->getData('name') ?? '');
+        $pageL11n->content = (string) ($request->getData('content') ?? '');
+
+        return $pageL11n;
+    }
+
+    /**
+     * Api method to install a application
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -221,7 +359,7 @@ final class ApiController extends Controller
     }
 
     /**
-     * Api method to create a task
+     * Api method to update a template
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -346,143 +484,5 @@ final class ApiController extends Controller
         }
 
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application Content', 'Directory content successfull returned', $content);
-    }
-
-    /**
-     * Api method to create a page
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
-    {
-        if (!empty($val = $this->validatePageCreate($request))) {
-            $response->set('page_create', new FormValidation($val));
-            $response->header->status = RequestStatusCode::R_400;
-
-            return;
-        }
-
-        $page = $this->createPageFromRequest($request);
-        $this->createModel($request->header->account, $page, PageMapper::class, 'page', $request->getOrigin());
-
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Page', 'Page successfully created', $page);
-    }
-
-    /**
-     * Validate page create request
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return array<string, bool>
-     *
-     * @since 1.0.0
-     */
-    private function validatePageCreate(RequestAbstract $request) : array
-    {
-        $val = [];
-        if (($val['name'] = empty($request->getData('name')))
-            || ($val['app'] = empty($request->getData('app')))
-        ) {
-            return $val;
-        }
-
-        return [];
-    }
-
-    /**
-     * Method to create page from request.
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return Page
-     *
-     * @since 1.0.0
-     */
-    private function createPageFromRequest(RequestAbstract $request) : Page
-    {
-        $page       = new Page();
-        $page->name = $request->getData('name') ?? '';
-        $page->app  = $request->getData('app') ?? 2;
-
-        return $page;
-    }
-
-    /**
-     * Api method to create a page
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
-    {
-        if (!empty($val = $this->validatePageL11nCreate($request))) {
-            $response->set('page_l11n_create', new FormValidation($val));
-            $response->header->status = RequestStatusCode::R_400;
-
-            return;
-        }
-
-        $l11nPage = $this->createPageL11nFromRequest($request);
-        $this->createModel($request->header->account, $l11nPage, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
-
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Localization', 'Page localization successfully created', $l11nPage);
-    }
-
-    /**
-     * Validate page l11n create request
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return array<string, bool>
-     *
-     * @since 1.0.0
-     */
-    private function validatePageL11nCreate(RequestAbstract $request) : array
-    {
-        $val = [];
-        if (($val['name'] = empty($request->getData('name')))
-            || ($val['page'] = empty($request->getData('page')))
-        ) {
-            return $val;
-        }
-
-        return [];
-    }
-
-    /**
-     * Method to create page localization from request.
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return PageL11n
-     *
-     * @since 1.0.0
-     */
-    private function createPageL11nFromRequest(RequestAbstract $request) : PageL11n
-    {
-        $pageL11n       = new PageL11n();
-        $pageL11n->page = (int) ($request->getData('page') ?? 0);
-        $pageL11n->setLanguage((string) (
-            $request->getData('language') ?? $request->getLanguage()
-        ));
-        $pageL11n->name    = (string) ($request->getData('name') ?? '');
-        $pageL11n->content = (string) ($request->getData('content') ?? '');
-
-        return $pageL11n;
     }
 }
