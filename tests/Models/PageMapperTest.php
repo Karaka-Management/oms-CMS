@@ -17,6 +17,7 @@ namespace Modules\CMS\tests\Models;
 use Modules\CMS\Models\Page;
 use Modules\CMS\Models\PageL11n;
 use Modules\CMS\Models\PageMapper;
+use Modules\CMS\Models\PageL11nMapper;
 use phpOMS\Localization\ISO639x1Enum;
 
 /**
@@ -35,19 +36,26 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
         $page->template = 'tpl';
         $page->app      = 1;
 
-        $l11n       = new PageL11n('Test Page', 'Test content');
-        $page->l11n = $l11n;
-
         $id = PageMapper::create()->execute($page);
         self::assertGreaterThan(0, $page->getId());
         self::assertEquals($id, $page->getId());
 
-        $pageR = PageMapper::get()->with('l11n')->with('l11n/language', ISO639x1Enum::_EN)->where('id', $page->getId())->execute();
+        $l11n       = new PageL11n('test_name', 'Test Page');
+        $l11n->page = $id;
+
+        PageL11nMapper::create()->execute($l11n);
+        $page->addL11n($l11n);
+
+        $pageR = PageMapper::get()
+            ->with('l11n')
+            ->where('id', $page->getId())
+            ->execute();
+
         self::assertEquals($page->name, $pageR->name);
         self::assertEquals($page->template, $pageR->template);
         self::assertEquals($page->app, $pageR->app);
         self::assertEquals($page->status, $pageR->status);
-        self::assertEquals($page->l11n->name, $pageR->l11n->name);
-        self::assertEquals($page->l11n->content, $pageR->l11n->content);
+        self::assertEquals($page->getL11n('test_name')->name, $pageR->getL11n('test_name')->name);
+        self::assertEquals($page->getL11n('test_name')->content, $pageR->getL11n('test_name')->content);
     }
 }

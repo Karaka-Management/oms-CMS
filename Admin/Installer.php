@@ -145,9 +145,7 @@ final class Installer extends InstallerAbstract
      */
     private static function installPage(ApplicationAbstract $app, array $data) : void
     {
-        if (!isset($data['id'], $data['name'], $data['src'])
-            || !\is_file(\dirname($data['path']) . '/' . $data['src'] . '/lang.php')
-        ) {
+        if (!isset($data['id'], $data['src'])) {
             return;
         }
 
@@ -160,7 +158,6 @@ final class Installer extends InstallerAbstract
         $app->moduleManager->get('CMS')->apiPageCreate($request, $response);
         $id = $response->get('')['response']->getId();
 
-        $lang  = include \dirname($data['path']) . '/' . $data['src'] . '/lang.php';
         $l11ns = \scandir(\dirname($data['path']) . '/' . $data['src']);
 
         if ($l11ns === false) {
@@ -170,7 +167,7 @@ final class Installer extends InstallerAbstract
         foreach ($l11ns as $l11n) {
             $langCode = \explode('.', $l11n)[0];
 
-            if ($l11n === '.' || $l11n === '..' || (!empty($lang) && !isset($lang[$langCode]))) {
+            if ($l11n === '.' || $l11n === '..') {
                 continue;
             }
 
@@ -180,7 +177,7 @@ final class Installer extends InstallerAbstract
             $request->header->account = 1;
 
             $request->setData('page', $id);
-            $request->setData('name', $lang[$langCode][$data['name']] ?? $data['name']);
+            $request->setData('name', $data['id']);
             $request->setData('language', $langCode);
             $request->setDatA('content', \file_get_contents(\dirname($data['path']) . '/' . $data['src'] . '/' . $l11n));
 
@@ -240,6 +237,7 @@ final class Installer extends InstallerAbstract
      *
      * @since 1.0.0
      */
+    /*
     private static function uninstallRoutesHooks(string $destRoutePath, string $srcRoutePath) : void
     {
         if (!\is_file($destRoutePath)
@@ -248,23 +246,20 @@ final class Installer extends InstallerAbstract
             return;
         }
 
-        if (!\is_file($destRoutePath)) {
-            throw new PathException($destRoutePath);
-        }
-
         if (!\is_writable($destRoutePath)) {
             throw new PermissionException($destRoutePath);
         }
 
-        /** @noinspection PhpIncludeInspection */
+        // @noinspection PhpIncludeInspection
         $appRoutes = include $destRoutePath;
-        /** @noinspection PhpIncludeInspection */
+        // @noinspection PhpIncludeInspection
         $moduleRoutes = include $srcRoutePath;
 
         $appRoutes = ArrayUtils::array_diff_assoc_recursive($appRoutes, $moduleRoutes);
 
         \file_put_contents($destRoutePath, '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
     }
+    */
 
     /**
      * Install navigation.

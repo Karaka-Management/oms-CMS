@@ -16,6 +16,7 @@ namespace Modules\CMS\Controller;
 
 use Modules\Admin\Models\AppMapper;
 use Modules\CMS\Models\Application;
+use Modules\CMS\Models\PageMapper;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
@@ -97,11 +98,71 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function viewApplicationContents(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
+    public function viewPageList(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $view->setTemplate('/Modules/CMS/Theme/Backend/application-contents');
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-page-list');
+        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+
+        $pages = PageMapper::getAll()
+            ->where('app', $request->getData('app'))
+            ->execute();
+
+        $view->setData('list', $pages);
+
+        return $view;
+    }
+
+    /**
+     * Routing end-point for application behaviour.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return RenderableInterface
+     *
+     * @since 1.0.0
+     * @codeCoverageIgnore
+     */
+    public function viewPage(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
+    {
+        $view = new View($this->app->l11nManager, $request, $response);
+
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-page');
+        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+
+        $editor = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
+        $view->addData('editor', $editor);
+
+
+        $page = PageMapper::get()
+            ->with('l11n')
+            ->where('id', $request->getData('id'))
+            ->execute();
+
+        $view->setData('page', $page);
+
+        return $view;
+    }
+
+    /**
+     * Routing end-point for application behaviour.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return RenderableInterface
+     *
+     * @since 1.0.0
+     */
+    public function viewApplicationPosts(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
+    {
+        $view = new View($this->app->l11nManager, $request, $response);
+
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-posts');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
 
         return $view;

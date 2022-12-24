@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
+use Modules\CMS\Models\PageL11n;
 
 /**
  * @internal
@@ -69,8 +70,9 @@ final class PageTest extends \PHPUnit\Framework\TestCase
      */
     public function testL11nInputOutput() : void
     {
-        $this->page->l11n->name = 'L11nName';
-        self::assertEquals('', $this->page->name);
-        self::assertEquals('L11nName', $this->page->l11n->name);
+        $l11n = new PageL11n('test_name', 'value');
+
+        $this->page->addL11n($l11n);
+        self::assertEquals('value', $this->page->getL11n('test_name')->content);
     }
 }

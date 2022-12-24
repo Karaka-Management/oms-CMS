@@ -67,7 +67,7 @@ final class PageMapper extends DataMapperFactory
             'mapper'      => PageL11nMapper::class,
             'table'       => 'cms_page_l11n',
             'self'        => 'cms_page_l11n_page',
-            'conditional' => true,
+            'conditional' => false,
             'external'    => null,
         ],
     ];

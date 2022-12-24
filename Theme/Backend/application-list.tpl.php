@@ -39,11 +39,11 @@ echo $this->getData('nav')->render();
                 <tbody>
                 <?php $count = 0;
                     foreach ($applications as $key => $application) : ++$count;
-                        $url = UriFactory::build('{/lang}/{/app}/cms/application/content?{?}&id=' . $application->getId()); ?>
+                        $url = UriFactory::build('{/lang}/{/app}/cms/application/page/list?{?}&app=' . $application->getId()); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->name); ?></a>
-                        <td><a class="content" href="<?= UriFactory::build($application->name); ?>"><?= $this->getHtml('Link'); ?></a>
+                        <td><a class="content" href="<?= UriFactory::build(\strtolower($application->name)); ?>"><?= $this->getHtml('Link'); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                 <tr><td colspan="3" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>

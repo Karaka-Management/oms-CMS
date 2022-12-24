@@ -29,9 +29,31 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/content.*$' => [
+    '^.*/cms/application/page/list.*$' => [
         [
-            'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationContents',
+            'dest'       => '\Modules\CMS\Controller\BackendController:viewPageList',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::NAME,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionCategory::APPLICATION,
+            ],
+        ],
+    ],
+    '^.*/cms/application/page\?.*$' => [
+        [
+            'dest'       => '\Modules\CMS\Controller\BackendController:viewPage',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::NAME,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionCategory::APPLICATION,
+            ],
+        ],
+    ],
+    '^.*/cms/application/post.*$' => [
+        [
+            'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationPosts',
             'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::NAME,

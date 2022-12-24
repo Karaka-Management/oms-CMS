@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Models;
 
+use phpOMS\Localization\ISO639x1Enum;
+
 /**
  * Page class.
  *
@@ -51,10 +53,10 @@ class Page
     /**
      * Page localization
      *
-     * @var PageL11n
+     * @var PageL11n[]
      * @since 1.0.0
      */
-    public PageL11n $l11n;
+    private array $l11n = [];
 
     /**
      * Page template.
@@ -73,16 +75,6 @@ class Page
     public int $app = 0;
 
     /**
-     * Construct.
-     *
-     * @since 1.0.0
-     */
-    public function __construct()
-    {
-        $this->l11n = new NullPageL11n();
-    }
-
-    /**
      * Get id
      *
      * @return int
@@ -92,5 +84,51 @@ class Page
     public function getId() : int
     {
         return $this->id;
+    }
+
+    /**
+     * Add l11n
+     *
+     * @param PageL11n $l11n Page l11n
+     *
+     * @return void
+     *
+     * @since 1.0.0
+     */
+    public function addL11n(PageL11n $l11n) : void
+    {
+        $this->l11n[] = $l11n;
+    }
+
+    /**
+     * Get l11n
+     *
+     * @param null|string $name Localization name
+     *
+     * @return PageL11n
+     *
+     * @since 1.0.0
+     */
+    public function getL11n(string $name = null) : PageL11n
+    {
+        foreach ($this->l11n as $l11n) {
+            if ($l11n->name === $name) {
+                return $l11n;
+            }
+        }
+
+        return new NullPageL11n();
+    }
+
+    /**
+     * Get localizations
+     *
+     * @return PageL11n[]
+     *
+     * @since 1.0.0
+     */
+    public function getL11ns() : array
+    {
+        return $this->l11n;
     }
 }
