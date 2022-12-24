@@ -12,16 +12,16 @@
  */
 declare(strict_types=1);
 
+use Modules\CMS\Models\NullPage;
+use phpOMS\Localization\ISO639Enum;
 use phpOMS\Uri\UriFactory;
 use phpOMS\Utils\Parser\Markdown\Markdown;
-use phpOMS\Localization\ISO639Enum;
-use Modules\CMS\Models\NullPage;
 
 /**
  * @var \phpOMS\Views\View       $this
  * @var \Modules\CMS\Models\Page $page
  */
-$page = $this->getData('page');
+$page  = $this->getData('page');
 $l11ns = $page->getL11ns();
 
 $languages = [];
@@ -89,7 +89,7 @@ echo $this->getData('nav')->render();
                     <?php foreach ($languages as $language) : ?>
                         <div class="form-group">
                             <label class="radio" for="iLanguage">
-                                <input type="radio" name="type" id="iLanguage" form="docForm" value="<?= $language ?>"<?= ($this->request->getData('lang') ?? $this->request->getLanguage()) === $language ? ' checked' : ''; ?>>
+                                <input type="radio" name="type" id="iLanguage" form="docForm" value="<?= $language; ?>"<?= ($this->request->getData('lang') ?? $this->request->getLanguage()) === $language ? ' checked' : ''; ?>>
                                 <span class="checkmark"></span>
                                 <?= $this->printHtml($language); ?>
                             </label>

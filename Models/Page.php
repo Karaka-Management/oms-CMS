@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Models;
 
-use phpOMS\Localization\ISO639x1Enum;
-
 /**
  * Page class.
  *

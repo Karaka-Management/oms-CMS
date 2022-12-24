@@ -136,7 +136,6 @@ final class BackendController extends Controller
         $editor = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
         $view->addData('editor', $editor);
 
-
         $page = PageMapper::get()
             ->with('l11n')
             ->where('id', $request->getData('id'))

@@ -16,9 +16,8 @@ namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
 use Modules\CMS\Models\PageL11n;
-use Modules\CMS\Models\PageMapper;
 use Modules\CMS\Models\PageL11nMapper;
-use phpOMS\Localization\ISO639x1Enum;
+use Modules\CMS\Models\PageMapper;
 
 /**
  * @internal
