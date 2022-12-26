@@ -166,9 +166,9 @@ final class ApiController extends Controller
     private function createPageFromRequest(RequestAbstract $request) : Page
     {
         $page           = new Page();
-        $page->name     = $request->getData('name') ?? '';
-        $page->app      = $request->getData('app') ?? 2;
-        $page->template = $request->getData('template') ?? '';
+        $page->name     = (string) ($request->getData('name') ?? '');
+        $page->app      = (int) ($request->getData('app') ?? 2);
+        $page->template = (string) ($request->getData('template') ?? '');
 
         return $page;
     }

@@ -80,6 +80,7 @@ final class Installer extends InstallerAbstract
         $apiApp->moduleManager  = $app->moduleManager;
         $apiApp->eventManager   = $app->eventManager;
 
+        /** @var array $cmsData */
         foreach ($cmsData as $cms) {
             switch ($cms['type']) {
                 case 'application':
@@ -156,7 +157,13 @@ final class Installer extends InstallerAbstract
         $request->setData('name', $data['id']);
         $request->setData('app', $data['app'] ?? 2);
         $app->moduleManager->get('CMS')->apiPageCreate($request, $response);
-        $id = $response->get('')['response']->getId();
+
+        $responseData = $response->get('');
+        if (!\is_array($responseData)) {
+            return;
+        }
+
+        $id = $responseData['response']->getId();
 
         $l11ns = \scandir(\dirname($data['path']) . '/' . $data['src']);
 
