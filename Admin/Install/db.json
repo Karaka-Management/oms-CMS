@@ -68,6 +68,14 @@
                 "null": true,
                 "foreignTable": "language",
                 "foreignKey": "language_639_1"
+            },
+            "cms_page_l11n_country": {
+                "name": "cms_page_l11n_country",
+                "type": "VARCHAR(2)",
+                "default": null,
+                "null": true,
+                "foreignTable": "country",
+                "foreignKey": "country_code2"
             }
         }
     },
@@ -126,7 +134,7 @@
             },
             "cms_post_title": {
                 "name": "cms_post_title",
-                "type": "VARCHAR(254)",
+                "type": "VARCHAR(255)",
                 "null": false
             },
             "cms_post_content": {
@@ -146,6 +154,14 @@
                 "null": true,
                 "foreignTable": "language",
                 "foreignKey": "language_639_1"
+            },
+            "cms_post_country": {
+                "name": "cms_post_country",
+                "type": "VARCHAR(2)",
+                "default": null,
+                "null": true,
+                "foreignTable": "country",
+                "foreignKey": "country_code2"
             },
             "cms_post_category": {
                 "name": "cms_post_category",

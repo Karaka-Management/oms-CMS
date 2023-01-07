@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
-use Modules\CMS\Models\PageL11n;
+use phpOMS\Localization\BaseStringL11n;
 use Modules\CMS\Models\PageL11nMapper;
 use Modules\CMS\Models\PageMapper;
 
@@ -39,8 +39,9 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
         self::assertGreaterThan(0, $page->getId());
         self::assertEquals($id, $page->getId());
 
-        $l11n       = new PageL11n('test_name', 'Test Page');
-        $l11n->page = $id;
+        $l11n       = new BaseStringL11n('Test Page');
+        $l11n->name = 'test_name';
+        $l11n->ref = $id;
 
         PageL11nMapper::create()->execute($l11n);
         $page->addL11n($l11n);

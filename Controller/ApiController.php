@@ -19,7 +19,7 @@ namespace Modules\CMS\Controller;
 use Modules\Admin\Models\App;
 use Modules\Admin\Models\AppMapper;
 use Modules\CMS\Models\Page;
-use Modules\CMS\Models\PageL11n;
+use phpOMS\Localization\BaseStringL11n;
 use Modules\CMS\Models\PageL11nMapper;
 use Modules\CMS\Models\PageMapper;
 use Modules\Media\Models\UploadFile;
@@ -43,69 +43,6 @@ use phpOMS\Utils\MbStringUtils;
  */
 final class ApiController extends Controller
 {
-    /**
-     * Validate application create request
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return array<string, bool> Returns the validation array of the request
-     *
-     * @since 1.0.0
-     */
-    private function validateApplicationCreate(RequestAbstract $request) : array
-    {
-        $val = [];
-        if (($val['name'] = empty($request->getData('name')))) {
-            return $val;
-        }
-
-        return [];
-    }
-
-    /**
-     * Api method to create an application
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiApplicationCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
-    {
-        if (!empty($val = $this->validateApplicationCreate($request))) {
-            $response->set($request->uri->__toString(), new FormValidation($val));
-            $response->header->status = RequestStatusCode::R_400;
-
-            return;
-        }
-
-        $application = $this->createApplicationFromRequest($request);
-        $this->createModel($request->header->account, $application, AppMapper::class, 'application', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
-    }
-
-    /**
-     * Method to create task from request.
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return App Returns the created application from the request
-     *
-     * @since 1.0.0
-     */
-    private function createApplicationFromRequest(RequestAbstract $request) : App
-    {
-        $app       = new App();
-        $app->name = (string) ($request->getData('name') ?? '');
-
-        return $app;
-    }
-
     /**
      * Api method to create a page
      *
@@ -227,14 +164,14 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract $request Request
      *
-     * @return PageL11n
+     * @return BaseStringL11n
      *
      * @since 1.0.0
      */
-    private function createPageL11nFromRequest(RequestAbstract $request) : PageL11n
+    private function createPageL11nFromRequest(RequestAbstract $request) : BaseStringL11n
     {
-        $pageL11n       = new PageL11n();
-        $pageL11n->page = (int) ($request->getData('page') ?? 0);
+        $pageL11n      = new BaseStringL11n();
+        $pageL11n->ref = (int) ($request->getData('page') ?? 0);
         $pageL11n->setLanguage((string) (
             $request->getData('language') ?? $request->getLanguage()
         ));
@@ -281,12 +218,9 @@ final class ApiController extends Controller
         $request->setData('appName', $app);
         $request->setData('theme', $request->getData('theme') ?? 'Default', true);
         $this->app->moduleManager->get('Admin')->apiInstallApplication($request, $response);
+        $this->app->moduleManager->get('Admin')->apiApplicationCreate($request, $response);
 
-        $application = $this->createApplicationFromRequest($request);
         Directory::delete(__DIR__ . '/../tmp');
-
-        $this->createModel($request->header->account, $application, AppMapper::class, 'application', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application', 'Application successfully created.', $application);
     }
 
     /**

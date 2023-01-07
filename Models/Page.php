@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Modules\CMS\Models;
 
+use phpOMS\Localization\BaseStringL11n;
+
 /**
  * Page class.
  *
@@ -51,7 +53,7 @@ class Page
     /**
      * Page localization
      *
-     * @var PageL11n[]
+     * @var BaseStringL11n[]
      * @since 1.0.0
      */
     private array $l11n = [];
@@ -87,13 +89,13 @@ class Page
     /**
      * Add l11n
      *
-     * @param PageL11n $l11n Page l11n
+     * @param BaseStringL11n $l11n Page l11n
      *
      * @return void
      *
      * @since 1.0.0
      */
-    public function addL11n(PageL11n $l11n) : void
+    public function addL11n(BaseStringL11n $l11n) : void
     {
         $this->l11n[] = $l11n;
     }
@@ -103,11 +105,11 @@ class Page
      *
      * @param null|string $name Localization name
      *
-     * @return PageL11n
+     * @return BaseStringL11n
      *
      * @since 1.0.0
      */
-    public function getL11n(string $name = null) : PageL11n
+    public function getL11n(string $name = null) : BaseStringL11n
     {
         foreach ($this->l11n as $l11n) {
             if ($l11n->name === $name) {
@@ -115,13 +117,13 @@ class Page
             }
         }
 
-        return new NullPageL11n();
+        return new NullBaseStringL11n();
     }
 
     /**
      * Get localizations
      *
-     * @return PageL11n[]
+     * @return BaseStringL11n[]
      *
      * @since 1.0.0
      */

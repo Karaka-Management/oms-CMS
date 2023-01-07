@@ -29,17 +29,6 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application$' => [
-        [
-            'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationCreate',
-            'verb'       => RouteVerb::PUT,
-            'permission' => [
-                'module' => ApiController::NAME,
-                'type'   => PermissionType::CREATE,
-                'state'  => PermissionCategory::APPLICATION,
-            ],
-        ],
-    ],
     '^.*/cms/application\?.*?id=.*$' => [
         [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationUpdate',

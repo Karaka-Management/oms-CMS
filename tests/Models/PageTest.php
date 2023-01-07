@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
-use Modules\CMS\Models\PageL11n;
+use phpOMS\Localization\BaseStringL11n;
 
 /**
  * @internal
@@ -70,7 +70,8 @@ final class PageTest extends \PHPUnit\Framework\TestCase
      */
     public function testL11nInputOutput() : void
     {
-        $l11n = new PageL11n('test_name', 'value');
+        $l11n = new BaseStringL11n('value');
+        $l11n->name = 'test_name';
 
         $this->page->addL11n($l11n);
         self::assertEquals('value', $this->page->getL11n('test_name')->content);

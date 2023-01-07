@@ -126,22 +126,6 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
      * @covers Modules\CMS\Controller\ApiController
      * @group module
      */
-    public function testApiApplicationCreateInvalidData() : void
-    {
-        $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
-
-        $request->header->account = 1;
-        $request->setData('invalid', '1');
-
-        $this->module->apiApplicationCreate($request, $response);
-        self::assertEquals(RequestStatusCode::R_400, $response->header->status);
-    }
-
-    /**
-     * @covers Modules\CMS\Controller\ApiController
-     * @group module
-     */
     public function testApiApplicationInstallInvalidData() : void
     {
         $response = new HttpResponse();
