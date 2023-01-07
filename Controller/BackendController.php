@@ -17,12 +17,12 @@ namespace Modules\CMS\Controller;
 use Modules\Admin\Models\AppMapper;
 use Modules\CMS\Models\Application;
 use Modules\CMS\Models\PageMapper;
+use phpOMS\Application\ApplicationType;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Views\View;
-use phpOMS\Application\ApplicationType;
 
 /**
  * CMS class.

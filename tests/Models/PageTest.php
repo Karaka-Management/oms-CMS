@@ -70,7 +70,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
      */
     public function testL11nInputOutput() : void
     {
-        $l11n = new BaseStringL11n('value');
+        $l11n       = new BaseStringL11n('value');
         $l11n->name = 'test_name';
 
         $this->page->addL11n($l11n);
