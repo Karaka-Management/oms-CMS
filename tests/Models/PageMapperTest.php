@@ -15,9 +15,9 @@ declare(strict_types=1);
 namespace Modules\CMS\tests\Models;
 
 use Modules\CMS\Models\Page;
-use phpOMS\Localization\BaseStringL11n;
 use Modules\CMS\Models\PageL11nMapper;
 use Modules\CMS\Models\PageMapper;
+use phpOMS\Localization\BaseStringL11n;
 
 /**
  * @internal
@@ -41,7 +41,7 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
 
         $l11n       = new BaseStringL11n('Test Page');
         $l11n->name = 'test_name';
-        $l11n->ref = $id;
+        $l11n->ref  = $id;
 
         PageL11nMapper::create()->execute($l11n);
         $page->addL11n($l11n);

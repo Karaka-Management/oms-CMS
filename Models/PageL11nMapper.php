@@ -39,7 +39,7 @@ final class PageL11nMapper extends DataMapperFactory
         'cms_page_l11n_content'  => ['name' => 'cms_page_l11n_content',  'type' => 'string', 'internal' => 'content'],
         'cms_page_l11n_page'     => ['name' => 'cms_page_l11n_page',     'type' => 'int',    'internal' => 'ref'],
         'cms_page_l11n_language' => ['name' => 'cms_page_l11n_language', 'type' => 'string', 'internal' => 'language'],
-        'cms_page_l11n_country' => ['name' => 'cms_page_l11n_country', 'type' => 'string', 'internal' => 'country'],
+        'cms_page_l11n_country'  => ['name' => 'cms_page_l11n_country', 'type' => 'string', 'internal' => 'country'],
     ];
 
     /**
