@@ -176,9 +176,29 @@ final class ApiController extends Controller
             $request->getData('language') ?? $request->getLanguage()
         ));
         $pageL11n->name    = (string) ($request->getData('name') ?? '');
-        $pageL11n->content = (string) ($request->getData('content') ?? '');
+
+        $page = PageMapper::get()
+            ->where('id', (int) ($request->getData('page') ?? 0))
+            ->execute();
+
+        $app = AppMapper::get()
+            ->where('id', $page->app)
+            ->execute();
+
+        $pageL11n->content = $this->parseCmsKeys((string) ($request->getData('content') ?? ''), $app);
 
         return $pageL11n;
+    }
+
+    private function parseCmsKeys(string $content, App $application) : string
+    {
+        if ($content === '') {
+            return '';
+        }
+
+        $content = \str_replace('{APPNAME}', $application->name, $content);
+
+        return $content;
     }
 
     /**

@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Modules\CMS\Models;
 
 use phpOMS\Localization\BaseStringL11n;
+use phpOMS\Localization\NullBaseStringL11n;
 
 /**
  * Page class.
