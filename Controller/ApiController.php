@@ -175,12 +175,14 @@ final class ApiController extends Controller
         $pageL11n->setLanguage((string) (
             $request->getData('language') ?? $request->getLanguage()
         ));
-        $pageL11n->name    = (string) ($request->getData('name') ?? '');
+        $pageL11n->name = (string) ($request->getData('name') ?? '');
 
+        /** @var Page $page */
         $page = PageMapper::get()
             ->where('id', (int) ($request->getData('page') ?? 0))
             ->execute();
 
+        /** @var App $app */
         $app = AppMapper::get()
             ->where('id', $page->app)
             ->execute();
@@ -190,6 +192,16 @@ final class ApiController extends Controller
         return $pageL11n;
     }
 
+    /**
+     * Searches and replaces well-defined keywords
+     *
+     * @param string $content     Content to search
+     * @param App    $application Application model
+     *
+     * @return string
+     *
+     * @since 1.0.0
+     */
     private function parseCmsKeys(string $content, App $application) : string
     {
         if ($content === '') {
