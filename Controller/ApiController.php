@@ -135,7 +135,7 @@ final class ApiController extends Controller
         $l11nPage = $this->createPageL11nFromRequest($request);
         $this->createModel($request->header->account, $l11nPage, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
 
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Localization', 'Page localization successfully created', $l11nPage);
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Localization', 'Localization successfully created', $l11nPage);
     }
 
     /**
