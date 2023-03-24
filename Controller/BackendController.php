@@ -6,7 +6,7 @@
  *
  * @package   Modules\CMS
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -28,7 +28,7 @@ use phpOMS\Views\View;
  * CMS class.
  *
  * @package Modules\CMS
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
@@ -54,9 +54,9 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response));
 
         if ($request->getData('ptype') === 'p') {
-            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', (int) ($request->getData('id') ?? 0), '<')->limit(25)->execute());
+            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '<')->limit(25)->execute());
         } elseif ($request->getData('ptype') === 'n') {
-            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', (int) ($request->getData('id') ?? 0), '>')->limit(25)->execute());
+            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '>')->limit(25)->execute());
         } else {
             $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', 0, '>')->limit(25)->execute());
         }
@@ -191,7 +191,7 @@ final class BackendController extends Controller
         $view->addData('app', $app);
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');
-        $path     = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . ($request->getData('file') ?? ''));
+        $path     = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . ($request->getDataString('file') ?? ''));
 
         if ($path === false || \stripos($path, $basePath . '/') !== 0 || $basePath === false) {
             $path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)));
@@ -224,8 +224,8 @@ final class BackendController extends Controller
             }
         }
 
-        $file   = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . ($request->getData('file') ?? ''));
-        $parent = $file === false || \is_dir($file) ? $request->getData('file') ?? '' : \dirname($request->getData('file') ?? '');
+        $file   = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . ($request->getDataString('file') ?? ''));
+        $parent = $file === false || \is_dir($file) ? $request->getDataString('file') ?? '' : \dirname($request->getDataString('file') ?? '');
 
         if ($file === false || !\is_file($file) || \stripos($file, $basePath) !== 0) {
             $file = !empty($temp2) ? \realpath(\rtrim($path, '/') . '/' . $temp2[0]['name']) : false;

@@ -6,7 +6,7 @@
  *
  * @package   Modules\CMS
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -39,7 +39,7 @@ echo $this->getData('nav')->render();
 
     <div class="col-xs-12 col-md-4">
         <div class="box">
-            <a href="<?= UriFactory::build('{/lang}/{/app}/' . $app->name); ?>" class="button">Application</a>
+            <a href="<?= UriFactory::build('{/base}/' . $app->name); ?>" class="button">Application</a>
         </div>
 
         <div class="portlet">
@@ -53,9 +53,9 @@ echo $this->getData('nav')->render();
             <div class="portlet-head"><?= $this->getHtml('Files'); ?></div>
             <div class="portlet-body">
                 <ul>
-                    <li><a href="<?= UriFactory::build('{/lang}/{/app}/cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="fa fa-folder-o"></i> ..</a>
+                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="fa fa-folder-o"></i> ..</a>
                 <?php foreach ($list as $element) : ?>
-                    <li><a href="<?= UriFactory::build('{/lang}/{/app}/cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="fa fa-folder-o"></i>' : '<i class="fa fa-file-o"></i>'; ?> <?= $element['name']; ?></a>
+                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="fa fa-folder-o"></i>' : '<i class="fa fa-file-o"></i>'; ?> <?= $element['name']; ?></a>
                 <?php endforeach; ?>
                 </ul>
             </div>

@@ -7,7 +7,7 @@
  *
  * @package   Modules\CMS
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -37,7 +37,7 @@ use phpOMS\Utils\MbStringUtils;
  * Api controller for the CMS module.
  *
  * @package Modules\CMS
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */
@@ -103,9 +103,9 @@ final class ApiController extends Controller
     private function createPageFromRequest(RequestAbstract $request) : Page
     {
         $page           = new Page();
-        $page->name     = (string) ($request->getData('name') ?? '');
-        $page->app      = (int) ($request->getData('app') ?? 2);
-        $page->template = (string) ($request->getData('template') ?? '');
+        $page->name     = $request->getDataString('name') ?? '';
+        $page->app      = $request->getDataInt('app') ?? 2;
+        $page->template = $request->getDataString('template') ?? '';
 
         return $page;
     }
@@ -171,15 +171,15 @@ final class ApiController extends Controller
     private function createPageL11nFromRequest(RequestAbstract $request) : BaseStringL11n
     {
         $pageL11n      = new BaseStringL11n();
-        $pageL11n->ref = (int) ($request->getData('page') ?? 0);
-        $pageL11n->setLanguage((string) (
-            $request->getData('language') ?? $request->getLanguage()
-        ));
-        $pageL11n->name = (string) ($request->getData('name') ?? '');
+        $pageL11n->ref = $request->getDataInt('page') ?? 0;
+        $pageL11n->setLanguage(
+            $request->getDataString('language') ?? $request->getLanguage()
+        );
+        $pageL11n->name = $request->getDataString('name') ?? '';
 
         /** @var Page $page */
         $page = PageMapper::get()
-            ->where('id', (int) ($request->getData('page') ?? 0))
+            ->where('id', $request->getDataInt('page') ?? 0)
             ->execute();
 
         /** @var App $app */
@@ -187,7 +187,7 @@ final class ApiController extends Controller
             ->where('id', $page->app)
             ->execute();
 
-        $pageL11n->content = $this->parseCmsKeys((string) ($request->getData('content') ?? ''), $app);
+        $pageL11n->content = $this->parseCmsKeys($request->getDataString('content') ?? '', $app);
 
         return $pageL11n;
     }
@@ -284,7 +284,7 @@ final class ApiController extends Controller
 
         $app = MbStringUtils::mb_ucfirst(
             \mb_strtolower(
-                $request->getData('name') ?? \basename($status[0]['filename'], '.zip')
+                $request->getDataString('name') ?? \basename($status[0]['filename'], '.zip')
             )
         );
 

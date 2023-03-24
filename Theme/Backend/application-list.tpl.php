@@ -6,7 +6,7 @@
  *
  * @package   Modules\CMS
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -20,8 +20,8 @@ use phpOMS\Uri\UriFactory;
  */
 $applications = $this->getData('applications') ?? [];
 
-$previous = empty($applications) ? '{/lang}/{/app}/cms/application/list' : '{/lang}/{/app}/cms/application/list?{?}&id=' . \reset($applications)->getId() . '&ptype=p';
-$next     = empty($applications) ? '{/lang}/{/app}/cms/application/list' : '{/lang}/{/app}/cms/application/list?{?}&id=' . \end($applications)->getId() . '&ptype=n';
+$previous = empty($applications) ? '{/base}/cms/application/list' : '{/base}/cms/application/list?{?}&id=' . \reset($applications)->getId() . '&ptype=p';
+$next     = empty($applications) ? '{/base}/cms/application/list' : '{/base}/cms/application/list?{?}&id=' . \end($applications)->getId() . '&ptype=n';
 
 echo $this->getData('nav')->render();
 ?>
@@ -39,7 +39,7 @@ echo $this->getData('nav')->render();
                 <tbody>
                 <?php $count = 0;
                     foreach ($applications as $key => $application) : ++$count;
-                        $url = UriFactory::build('{/lang}/{/app}/cms/application/page/list?{?}&app=' . $application->getId()); ?>
+                        $url = UriFactory::build('{/base}/cms/application/page/list?{?}&app=' . $application->getId()); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($application->name); ?></a>
