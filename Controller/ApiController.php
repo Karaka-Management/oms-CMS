@@ -248,7 +248,8 @@ final class ApiController extends Controller
         $request->setData('appSrc', 'Modules/CMS/tmp/' . $app);
         $request->setData('appDest', 'Web/' . $app);
         $request->setData('appName', $app);
-        $request->setData('theme', $request->getData('theme') ?? 'Default', true);
+        $request->setData('default_unit', $request->getDataInt('default_int'));
+        $request->setData('theme', $request->getDataString('theme') ?? 'Default', true);
         $this->app->moduleManager->get('Admin')->apiInstallApplication($request, $response);
         $this->app->moduleManager->get('Admin')->apiApplicationCreate($request, $response);
 
