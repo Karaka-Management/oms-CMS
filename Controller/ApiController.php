@@ -82,8 +82,8 @@ final class ApiController extends Controller
     private function validatePageCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['name'] = empty($request->getData('name')))
-            || ($val['app'] = empty($request->getData('app')))
+        if (($val['name'] = !$request->hasData('name'))
+            || ($val['app'] = !$request->hasData('app'))
         ) {
             return $val;
         }
@@ -150,8 +150,8 @@ final class ApiController extends Controller
     private function validatePageL11nCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['name'] = empty($request->getData('name')))
-            || ($val['page'] = empty($request->getData('page')))
+        if (($val['name'] = !$request->hasData('name'))
+            || ($val['page'] = !$request->hasData('page'))
         ) {
             return $val;
         }
@@ -316,7 +316,7 @@ final class ApiController extends Controller
     private function validateApplicationInstall(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['name'] = empty($request->getData('name')))
+        if (($val['name'] = !$request->hasData('name'))
             || ($val['files'] = empty($request->getFiles()))
         ) {
             return $val;
@@ -363,7 +363,7 @@ final class ApiController extends Controller
 
         \file_put_contents($path, $request->getData('content'));
 
-        if (!empty($request->getData('name'))) {
+        if ($request->hasData('name')) {
             $old = $path;
             $new = $basePath . '/' . $request->getData('name') . '.tpl.php';
             \rename($old, $new);
@@ -384,7 +384,7 @@ final class ApiController extends Controller
     private function validateApplicationTemplateUpdate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['content'] = empty($request->getData('content')))) {
+        if (($val['content'] = !$request->hasData('content'))) {
             return $val;
         }
 
