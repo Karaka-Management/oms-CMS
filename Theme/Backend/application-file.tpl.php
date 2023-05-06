@@ -30,10 +30,10 @@ $isNewDoc = false;
 echo $this->getData('nav')->render();
 ?>
 
-<div class="row">
-    <div class="col-xs-12 col-md-8">
-        <div class="box" style="height: 100%; display: flex; align-items: stretch;">
-            <textarea name="content" style="height: 100%;"><?= \str_replace("\n", '&#13;&#10;', $content); ?></textarea>
+<div class="row fill-all">
+    <div class="col-xs-12 col-md-8" style="display: flex;">
+        <div class="box fill-all">
+            <pre><code contenteditable><?= \htmlspecialchars($content); ?></code></pre>
         </div>
     </div>
 
@@ -49,7 +49,7 @@ echo $this->getData('nav')->render();
                 </div>
             </div>
 
-        <div class="portlet">
+        <div class="portlet sticky">
             <div class="portlet-head"><?= $this->getHtml('Files'); ?></div>
             <div class="portlet-body">
                 <ul>

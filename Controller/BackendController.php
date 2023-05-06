@@ -15,13 +15,13 @@ declare(strict_types=1);
 namespace Modules\CMS\Controller;
 
 use Modules\Admin\Models\AppMapper;
-use Modules\CMS\Models\Application;
 use Modules\CMS\Models\PageMapper;
 use phpOMS\Application\ApplicationType;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
+use phpOMS\Security\Guard;
 use phpOMS\Views\View;
 
 /**
@@ -197,7 +197,7 @@ final class BackendController extends Controller
             $path = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)));
         }
 
-        if ($path === false || $basePath === false) {
+        if ($path === false || $basePath === false || !Guard::isSafePath($path)) {
             $view->setTemplate('/Web/Backend/Error/404');
             $response->header->status = RequestStatusCode::R_404;
 
@@ -232,6 +232,13 @@ final class BackendController extends Controller
         }
 
         $fileList = \array_merge($temp1, $temp2);
+
+        if (!Guard::isSafePath($file)) {
+            $view->setTemplate('/Web/Backend/Error/404');
+            $response->header->status = RequestStatusCode::R_404;
+
+            return $view;
+        }
 
         $view->addData('content', $file === false ? '' : \file_get_contents($file));
         $view->addData('parent', $parent);
