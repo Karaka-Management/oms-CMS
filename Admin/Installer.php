@@ -163,7 +163,7 @@ final class Installer extends InstallerAbstract
             return;
         }
 
-        $id = $responseData['response']->getId();
+        $id = $responseData['response']->id;
 
         $l11ns = \scandir(\dirname($data['path']) . '/' . $data['src']);
 

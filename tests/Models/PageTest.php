@@ -38,7 +38,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefault() : void
     {
-        self::assertEquals(0, $this->page->getId());
+        self::assertEquals(0, $this->page->id);
         self::assertEquals('', $this->page->name);
         self::assertEquals('', $this->page->template);
         self::assertEquals(0, $this->page->app);

@@ -20,8 +20,8 @@ use phpOMS\Uri\UriFactory;
  */
 $list = $this->getData('list') ?? [];
 
-$previous = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&id=' . \reset($list)->getId() . '&ptype=p';
-$next     = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&id=' . \end($list)->getId() . '&ptype=n';
+$previous = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&id=' . \reset($list)->id . '&ptype=p';
+$next     = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&id=' . \end($list)->id . '&ptype=n';
 
 echo $this->getData('nav')->render();
 ?>
@@ -38,7 +38,7 @@ echo $this->getData('nav')->render();
                 <tbody>
                 <?php $count = 0;
                     foreach ($list as $key => $page) : ++$count;
-                        $url = UriFactory::build('{/base}/cms/application/page?{?}&id=' . $page->getId()); ?>
+                        $url = UriFactory::build('{/base}/cms/application/page?{?}&id=' . $page->id); ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td>
                         <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($page->name); ?></a>

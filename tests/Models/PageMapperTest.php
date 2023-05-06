@@ -36,8 +36,8 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
         $page->app      = 1;
 
         $id = PageMapper::create()->execute($page);
-        self::assertGreaterThan(0, $page->getId());
-        self::assertEquals($id, $page->getId());
+        self::assertGreaterThan(0, $page->id);
+        self::assertEquals($id, $page->id);
 
         $l11n       = new BaseStringL11n('Test Page');
         $l11n->name = 'test_name';
@@ -48,7 +48,7 @@ final class PageMapperTest extends \PHPUnit\Framework\TestCase
 
         $pageR = PageMapper::get()
             ->with('l11n')
-            ->where('id', $page->getId())
+            ->where('id', $page->id)
             ->execute();
 
         self::assertEquals($page->name, $pageR->name);
