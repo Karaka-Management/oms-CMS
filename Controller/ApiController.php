@@ -43,6 +43,38 @@ use phpOMS\Utils\MbStringUtils;
  */
 final class ApiController extends Controller
 {
+    public function apiCookieConsent(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        $cookieContent = \file_get_contents(__DIR__ . '/../../../Web/' . ($request->getData('app') ?? $this->app->appName) . '/cookie_consent.json');
+        if ($cookieContent === false) {
+            $response->header->status = RequestStatusCode::R_400;
+
+            return;
+        }
+
+        $cookieRules = \json_decode($cookieContent, true);
+        if (!\is_array($cookieRules)) {
+            $response->header->status = RequestStatusCode::R_400;
+
+            return;
+        }
+
+        $userSettings = $request->getData('cookie_consent_rules');
+        $this->app->cookieJar->set('cookie_consent', \json_encode($userSettings), 86400);
+
+        foreach ($userSettings as $rule) {
+            if (isset($cookieRules[$rule])) {
+                foreach ($rule['values'] as $key => $value) {
+                    if (!empty($value)) {
+                        $this->app->cookieJar->set($key, $value);
+                    }
+                }
+            }
+        }
+
+        $this->app->cookieJar->save();
+    }
+
     /**
      * Api method to create a page
      *

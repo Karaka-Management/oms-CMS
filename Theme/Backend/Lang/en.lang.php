@@ -20,4 +20,11 @@ return ['CMS' => [
     'Name'         => 'Name',
     'Templates'    => 'Templates',
     'Upload'       => 'Upload',
+    'CookieConsent' => 'Cookie Consent',
+    'Customize' => 'Customize',
+    'CookieExplanation' => 'Cookies help us deliver the best experience on our website.',
+    'RejectAll' => 'Reject All',
+    'AcceptAll' => 'Accept All',
+    'AcceptRequired' => 'Accept Required',
+    'Submit' => 'Submit',
 ]];

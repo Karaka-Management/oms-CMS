@@ -18,6 +18,15 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
+    '^.*/cookie(\?.*|$)' => [
+        [
+            'dest'       => '\Modules\CMS\Controller\ApiController:apiCookieConsent',
+            'verb'       => RouteVerb::ANY,
+            'permission' => [
+            ],
+        ],
+    ],
+
     '^.*/cms/application/upload$' => [
         [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationInstall',
