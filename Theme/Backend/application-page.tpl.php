@@ -40,7 +40,7 @@ echo $this->getData('nav')->render();
             </section>
 
             <?php
-            	foreach ($l11ns as $l11n) :
+                foreach ($l11ns as $l11n) :
                     if (!\in_array($l11n->getLanguage(), $languages)) {
                         $languages[] = $l11n->getLanguage();
                     }
@@ -49,18 +49,18 @@ echo $this->getData('nav')->render();
                         $l11nNames[] = $l11n->name;
                     }
 
-            		if ($l11n->getLanguage() === $this->response->getLanguage()) :
+                    if ($l11n->getLanguage() === $this->response->getLanguage()) :
             ?>
-	            <section class="portlet">
-	                <div class="portlet-body">
-	                    <?= $this->getData('editor')->render('iNews'); ?>
-	                </div>
-	            </section>
+                <section class="portlet">
+                    <div class="portlet-body">
+                        <?= $this->getData('editor')->render('iNews'); ?>
+                    </div>
+                </section>
 
-	            <div class="box wf-100">
-	            <?= $this->getData('editor')->getData('text')->render('iNews', 'plain', 'docForm', $l11n->content, Markdown::parse($l11n->content)); ?>
-	            </div>
-        	<?php endif; endforeach; ?>
+                <div class="box wf-100">
+                <?= $this->getData('editor')->getData('text')->render('iNews', 'plain', 'docForm', $l11n->content, Markdown::parse($l11n->content)); ?>
+                </div>
+            <?php endif; endforeach; ?>
         </div>
     </div>
 
