@@ -12,7 +12,6 @@
  */
 declare(strict_types=1);
 
-use Modules\CMS\Models\NullPage;
 use phpOMS\Localization\ISO639Enum;
 use phpOMS\Uri\UriFactory;
 use phpOMS\Utils\Parser\Markdown\Markdown;

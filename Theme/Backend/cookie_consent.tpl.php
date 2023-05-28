@@ -40,8 +40,8 @@ $rules = $this->getData('rules') ?? [];
             <div>
                 <?php foreach ($rules as $id => $rule) : ?>
                     <div class="consent_element">
-                        <label class="checkbox" for="R-<?= $this->printHtml($id); ?><?= $rule['required'] ? '-r' : '' ?>">
-                            <input id="R-<?= $this->printHtml($id); ?>" type="checkbox" name="cookie_consent_rules[]" value="<?= $id; ?>"<?= $rule['required'] ? ' required' : '' ?><?= $rule['checked'] || $rule['required'] ? ' checked' : ''; ?>>
+                        <label class="checkbox" for="R-<?= $this->printHtml($id); ?><?= $rule['required'] ? '-r' : ''; ?>">
+                            <input id="R-<?= $this->printHtml($id); ?>" type="checkbox" name="cookie_consent_rules[]" value="<?= $id; ?>"<?= $rule['required'] ? ' required' : ''; ?><?= $rule['checked'] || $rule['required'] ? ' checked' : ''; ?>>
                             <span class="checkmark"></span>
                             <?= $this->printHtml($rule['l11n'][$this->request->getLanguage()]['name']); ?>
                         </label>
