@@ -20,14 +20,14 @@ use phpOMS\Utils\Parser\Markdown\Markdown;
  * @var \phpOMS\Views\View       $this
  * @var \Modules\CMS\Models\Page $page
  */
-$page  = $this->getData('page');
+$page  = $this->data['page'];
 $l11ns = $page->getL11ns();
 
 $languages = [];
 $l11nNames = [];
 $isNewPage = $page->id === 0;
 
-echo $this->getData('nav')->render();
+echo $this->data['nav']->render();
 ?>
 <div class="row">
     <div class="col-xs-12 col-md-9">

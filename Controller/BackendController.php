@@ -51,14 +51,14 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-list');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response);
 
         if ($request->getData('ptype') === 'p') {
-            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '<')->limit(25)->execute());
+            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '<')->limit(25)->execute();
         } elseif ($request->getData('ptype') === 'n') {
-            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '>')->limit(25)->execute());
+            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '>')->limit(25)->execute();
         } else {
-            $view->setData('applications', AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', 0, '>')->limit(25)->execute());
+            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', 0, '>')->limit(25)->execute();
         }
 
         return $view;
@@ -80,10 +80,10 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-create');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response);
 
         $editor = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
-        $view->addData('editor', $editor);
+        $view->data['editor'] = $editor;
 
         return $view;
     }
@@ -104,13 +104,13 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-page-list');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
 
         $pages = PageMapper::getAll()
             ->where('app', $request->getData('app'))
             ->execute();
 
-        $view->setData('list', $pages);
+        $view->data['list'] = $pages;
 
         return $view;
     }
@@ -132,17 +132,17 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-page');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
 
         $editor = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
-        $view->addData('editor', $editor);
+        $view->data['editor'] = $editor;
 
         $page = PageMapper::get()
             ->with('l11n')
             ->where('id', $request->getData('id'))
             ->execute();
 
-        $view->setData('page', $page);
+        $view->data['page'] = $page;
 
         return $view;
     }
@@ -163,7 +163,7 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-posts');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
 
         return $view;
     }
@@ -184,11 +184,11 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-file');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
 
         /** @var \Modules\Admin\Models\App $app */
         $app = AppMapper::get()->where('type', ApplicationType::WEB)->where('id', $request->getData('id'))->execute();
-        $view->addData('app', $app);
+        $view->data['app'] = $app;
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');
         $path     = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . ($request->getDataString('file') ?? ''));
@@ -240,9 +240,9 @@ final class BackendController extends Controller
             return $view;
         }
 
-        $view->addData('content', $file === false ? '' : \file_get_contents($file));
-        $view->addData('parent', $parent);
-        $view->addData('list', $fileList);
+        $view->data['content'] = $file === false ? '' : \file_get_contents($file);
+        $view->data['parent'] = $parent;
+        $view->data['list'] = $fileList;
 
         return $view;
     }

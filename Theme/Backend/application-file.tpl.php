@@ -19,15 +19,15 @@ use phpOMS\Uri\UriFactory;
  * @var \phpOMS\Views\View $this
  * @var string[]           $file
  */
-$app     = $this->getDatA('app');
-$file    = $this->getData('file') ?? [];
-$content = $this->getData('content') ?? [];
-$list    = $this->getData('list') ?? [];
+$app     = $this->data['app'];
+$file    = $this->data['file'] ?? [];
+$content = $this->data['content'] ?? [];
+$list    = $this->data['list'] ?? [];
 
 $doc      = null;
 $isNewDoc = false;
 
-echo $this->getData('nav')->render();
+echo $this->data['nav']->render();
 ?>
 
 <div class="row fill-all">

@@ -14,7 +14,7 @@ declare(strict_types=1);
 use phpOMS\Uri\UriFactory;
 
 /** @var \phpOMS\Views\View $this */
-$rules = $this->getData('rules') ?? [];
+$rules = $this->data['rules'] ?? [];
 ?>
 
 <?php if (!empty($rules)) : ?>
