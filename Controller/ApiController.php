@@ -91,7 +91,7 @@ final class ApiController extends Controller
     public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validatePageCreate($request))) {
-            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->data[$request->uri->__toString()] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
@@ -158,7 +158,7 @@ final class ApiController extends Controller
     public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validatePageL11nCreate($request))) {
-            $response->set('page_l11n_create', new FormValidation($val));
+            $response->data['page_l11n_create'] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
@@ -261,7 +261,7 @@ final class ApiController extends Controller
     public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateApplicationInstall($request))) {
-            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->data[$request->uri->__toString()] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
@@ -308,7 +308,7 @@ final class ApiController extends Controller
         $upload->outputDir        = __DIR__ . '/../tmp';
         $upload->preserveFileName = true;
 
-        $status = $upload->upload($request->getFiles());
+        $status = $upload->upload($request->files);
         $status = \array_values($status);
 
         if ($status[0]['status'] !== UploadStatus::OK) {
@@ -349,7 +349,7 @@ final class ApiController extends Controller
     {
         $val = [];
         if (($val['name'] = !$request->hasData('name'))
-            || ($val['files'] = empty($request->getFiles()))
+            || ($val['files'] = empty($request->files))
         ) {
             return $val;
         }
@@ -373,7 +373,7 @@ final class ApiController extends Controller
     public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
-            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->data[$request->uri->__toString()] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
