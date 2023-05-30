@@ -205,7 +205,7 @@ final class ApiController extends Controller
         $pageL11n      = new BaseStringL11n();
         $pageL11n->ref = $request->getDataInt('page') ?? 0;
         $pageL11n->setLanguage(
-            $request->getDataString('language') ?? $request->getLanguage()
+            $request->getDataString('language') ?? $request->header->l11n->language
         );
         $pageL11n->name = $request->getDataString('name') ?? '';
 

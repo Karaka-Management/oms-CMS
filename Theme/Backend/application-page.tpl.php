@@ -40,15 +40,15 @@ echo $this->getData('nav')->render();
 
             <?php
                 foreach ($l11ns as $l11n) :
-                    if (!\in_array($l11n->getLanguage(), $languages)) {
-                        $languages[] = $l11n->getLanguage();
+                    if (!\in_array($l11n->language, $languages)) {
+                        $languages[] = $l11n->language;
                     }
 
                     if (!\in_array($l11n->name, $l11nNames)) {
                         $l11nNames[] = $l11n->name;
                     }
 
-                    if ($l11n->getLanguage() === $this->response->getLanguage()) :
+                    if ($l11n->language === $this->response->header->l11n->language) :
             ?>
                 <section class="portlet">
                     <div class="portlet-body">
@@ -88,7 +88,7 @@ echo $this->getData('nav')->render();
                     <?php foreach ($languages as $language) : ?>
                         <div class="form-group">
                             <label class="radio" for="iLanguage">
-                                <input type="radio" name="type" id="iLanguage" form="docForm" value="<?= $language; ?>"<?= ($this->request->getData('lang') ?? $this->request->getLanguage()) === $language ? ' checked' : ''; ?>>
+                                <input type="radio" name="type" id="iLanguage" form="docForm" value="<?= $language; ?>"<?= ($this->request->getData('lang') ?? $this->request->header->l11n->language) === $language ? ' checked' : ''; ?>>
                                 <span class="checkmark"></span>
                                 <?= $this->printHtml($language); ?>
                             </label>
