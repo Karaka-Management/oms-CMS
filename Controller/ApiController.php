@@ -43,6 +43,19 @@ use phpOMS\Utils\MbStringUtils;
  */
 final class ApiController extends Controller
 {
+    /**
+     * Api method to handle cookie consent settings
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
     public function apiCookieConsent(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         $cookieContent = \file_get_contents(__DIR__ . '/../../../Web/' . ($request->getData('app') ?? $this->app->appName) . '/cookie_consent.json');
@@ -92,7 +105,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validatePageCreate($request))) {
             $response->data[$request->uri->__toString()] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status                    = RequestStatusCode::R_400;
 
             return;
         }
@@ -159,7 +172,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validatePageL11nCreate($request))) {
             $response->data['page_l11n_create'] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status           = RequestStatusCode::R_400;
 
             return;
         }
@@ -262,7 +275,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateApplicationInstall($request))) {
             $response->data[$request->uri->__toString()] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status                    = RequestStatusCode::R_400;
 
             return;
         }
@@ -374,7 +387,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
             $response->data[$request->uri->__toString()] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status                    = RequestStatusCode::R_400;
 
             return;
         }

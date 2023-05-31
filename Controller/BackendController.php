@@ -82,7 +82,7 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-create');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response);
 
-        $editor = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
+        $editor               = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
         $view->data['editor'] = $editor;
 
         return $view;
@@ -134,7 +134,7 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-page');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
 
-        $editor = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
+        $editor               = new \Modules\Editor\Theme\Backend\Components\Editor\BaseView($this->app->l11nManager, $request, $response);
         $view->data['editor'] = $editor;
 
         $page = PageMapper::get()
@@ -187,7 +187,7 @@ final class BackendController extends Controller
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
 
         /** @var \Modules\Admin\Models\App $app */
-        $app = AppMapper::get()->where('type', ApplicationType::WEB)->where('id', $request->getData('id'))->execute();
+        $app               = AppMapper::get()->where('type', ApplicationType::WEB)->where('id', $request->getData('id'))->execute();
         $view->data['app'] = $app;
 
         $basePath = \realpath(__DIR__ . '/../../../Web/');
@@ -241,8 +241,8 @@ final class BackendController extends Controller
         }
 
         $view->data['content'] = $file === false ? '' : \file_get_contents($file);
-        $view->data['parent'] = $parent;
-        $view->data['list'] = $fileList;
+        $view->data['parent']  = $parent;
+        $view->data['list']    = $fileList;
 
         return $view;
     }

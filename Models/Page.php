@@ -75,7 +75,6 @@ class Page
      */
     public int $app = 0;
 
-
     /**
      * Add l11n
      *
