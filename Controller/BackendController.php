@@ -233,7 +233,7 @@ final class BackendController extends Controller
 
         $fileList = \array_merge($temp1, $temp2);
 
-        if (!Guard::isSafePath($file)) {
+        if ($file === false || !Guard::isSafePath($file)) {
             $view->setTemplate('/Web/Backend/Error/404');
             $response->header->status = RequestStatusCode::R_404;
 

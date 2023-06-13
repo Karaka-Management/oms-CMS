@@ -72,7 +72,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $userSettings = $request->getData('cookie_consent_rules');
+        $userSettings = $request->getDataJson('cookie_consent_rules');
         $this->app->cookieJar->set('cookie_consent', \json_encode($userSettings), 86400);
 
         foreach ($userSettings as $rule) {
