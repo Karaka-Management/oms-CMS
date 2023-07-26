@@ -25,7 +25,6 @@ use Modules\Media\Models\UploadFile;
 use Modules\Media\Models\UploadStatus;
 use phpOMS\Localization\BaseStringL11n;
 use phpOMS\Message\Http\RequestStatusCode;
-use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
@@ -104,15 +103,15 @@ final class ApiController extends Controller
     public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validatePageCreate($request))) {
-            $response->data[$request->uri->__toString()] = new FormValidation($val);
-            $response->header->status                    = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $application = $this->createPageFromRequest($request);
         $this->createModel($request->header->account, $application, PageMapper::class, 'page', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Page', 'Page successfully created.', $application);
+        $this->createStandardCreateResponse($request, $response, $application);
     }
 
     /**
@@ -171,16 +170,15 @@ final class ApiController extends Controller
     public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validatePageL11nCreate($request))) {
-            $response->data['page_l11n_create'] = new FormValidation($val);
-            $response->header->status           = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $l11nPage = $this->createPageL11nFromRequest($request);
         $this->createModel($request->header->account, $l11nPage, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
-
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Localization', 'Localization successfully created', $l11nPage);
+        $this->createStandardCreateResponse($request, $response, $l11nPage);
     }
 
     /**
@@ -414,7 +412,7 @@ final class ApiController extends Controller
             \rename($old, $new);
         }
 
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application Template', 'Template successfully updated', $request->getData('content'));
+        $this->createStandardCreateResponse($request, $response, $request->getData('content'));
     }
 
     /**
@@ -495,6 +493,6 @@ final class ApiController extends Controller
             $content = [];
         }
 
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Application Content', 'Directory content successfull returned', $content);
+        $this->createStandardReturnResponse($request, $response, $content);
     }
 }
