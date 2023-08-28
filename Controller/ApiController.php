@@ -435,40 +435,6 @@ final class ApiController extends Controller
     }
 
     /**
-     * Api method to create a task
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiApplicationUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
-    {
-    }
-
-    /**
-     * Api method to create a task
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiApplicationTemplateCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
-    {
-    }
-
-    /**
      * Api method to list files of a application
      *
      * @param RequestAbstract  $request  Request
@@ -485,7 +451,7 @@ final class ApiController extends Controller
     {
         /** @var App $app */
         $app  = AppMapper::get()->where('id', (int) $request->getData('id'))->execute();
-        $path = (string) ($request->getData('path') ?? '/');
+        $path = $request->getDataString('path') ?? '/';
 
         $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . $path);
 
@@ -494,5 +460,264 @@ final class ApiController extends Controller
         }
 
         $this->createStandardReturnResponse($request, $response, $content);
+    }
+
+    /**
+     * Api method to update Page
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiPageUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        if (!empty($val = $this->validatePageUpdate($request))) {
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidUpdateResponse($request, $response, $val);
+
+            return;
+        }
+
+        /** @var \Modules\CMS\Models\Page $old */
+        $old = PageMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $new = $this->updatePageFromRequest($request, clone $old);
+
+        $this->updateModel($request->header->account, $old, $new, PageMapper::class, 'page', $request->getOrigin());
+        $this->createStandardUpdateResponse($request, $response, $new);
+    }
+
+    /**
+     * Method to update Page from request.
+     *
+     * @param RequestAbstract  $request Request
+     * @param Page     $new     Model to modify
+     *
+     * @return Page
+     *
+     * @todo: implement
+     *
+     * @since 1.0.0
+     */
+    public function updatePageFromRequest(RequestAbstract $request, Page $new) : Page
+    {
+        $new->name     = $request->getDataString('name') ?? $new->name;
+        $new->app      = $request->getDataInt('app') ?? $new->app;
+        $new->template = $request->getDataString('template') ?? $new->template;
+
+        return $new;
+    }
+
+    /**
+     * Validate Page update request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @todo: implement
+     *
+     * @since 1.0.0
+     */
+    private function validatePageUpdate(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['id'] = !$request->hasData('id'))) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Api method to delete Page
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiPageDelete(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        if (!empty($val = $this->validatePageDelete($request))) {
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidDeleteResponse($request, $response, $val);
+
+            return;
+        }
+
+        /** @var \Modules\CMS\Models\Page $page */
+        $page = PageMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $this->deleteModel($request->header->account, $page, PageMapper::class, 'page', $request->getOrigin());
+        $this->createStandardDeleteResponse($request, $response, $page);
+    }
+
+    /**
+     * Validate Page delete request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @todo: implement
+     *
+     * @since 1.0.0
+     */
+    private function validatePageDelete(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['id'] = !$request->hasData('id'))) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Api method to update PageL11n
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiPageL11nUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        if (!empty($val = $this->validatePageL11nUpdate($request))) {
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidUpdateResponse($request, $response, $val);
+
+            return;
+        }
+
+        /** @var BaseStringL11n $old */
+        $old = PageL11nMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $new = $this->updatePageL11nFromRequest($request, clone $old);
+
+        $this->updateModel($request->header->account, $old, $new, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
+        $this->createStandardUpdateResponse($request, $response, $new);
+    }
+
+    /**
+     * Method to update PageL11n from request.
+     *
+     * @param RequestAbstract  $request Request
+     * @param BaseStringL11n     $new     Model to modify
+     *
+     * @return BaseStringL11n
+     *
+     * @todo: implement
+     *
+     * @since 1.0.0
+     */
+    public function updatePageL11nFromRequest(RequestAbstract $request, BaseStringL11n $new) : BaseStringL11n
+    {
+        $new->ref = $request->getDataInt('page') ?? $new->ref;
+        $new->setLanguage(
+            $request->getDataString('language') ?? $new->language
+        );
+        $new->name = $request->getDataString('name') ?? $new->name;
+
+        /** @var Page $page */
+        $page = PageMapper::get()
+            ->where('id', $request->getDataInt('page') ?? 0)
+            ->execute();
+
+        /** @var App $app */
+        $app = $page->id !== 0 ? AppMapper::get()
+            ->where('id', $page->app)
+            ->execute()
+            : null;
+
+        $new->content = $request->hasData('content')
+            ? $this->parseCmsKeys($request->getDataString('content') ?? '', $app)
+            : $new->content;
+
+        return $new;
+    }
+
+    /**
+     * Validate PageL11n update request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @todo: implement
+     *
+     * @since 1.0.0
+     */
+    private function validatePageL11nUpdate(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['id'] = !$request->hasData('id'))) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Api method to delete PageL11n
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiPageL11nDelete(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    {
+        if (!empty($val = $this->validatePageL11nDelete($request))) {
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidDeleteResponse($request, $response, $val);
+
+            return;
+        }
+
+        /** @var \Modules\CMS\Models\PageL11n $pageL11n */
+        $pageL11n = PageL11nMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $this->deleteModel($request->header->account, $pageL11n, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
+        $this->createStandardDeleteResponse($request, $response, $pageL11n);
+    }
+
+    /**
+     * Validate PageL11n delete request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @todo: implement
+     *
+     * @since 1.0.0
+     */
+    private function validatePageL11nDelete(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['id'] = !$request->hasData('id'))) {
+            return $val;
+        }
+
+        return [];
     }
 }

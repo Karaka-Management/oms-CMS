@@ -50,6 +50,9 @@ final class Installer extends InstallerAbstract
      *
      * @return array
      *
+     * @throws PathException
+     * @throws \Exception
+     *
      * @since 1.0.0
      */
     public static function installExternal(ApplicationAbstract $app, array $data) : array
@@ -200,6 +203,7 @@ final class Installer extends InstallerAbstract
      *
      * @return void
      *
+     * @throws PathException
      * @throws PermissionException
      *
      * @since 1.0.0
