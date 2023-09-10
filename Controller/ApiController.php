@@ -694,7 +694,7 @@ final class ApiController extends Controller
             return;
         }
 
-        /** @var \Modules\CMS\Models\PageL11n $pageL11n */
+        /** @var BaseStringL11n $pageL11n */
         $pageL11n = PageL11nMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $this->deleteModel($request->header->account, $pageL11n, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
         $this->createStandardDeleteResponse($request, $response, $pageL11n);
