@@ -34,7 +34,9 @@ echo $this->data['nav']->render();
         <div id="testEditor" class="m-editor">
             <section class="portlet">
                 <div class="portlet-body">
-                    <input id="iTitle" type="text" name="title" form="docForm" value="<?= $page->name; ?>" autocomplete="off">
+                    <form id="fCms" method="<?= $isNewPage ? 'PUT' : 'POST'; ?>" action="<?= UriFactory::build('{/api}cms/page?{?}&csrf={$CSRF}'); ?>">
+                        <input id="iTitle" type="text" name="name" value="<?= $page->name; ?>" autocomplete="off">
+                    </form>
                 </div>
             </section>
 
@@ -48,16 +50,19 @@ echo $this->data['nav']->render();
                         $l11nNames[] = $l11n->name;
                     }
 
-                    if ($l11n->language === $this->response->header->l11n->language) :
+                    if ($l11n->language === ($this->request->getDataString('lang') ?? $this->response->header->l11n->language)) :
             ?>
                 <section class="portlet">
                     <div class="portlet-body">
-                        <?= $this->getData('editor')->render('iNews'); ?>
+                        <?= $this->getData('editor')->render('iPage'); ?>
                     </div>
                 </section>
 
                 <div class="box wf-100">
-                <?= $this->getData('editor')->getData('text')->render('iNews', 'plain', 'docForm', $l11n->content, Markdown::parse($l11n->content)); ?>
+                    <?= $this->getData('editor')
+                        ->getData('text')
+                        ->render('iPage', 'content', 'fCms', $l11n->content, Markdown::parse($l11n->content));
+                    ?>
                 </div>
             <?php endif; endforeach; ?>
         </div>
@@ -69,37 +74,49 @@ echo $this->data['nav']->render();
                 <tr>
                     <?php if (!$isNewPage) : ?>
                         <td>
-                        <input class="cancel" type="submit" name="deleteButton" id="iDeleteButton" value="<?= $this->getHtml('Delete', '0', '0'); ?>">
+                        <input class="cancel" type="submit" name="deleteButton" id="iDeleteButton" form="fCms" value="<?= $this->getHtml('Delete', '0', '0'); ?>">
                         <td class="rightText">
-                        <input type="submit" name="saveButton" id="iSaveButton" value="<?= $this->getHtml('Save', '0', '0'); ?>">
+                        <input type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Save', '0', '0'); ?>">
                     <?php else: ?>
                     <td class="rightText">
-                        <input class="create" type="submit" name="saveButton" id="iSaveButton" value="<?= $this->getHtml('Create', '0', '0'); ?>">
+                        <input class="create" type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Create', '0', '0'); ?>">
                     <?php endif; ?>
             </table>
         </div>
 
         <section class="portlet">
-            <form id="docForm"
-                method="<?= $isNewPage ? 'PUT' : 'POST'; ?>"
-                action="<?= UriFactory::build('{/api}news?' . ($isNewPage ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
-                <div class="portlet-head"><?= $this->getHtml('Content'); ?></div>
-                <div class="portlet-body">
-                    <?php foreach ($languages as $language) : ?>
-                        <div class="form-group">
-                            <label class="radio" for="iLanguage">
-                                <input type="radio" name="type" id="iLanguage" form="docForm" value="<?= $language; ?>"<?= ($this->request->getData('lang') ?? $this->request->header->l11n->language) === $language ? ' checked' : ''; ?>>
-                                <span class="checkmark"></span>
-                                <?= $this->printHtml($language); ?>
-                            </label>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </form>
+            <div class="portlet-head"><?= $this->getHtml('Content'); ?></div>
+            <div class="portlet-body">
+                <input type="hidden" name="id" value="<?= $page->id; ?>">
+                <?php foreach ($languages as $language) : ?>
+                    <div class="form-group">
+                        <label class="radio" for="iLanguage-<?= $language; ?>">
+                            <input
+                                id="iLanguage-<?= $language; ?>"
+                                type="radio"
+                                name="language"
+                                form="fCms"
+                                value="<?= $language; ?>"
+                                data-action='[
+                                    {
+                                        "listener": "change", "action": [
+                                            {
+                                                "key": 1, "type": "redirect", "uri": "{%}&lang={![name=\"language\"]:checked}", "target": "self"
+                                            }
+                                        ]
+                                    }
+                                ]'
+                                <?= ($this->request->getData('lang') ?? $this->request->header->l11n->language) === $language ? ' checked' : ''; ?>>
+                            <span class="checkmark"></span>
+                            <?= $this->printHtml($language); ?>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </section>
 
         <section class="portlet">
-            <form id="docForm"
+            <form id="elementForm"
                 method="<?= $isNewPage ? 'PUT' : 'POST'; ?>"
                 action="<?= UriFactory::build('{/api}news?' . ($isNewPage ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
                 <div class="portlet-head"><?= $this->getHtml('Localization'); ?></div>

@@ -19,6 +19,7 @@ return ['Navigation' => [
     'Create'       => 'Create',
     'Files'        => 'Files',
     'Pages'        => 'Pages',
+    'Posts'        => 'Posts',
     'Permissions'  => 'Permissions',
     'Settings'     => 'Settings',
     'Themes'       => 'Themes',

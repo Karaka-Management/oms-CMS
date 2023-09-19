@@ -57,7 +57,7 @@ final class ApiController extends Controller
      */
     public function apiCookieConsent(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
-        $cookieContent = \file_get_contents(__DIR__ . '/../../../Web/' . ($request->getData('app') ?? $this->app->appName) . '/cookie_consent.json');
+        $cookieContent = \file_get_contents(__DIR__ . '/../../../Web/' . ($request->getDataString('app') ?? $this->app->appName) . '/cookie_consent.json');
         if ($cookieContent === false) {
             $response->header->status = RequestStatusCode::R_400;
 
@@ -489,6 +489,25 @@ final class ApiController extends Controller
         $new = $this->updatePageFromRequest($request, clone $old);
 
         $this->updateModel($request->header->account, $old, $new, PageMapper::class, 'page', $request->getOrigin());
+
+        if ($request->hasData('content')) {
+            $l11ns = PageL11nMapper::getAll()
+                ->where('ref', (int) $request->getData('id'))
+                ->where('language', $request->getDataString('language') ?? $request->header->l11n->language)
+                ->execute();
+
+            $request->setData('page', (int) $request->getData('id'), true);
+
+            $contents = $request->getDataJson('content');
+            foreach ($contents as $content) {
+                // @todo: fix this, the next line is wrong. I need to also pass an id array to know to which id the content belongs
+                $request->setData('id', \reset($l11ns)->id, true);
+
+                $request->setData('content', $content, true);
+                $this->apiPageL11nUpdate($request, $response, $data);
+            }
+        }
+
         $this->createStandardUpdateResponse($request, $response, $new);
     }
 
