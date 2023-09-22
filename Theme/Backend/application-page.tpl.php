@@ -74,9 +74,9 @@ echo $this->data['nav']->render();
                 <tr>
                     <?php if (!$isNewPage) : ?>
                         <td>
-                        <input class="cancel" type="submit" name="deleteButton" id="iDeleteButton" form="fCms" value="<?= $this->getHtml('Delete', '0', '0'); ?>">
+                            <input class="cancel" type="submit" name="deleteButton" id="iDeleteButton" form="fCms" value="<?= $this->getHtml('Delete', '0', '0'); ?>">
                         <td class="rightText">
-                        <input type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Save', '0', '0'); ?>">
+                            <input type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Save', '0', '0'); ?>">
                     <?php else: ?>
                     <td class="rightText">
                         <input class="create" type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Create', '0', '0'); ?>">
@@ -116,7 +116,7 @@ echo $this->data['nav']->render();
         </section>
 
         <section class="portlet">
-            <form id="elementForm"
+            <form id="localizationForm"
                 method="<?= $isNewPage ? 'PUT' : 'POST'; ?>"
                 action="<?= UriFactory::build('{/api}news?' . ($isNewPage ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
                 <div class="portlet-head"><?= $this->getHtml('Localization'); ?></div>
@@ -168,7 +168,7 @@ echo $this->data['nav']->render();
         </section>
 
         <section class="portlet">
-            <form id="docForm"
+            <form id="elementForm"
                 method="<?= $isNewPage ? 'PUT' : 'POST'; ?>"
                 action="<?= UriFactory::build('{/api}news?' . ($isNewPage ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
                 <div class="portlet-head"><?= $this->getHtml('Element'); ?></div>
