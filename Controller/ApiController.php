@@ -490,22 +490,33 @@ final class ApiController extends Controller
 
         $this->updateModel($request->header->account, $old, $new, PageMapper::class, 'page', $request->getOrigin());
 
-        if ($request->hasData('content')) {
-            $l11ns = PageL11nMapper::getAll()
-                ->where('ref', (int) $request->getData('id'))
-                ->where('language', $request->getDataString('language') ?? $request->header->l11n->language)
-                ->execute();
+        if (!$request->hasData('content')) {
+            $this->createStandardUpdateResponse($request, $response, $new);
 
-            $request->setData('page', (int) $request->getData('id'), true);
+            return;
+        }
 
-            $contents = $request->getDataJson('content');
-            foreach ($contents as $content) {
-                // @todo: fix this, the next line is wrong. I need to also pass an id array to know to which id the content belongs
-                $request->setData('id', \reset($l11ns)->id, true);
+        /** @var \phpOMS\Localization\BaseStringL11n[] $l11ns */
+        $l11ns = PageL11nMapper::getAll()
+            ->where('ref', (int) $request->getData('id'))
+            ->where('language', $request->getDataString('language') ?? $request->header->l11n->language)
+            ->execute();
 
-                $request->setData('content', $content, true);
-                $this->apiPageL11nUpdate($request, $response, $data);
-            }
+        if (empty($l11ns)) {
+            $this->createInvalidUpdateResponse($request, $response, []);
+
+            return;
+        }
+
+        $request->setData('page', (int) $request->getData('id'), true);
+
+        $contents = $request->getDataJson('content');
+        foreach ($contents as $content) {
+            // @todo: fix this, the next line is wrong. I need to also pass an id array to know to which id the content belongs
+            $request->setData('id', \reset($l11ns)->id, true);
+
+            $request->setData('content', $content, true);
+            $this->apiPageL11nUpdate($request, $response, $data);
         }
 
         $this->createStandardUpdateResponse($request, $response, $new);
