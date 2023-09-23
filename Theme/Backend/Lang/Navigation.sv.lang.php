@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Filer',
     'Pages'        => 'Sidor',
     'Permissions'  => 'Behörighet',
+    'Posts'        => '',
     'Settings'     => 'inställningar',
     'Themes'       => 'Teman',
     'Widgets'      => 'Widgets',

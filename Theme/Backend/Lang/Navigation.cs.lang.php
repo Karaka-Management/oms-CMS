@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Soubory',
     'Pages'        => 'Stránky',
     'Permissions'  => 'Oprávnění',
+    'Posts'        => '',
     'Settings'     => 'Nastavení',
     'Themes'       => 'Témata',
     'Widgets'      => 'Widgets.',

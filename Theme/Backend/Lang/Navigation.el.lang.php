@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Αρχεία',
     'Pages'        => 'Σελίδες',
     'Permissions'  => 'Δικαιώματα',
+    'Posts'        => '',
     'Settings'     => 'Ρυθμίσεις',
     'Themes'       => 'Θέματα',
     'Widgets'      => 'Widgets',

@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Fájlok',
     'Pages'        => 'Oldalak',
     'Permissions'  => 'Engedélyek',
+    'Posts'        => '',
     'Settings'     => 'Beállítások',
     'Themes'       => 'Témák',
     'Widgets'      => 'Widgetek',

@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Файли',
     'Pages'        => 'Сторінка',
     'Permissions'  => 'Дозволи',
+    'Posts'        => '',
     'Settings'     => 'Налаштування',
     'Themes'       => 'Теми',
     'Widgets'      => 'Віджети',

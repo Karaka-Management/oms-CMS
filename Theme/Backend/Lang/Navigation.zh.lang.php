@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => '文件',
     'Pages'        => '页面',
     'Permissions'  => '权限',
+    'Posts'        => '',
     'Settings'     => '设置',
     'Themes'       => '主题',
     'Widgets'      => '小部件',

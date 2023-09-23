@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Dosyalar',
     'Pages'        => 'Sayfalar',
     'Permissions'  => 'İzinler',
+    'Posts'        => '',
     'Settings'     => 'Ayarlar',
     'Themes'       => 'Temalar',
     'Widgets'      => 'Widget\'lar',

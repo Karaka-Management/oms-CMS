@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'Tiedostot',
     'Pages'        => 'Sivut',
     'Permissions'  => 'Oikeudet',
+    'Posts'        => '',
     'Settings'     => 'asetukset',
     'Themes'       => 'Teemat',
     'Widgets'      => 'Widgetit',

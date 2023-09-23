@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'الملفات',
     'Pages'        => 'الصفحات',
     'Permissions'  => 'الأذونات',
+    'Posts'        => '',
     'Settings'     => 'إعدادات',
     'Themes'       => 'المواضيع',
     'Widgets'      => 'الحاجيات',

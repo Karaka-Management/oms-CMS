@@ -20,6 +20,7 @@ return ['Navigation' => [
     'Files'        => 'ไฟล์',
     'Pages'        => 'หน้า',
     'Permissions'  => 'การอนุญาต',
+    'Posts'        => '',
     'Settings'     => 'การตั้งค่า',
     'Themes'       => 'ธีม',
     'Widgets'      => 'วิดเจ็ต',
