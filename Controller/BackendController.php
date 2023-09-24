@@ -228,7 +228,7 @@ final class BackendController extends Controller
         $parent = $file === false || \is_dir($file) ? $request->getDataString('file') ?? '' : \dirname($request->getDataString('file') ?? '');
 
         if ($file === false || !\is_file($file) || \stripos($file, $basePath) !== 0) {
-            $file = !empty($temp2) ? \realpath(\rtrim($path, '/') . '/' . $temp2[0]['name']) : false;
+            $file = empty($temp2) ? false : \realpath(\rtrim($path, '/') . '/' . $temp2[0]['name']);
         }
 
         $fileList = \array_merge($temp1, $temp2);

@@ -251,9 +251,7 @@ final class ApiController extends Controller
             return '';
         }
 
-        $content = \str_replace('{APPNAME}', $application->name, $content);
-
-        return $content;
+        return \str_replace('{APPNAME}', $application->name, $content);
     }
 
     /**
