@@ -38,17 +38,6 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/template((?!tpl=).)*$' => [
-        [
-            'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateCreate',
-            'verb'       => RouteVerb::PUT,
-            'permission' => [
-                'module' => ApiController::NAME,
-                'type'   => PermissionType::MODIFY,
-                'state'  => PermissionCategory::APPLICATION,
-            ],
-        ],
-    ],
     '^.*/cms/application/template\?.*?tpl=.*?$' => [
         [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateUpdate',
