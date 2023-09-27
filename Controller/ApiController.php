@@ -46,7 +46,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -54,7 +54,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiCookieConsent(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiCookieConsent(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         $cookieContent = \file_get_contents(__DIR__ . '/../../../Web/' . ($request->getDataString('app') ?? $this->app->appName) . '/cookie_consent.json');
         if ($cookieContent === false) {
@@ -91,7 +91,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -99,7 +99,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiPageCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validatePageCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -158,7 +158,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -166,7 +166,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiPageL11nCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validatePageL11nCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -258,7 +258,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -266,7 +266,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiApplicationInstall(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validateApplicationInstall($request))) {
             $response->data[$request->uri->__toString()] = new FormValidation($val);
@@ -370,7 +370,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -378,7 +378,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiApplicationTemplateUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validateApplicationTemplateUpdate($request))) {
             $response->data[$request->uri->__toString()] = new FormValidation($val);
@@ -436,7 +436,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -444,7 +444,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         /** @var App $app */
         $app  = AppMapper::get()->where('id', (int) $request->getData('id'))->execute();
@@ -464,7 +464,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -472,7 +472,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiPageUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validatePageUpdate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -566,7 +566,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -574,7 +574,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageDelete(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiPageDelete(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validatePageDelete($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -615,7 +615,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -623,7 +623,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageL11nUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiPageL11nUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validatePageL11nUpdate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -704,7 +704,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -712,7 +712,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiPageL11nDelete(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiPageL11nDelete(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validatePageL11nDelete($request))) {
             $response->header->status = RequestStatusCode::R_400;
