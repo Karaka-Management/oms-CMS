@@ -57,7 +57,7 @@ class Page
      * @var BaseStringL11n[]
      * @since 1.0.0
      */
-    private array $l11n = [];
+    public array $l11n = [];
 
     /**
      * Page template.
