@@ -161,7 +161,7 @@ final class Installer extends InstallerAbstract
         $request->setData('app', $data['app'] ?? 2);
         $app->moduleManager->get('CMS')->apiPageCreate($request, $response);
 
-        $responseData = $response->get('');
+        $responseData = $response->getData('');
         if (!\is_array($responseData)) {
             return;
         }
