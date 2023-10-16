@@ -23,7 +23,7 @@ final class NullPageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\CMS\Models\NullPage
-     * @group framework
+     * @group module
      */
     public function testNull() : void
     {
@@ -32,7 +32,7 @@ final class NullPageTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers Modules\CMS\Models\NullPage
-     * @group framework
+     * @group module
      */
     public function testId() : void
     {
