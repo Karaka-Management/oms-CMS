@@ -39,4 +39,14 @@ final class NullPageTest extends \PHPUnit\Framework\TestCase
         $null = new NullPage(2);
         self::assertEquals(2, $null->id);
     }
+
+    /**
+     * @covers Modules\CMS\Models\NullPage
+     * @group module
+     */
+    public function testJsonSerialize() : void
+    {
+        $null = new NullPage(2);
+        self::assertEquals(['id' => 2], $null);
+    }
 }
