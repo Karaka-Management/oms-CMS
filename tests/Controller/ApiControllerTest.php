@@ -155,4 +155,14 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $this->module->apiApplicationTemplateUpdate($request, $response);
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
+
+    public function testInvalidapiPageL11nDelete() : void
+    {
+        $response = new HttpResponse();
+        $request  = new HttpRequest(new HttpUri(''));
+
+        $request->header->account = 1;
+        $this->module->apiPageL11nDelete($request, $response);
+        self::assertEquals(RequestStatusCode::R_400, $response->header->status);
+    }
 }
