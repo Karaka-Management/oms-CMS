@@ -28,7 +28,7 @@ echo $this->data['nav']->render();
 <div class="row">
     <div class="col-xs-12">
         <div class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Pages'); ?><i class="lni lni-download download btn end-xs"></i></div>
+            <div class="portlet-head"><?= $this->getHtml('Pages'); ?><i class="g-icon download btn end-xs">download</i></div>
             <div class="slider">
             <table id="pageList" class="default sticky">
                 <thead>

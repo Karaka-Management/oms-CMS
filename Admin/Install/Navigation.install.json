@@ -7,7 +7,7 @@
         "name": "CMS",
         "uri": null,
         "target": "self",
-        "icon": "fa fa-cloud",
+        "icon": "cloud",
         "order": 30,
         "from": "CMS",
         "permission": { "permission": 2, "category": null, "element": null },

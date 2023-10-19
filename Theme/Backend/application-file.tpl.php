@@ -53,9 +53,9 @@ echo $this->data['nav']->render();
             <div class="portlet-head"><?= $this->getHtml('Files'); ?></div>
             <div class="portlet-body">
                 <ul>
-                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="fa fa-folder-o"></i> ..</a>
+                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="g-icon">folder_open</i> ..</a>
                 <?php foreach ($list as $element) : ?>
-                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="fa fa-folder-o"></i>' : '<i class="fa fa-file-o"></i>'; ?> <?= $element['name']; ?></a>
+                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="g-icon">folder_open</i>' : '<i class="g-icon">article</i>'; ?> <?= $element['name']; ?></a>
                 <?php endforeach; ?>
                 </ul>
             </div>
