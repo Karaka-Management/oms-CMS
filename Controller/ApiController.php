@@ -23,6 +23,7 @@ use Modules\CMS\Models\PageMapper;
 use Modules\Media\Models\UploadFile;
 use Modules\Media\Models\UploadStatus;
 use phpOMS\Localization\BaseStringL11n;
+use phpOMS\Localization\ISO639x1Enum;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -509,7 +510,7 @@ final class ApiController extends Controller
 
         $contents = $request->getDataJson('content');
         foreach ($contents as $content) {
-            // @todo: fix this, the next line is wrong. I need to also pass an id array to know to which id the content belongs
+            // @todo fix this, the next line is wrong. I need to also pass an id array to know to which id the content belongs
             $request->setData('id', \reset($l11ns)->id, true);
 
             $request->setData('content', $content, true);
@@ -527,7 +528,7 @@ final class ApiController extends Controller
      *
      * @return Page
      *
-     * @todo: implement
+     * @todo Implement API update function
      *
      * @since 1.0.0
      */
@@ -547,7 +548,7 @@ final class ApiController extends Controller
      *
      * @return array<string, bool>
      *
-     * @todo: implement
+     * @todo Implement API validation function
      *
      * @since 1.0.0
      */
@@ -596,7 +597,7 @@ final class ApiController extends Controller
      *
      * @return array<string, bool>
      *
-     * @todo: implement
+     * @todo Implement API validation function
      *
      * @since 1.0.0
      */
@@ -648,7 +649,7 @@ final class ApiController extends Controller
      *
      * @return BaseStringL11n
      *
-     * @todo: implement
+     * @todo Implement API update function
      *
      * @since 1.0.0
      */
@@ -685,14 +686,14 @@ final class ApiController extends Controller
      *
      * @return array<string, bool>
      *
-     * @todo: implement
-     *
      * @since 1.0.0
      */
     private function validatePageL11nUpdate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['id'] = !$request->hasData('id'))) {
+        if (($val['id'] = !$request->hasData('id'))
+            || ($val['language'] = $request->hasData('language') && !ISO639x1Enum::isValidValue($request->getDataString('language')))
+        ) {
             return $val;
         }
 
@@ -734,7 +735,7 @@ final class ApiController extends Controller
      *
      * @return array<string, bool>
      *
-     * @todo: implement
+     * @todo Implement API validation function
      *
      * @since 1.0.0
      */
