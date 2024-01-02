@@ -16,6 +16,7 @@ namespace Modules\CMS\Controller;
 
 use Modules\Admin\Models\AppMapper;
 use Modules\CMS\Models\PageMapper;
+use Modules\CMS\Models\PostMapper;
 use phpOMS\Application\ApplicationType;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\RequestStatusCode;
@@ -36,7 +37,7 @@ use phpOMS\Views\View;
 final class BackendController extends Controller
 {
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -65,7 +66,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -89,7 +90,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -116,7 +117,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -148,7 +149,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -162,14 +163,20 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $view->setTemplate('/Modules/CMS/Theme/Backend/application-posts');
+        $view->setTemplate('/Modules/CMS/Theme/Backend/application-post-list');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802101, $request, $response);
+
+        $posts = PostMapper::getAll()
+            ->where('app', $request->getData('app'))
+            ->execute();
+
+        $view->data['list'] = $posts;
 
         return $view;
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response

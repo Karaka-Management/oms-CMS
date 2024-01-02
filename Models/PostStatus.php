@@ -17,14 +17,16 @@ namespace Modules\CMS\Models;
 use phpOMS\Stdlib\Base\Enum;
 
 /**
- * Permission category enum.
+ * Account status enum.
  *
  * @package Modules\CMS\Models
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */
-abstract class PermissionCategory extends Enum
+abstract class PostStatus extends Enum
 {
-    public const APPLICATION = 1;
+    public const ACTIVE = 1;
+
+    public const INACTIVE = 2;
 }

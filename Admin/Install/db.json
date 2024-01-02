@@ -163,6 +163,11 @@
                 "foreignTable": "country",
                 "foreignKey": "country_code2"
             },
+            "cms_post_status": {
+                "name": "cms_post_status",
+                "type": "TINYINT(1)",
+                "null": false
+            },
             "cms_post_category": {
                 "name": "cms_post_category",
                 "type": "INT",
@@ -179,8 +184,8 @@
                 "foreignTable": "cms_page",
                 "foreignKey": "cms_page_id"
             },
-            "cms_post_application": {
-                "name": "cms_post_application",
+            "cms_post_app": {
+                "name": "cms_post_app",
                 "type": "INT",
                 "null": true,
                 "default": null,

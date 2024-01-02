@@ -38,10 +38,6 @@ echo $this->data['nav']->render();
     </div>
 
     <div class="col-xs-12 col-md-4">
-        <div class="box">
-            <a href="<?= UriFactory::build('{/base}/' . $app->name); ?>" class="button">Application</a>
-        </div>
-
         <div class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Upload'); ?></div>
                 <div class="portlet-body">
