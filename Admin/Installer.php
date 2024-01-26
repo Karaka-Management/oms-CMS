@@ -20,8 +20,6 @@ use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Module\InstallerAbstract;
 use phpOMS\System\File\PathException;
 use phpOMS\System\File\PermissionException;
-use phpOMS\Uri\HttpUri;
-use phpOMS\Utils\ArrayUtils;
 use phpOMS\Utils\Parser\Php\ArrayParser;
 
 /**
@@ -128,7 +126,7 @@ final class Installer extends InstallerAbstract
         }
 
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('name', $data['name']);
@@ -154,7 +152,7 @@ final class Installer extends InstallerAbstract
         }
 
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('name', $data['id']);
@@ -182,7 +180,7 @@ final class Installer extends InstallerAbstract
             }
 
             $response = new HttpResponse();
-            $request  = new HttpRequest(new HttpUri(''));
+            $request  = new HttpRequest();
 
             $request->header->account = 1;
 

@@ -98,7 +98,7 @@ class Post
      *
      * @since 1.0.0
      */
-    public function getL11n(string $name = null) : BaseStringL11n
+    public function getL11n(?string $name = null) : BaseStringL11n
     {
         foreach ($this->l11n as $l11n) {
             if ($l11n->name === $name) {

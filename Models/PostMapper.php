@@ -36,10 +36,10 @@ final class PostMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'cms_post_id'       => ['name' => 'cms_post_id',       'type' => 'int',    'internal' => 'id'],
-        'cms_post_name'     => ['name' => 'cms_post_name',     'type' => 'string', 'internal' => 'name'],
-        'cms_post_status'   => ['name' => 'cms_post_status',   'type' => 'int',    'internal' => 'status'],
-        'cms_post_app'      => ['name' => 'cms_post_app',      'type' => 'int',    'internal' => 'app'],
+        'cms_post_id'     => ['name' => 'cms_post_id',       'type' => 'int',    'internal' => 'id'],
+        'cms_post_name'   => ['name' => 'cms_post_name',     'type' => 'string', 'internal' => 'name'],
+        'cms_post_status' => ['name' => 'cms_post_status',   'type' => 'int',    'internal' => 'status'],
+        'cms_post_app'    => ['name' => 'cms_post_app',      'type' => 'int',    'internal' => 'app'],
     ];
 
     /**

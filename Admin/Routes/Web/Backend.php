@@ -18,7 +18,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/cms/application/list.*$' => [
+    '^.*/cms/application/list(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationList',
             'verb'       => RouteVerb::GET,
@@ -29,7 +29,7 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/page/list.*$' => [
+    '^.*/cms/application/page/list(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewPageList',
             'verb'       => RouteVerb::GET,
@@ -40,7 +40,7 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/page\?.*$' => [
+    '^.*/cms/application/page(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewPage',
             'verb'       => RouteVerb::GET,
@@ -51,7 +51,7 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/post.*$' => [
+    '^.*/cms/application/post(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationPosts',
             'verb'       => RouteVerb::GET,
@@ -62,7 +62,7 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/file.*$' => [
+    '^.*/cms/application/file(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationFile',
             'verb'       => RouteVerb::GET,
@@ -73,7 +73,7 @@ return [
             ],
         ],
     ],
-    '^.*/cms/application/create.*$' => [
+    '^.*/cms/application/create(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationCreate',
             'verb'       => RouteVerb::GET,

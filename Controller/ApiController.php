@@ -213,12 +213,10 @@ final class ApiController extends Controller
      */
     private function createPageL11nFromRequest(RequestAbstract $request) : BaseStringL11n
     {
-        $pageL11n      = new BaseStringL11n();
-        $pageL11n->ref = $request->getDataInt('page') ?? 0;
-        $pageL11n->setLanguage(
-            $request->getDataString('language') ?? $request->header->l11n->language
-        );
-        $pageL11n->name = $request->getDataString('name') ?? '';
+        $pageL11n           = new BaseStringL11n();
+        $pageL11n->ref      = $request->getDataInt('page') ?? 0;
+        $pageL11n->language = ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? $request->header->l11n->language;
+        $pageL11n->name     = $request->getDataString('name') ?? '';
 
         /** @var Page $page */
         $page = PageMapper::get()
@@ -655,11 +653,9 @@ final class ApiController extends Controller
      */
     public function updatePageL11nFromRequest(RequestAbstract $request, BaseStringL11n $new) : BaseStringL11n
     {
-        $new->ref = $request->getDataInt('page') ?? $new->ref;
-        $new->setLanguage(
-            $request->getDataString('language') ?? $new->language
-        );
-        $new->name = $request->getDataString('name') ?? $new->name;
+        $new->ref      = $request->getDataInt('page') ?? $new->ref;
+        $new->language = ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? $new->language;
+        $new->name     = $request->getDataString('name') ?? $new->name;
 
         /** @var Page $page */
         $page = PageMapper::get()
