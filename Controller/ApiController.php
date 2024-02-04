@@ -39,6 +39,11 @@ use phpOMS\Utils\MbStringUtils;
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
+ *
+ * @feature Create functionality which allows to replace application files
+ *      This is also very important for customizing the `Backend` for customers.
+ *      Instead of just overwriting them they get backed up in a backup directory.
+ *      https://github.com/Karaka-Management/oms-CMS/issues/4
  */
 final class ApiController extends Controller
 {
@@ -546,8 +551,6 @@ final class ApiController extends Controller
      *
      * @return array<string, bool>
      *
-     * @todo Implement API validation function
-     *
      * @since 1.0.0
      */
     private function validatePageUpdate(RequestAbstract $request) : array
@@ -594,8 +597,6 @@ final class ApiController extends Controller
      * @param RequestAbstract $request Request
      *
      * @return array<string, bool>
-     *
-     * @todo Implement API validation function
      *
      * @since 1.0.0
      */
@@ -730,8 +731,6 @@ final class ApiController extends Controller
      * @param RequestAbstract $request Request
      *
      * @return array<string, bool>
-     *
-     * @todo Implement API validation function
      *
      * @since 1.0.0
      */
