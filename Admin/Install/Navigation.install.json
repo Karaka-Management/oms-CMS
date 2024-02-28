@@ -94,7 +94,7 @@
                         "type": 3,
                         "subtype": 1,
                         "name": "Create",
-                        "uri": "{/base}/cms/application/create",
+                        "uri": "{/base}/cms/application/create?{?}",
                         "target": "self",
                         "icon": null,
                         "order": 10,

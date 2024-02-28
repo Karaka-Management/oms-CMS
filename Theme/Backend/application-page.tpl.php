@@ -75,10 +75,10 @@ echo $this->data['nav']->render();
                     <?php if (!$isNewPage) : ?>
                         <td>
                             <input class="cancel" type="submit" name="deleteButton" id="iDeleteButton" form="fCms" value="<?= $this->getHtml('Delete', '0', '0'); ?>">
-                        <td class="rightText">
+                        <td class="rT">
                             <input type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Save', '0', '0'); ?>">
                     <?php else: ?>
-                    <td class="rightText">
+                    <td class="rT">
                         <input class="create" type="submit" name="saveButton" id="iSaveButton" form="fCms" value="<?= $this->getHtml('Create', '0', '0'); ?>">
                     <?php endif; ?>
             </table>
