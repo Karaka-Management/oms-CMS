@@ -22,7 +22,7 @@ use Modules\CMS\Models\NullPage;
 final class NullPageTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Modules\CMS\Models\NullPage
+     * @covers \Modules\CMS\Models\NullPage
      * @group module
      */
     public function testNull() : void
@@ -31,7 +31,7 @@ final class NullPageTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Models\NullPage
+     * @covers \Modules\CMS\Models\NullPage
      * @group module
      */
     public function testId() : void
@@ -41,7 +41,7 @@ final class NullPageTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Models\NullPage
+     * @covers \Modules\CMS\Models\NullPage
      * @group module
      */
     public function testJsonSerialize() : void

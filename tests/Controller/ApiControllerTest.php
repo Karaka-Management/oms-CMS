@@ -92,7 +92,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Controller\ApiController
+     * @covers \Modules\CMS\Controller\ApiController
      * @group module
      */
     public function testApiPageCreateInvalidData() : void
@@ -108,7 +108,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Controller\ApiController
+     * @covers \Modules\CMS\Controller\ApiController
      * @group module
      */
     public function testApiPageL11nCreateInvalidData() : void
@@ -124,7 +124,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Controller\ApiController
+     * @covers \Modules\CMS\Controller\ApiController
      * @group module
      */
     public function testApiApplicationInstallInvalidData() : void
@@ -140,7 +140,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Controller\ApiController
+     * @covers \Modules\CMS\Controller\ApiController
      * @group module
      */
     public function testApiApplicationTemplateUpdateInvalidData() : void

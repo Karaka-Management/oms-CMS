@@ -25,7 +25,7 @@ use phpOMS\Localization\BaseStringL11n;
 final class PageMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Modules\CMS\Models\PageMapper
+     * @covers \Modules\CMS\Models\PageMapper
      * @group module
      */
     public function testCR() : void

@@ -33,7 +33,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Models\Page
+     * @covers \Modules\CMS\Models\Page
      * @group module
      */
     public function testDefault() : void
@@ -45,7 +45,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Models\Page
+     * @covers \Modules\CMS\Models\Page
      * @group module
      */
     public function testNameInputOutput() : void
@@ -55,7 +55,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Models\Page
+     * @covers \Modules\CMS\Models\Page
      * @group module
      */
     public function testTemplateInputOutput() : void
@@ -65,7 +65,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\CMS\Models\Page
+     * @covers \Modules\CMS\Models\Page
      * @group module
      */
     public function testL11nInputOutput() : void
