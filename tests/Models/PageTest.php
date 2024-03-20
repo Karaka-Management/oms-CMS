@@ -20,6 +20,7 @@ use phpOMS\Localization\BaseStringL11n;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\CMS\Models\Page::class)]
 final class PageTest extends \PHPUnit\Framework\TestCase
 {
     private Page $page;
@@ -32,10 +33,7 @@ final class PageTest extends \PHPUnit\Framework\TestCase
         $this->page = new Page();
     }
 
-    /**
-     * @covers \Modules\CMS\Models\Page
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testDefault() : void
     {
         self::assertEquals(0, $this->page->id);
@@ -44,30 +42,21 @@ final class PageTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->page->app);
     }
 
-    /**
-     * @covers \Modules\CMS\Models\Page
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testNameInputOutput() : void
     {
         $this->page->name = 'TestName';
         self::assertEquals('TestName', $this->page->name);
     }
 
-    /**
-     * @covers \Modules\CMS\Models\Page
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testTemplateInputOutput() : void
     {
         $this->page->template = 'TestTemplate';
         self::assertEquals('TestTemplate', $this->page->template);
     }
 
-    /**
-     * @covers \Modules\CMS\Models\Page
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testL11nInputOutput() : void
     {
         $l11n       = new BaseStringL11n('value');

@@ -22,12 +22,10 @@ use phpOMS\Localization\BaseStringL11n;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\CMS\Models\PageMapper::class)]
 final class PageMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\CMS\Models\PageMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCR() : void
     {
         $page           = new Page();
