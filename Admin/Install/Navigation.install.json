@@ -101,7 +101,8 @@
                         "from": "CMS",
                         "permission": { "permission": 2, "category": null, "element": null },
                         "parent": 1007802001,
-                        "children": []
+                        "children": [],
+                        "status": 3
                     }
                 ]
             }

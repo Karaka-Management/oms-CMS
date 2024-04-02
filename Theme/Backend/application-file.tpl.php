@@ -30,28 +30,31 @@ $isNewDoc = false;
 echo $this->data['nav']->render();
 ?>
 
-<div class="row fill-all">
-    <div class="col-xs-12 col-md-8" style="display: flex;">
-        <div class="box fill-all">
-            <pre><code contenteditable><?= \htmlspecialchars($content); ?></code></pre>
-        </div>
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+        <section class="portlet">
+            <div class="portlet-body">
+                <pre><code contenteditable><?= \htmlspecialchars($content); ?></code></pre>
+            </div>
+        </section>
     </div>
 
     <div class="col-xs-12 col-md-4">
+        <!--
+        @todo Implement
         <div class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Upload'); ?></div>
-                <div class="portlet-body">
-
-                </div>
-            </div>
+            <div class="portlet-body"></div>
+        </div>
+        -->
 
         <div class="portlet sticky">
             <div class="portlet-head"><?= $this->getHtml('Files'); ?></div>
             <div class="portlet-body">
                 <ul>
-                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="g-icon">folder_open</i> ..</a>
+                    <li><a href="<?= UriFactory::build('{/base}/cms/application/files{?}&file=' . FileUtils::absolute(\rtrim($this->getData('parent'), '/') . '/..')); ?>"><i class="g-icon">folder_open</i> ..</a>
                 <?php foreach ($list as $element) : ?>
-                    <li><a href="<?= UriFactory::build('{/base}/cms/application/file{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="g-icon">folder_open</i>' : '<i class="g-icon">article</i>'; ?> <?= $element['name']; ?></a>
+                    <li><a href="<?= UriFactory::build('{/base}/cms/application/files{?}&file=' . \rtrim($this->getData('parent'), '/') . '/' . $element['name']); ?>"><?= $element['type'] === 1 ? '<i class="g-icon">folder_open</i>' : '<i class="g-icon">article</i>'; ?> <?= $element['name']; ?></a>
                 <?php endforeach; ?>
                 </ul>
             </div>

@@ -51,7 +51,7 @@ return [
             ],
         ],
     ],
-    '^/cms/application/post(\?.*$|$)' => [
+    '^/cms/application/post/list(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationPosts',
             'verb'       => RouteVerb::GET,
@@ -62,7 +62,7 @@ return [
             ],
         ],
     ],
-    '^/cms/application/file(\?.*$|$)' => [
+    '^/cms/application/files(\?.*$|$)' => [
         [
             'dest'       => '\Modules\CMS\Controller\BackendController:viewApplicationFile',
             'verb'       => RouteVerb::GET,

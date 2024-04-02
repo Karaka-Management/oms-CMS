@@ -55,11 +55,11 @@ final class BackendController extends Controller
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response);
 
         if ($request->getData('ptype') === 'p') {
-            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '<')->limit(25)->execute();
+            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('offset') ?? 0, '<')->limit(25)->executeGetArray();
         } elseif ($request->getData('ptype') === 'n') {
-            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('id') ?? 0, '>')->limit(25)->execute();
+            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('offset') ?? 0, '>')->limit(25)->executeGetArray();
         } else {
-            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', 0, '>')->limit(25)->execute();
+            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', 0, '>')->limit(25)->executeGetArray();
         }
 
         return $view;
@@ -109,7 +109,7 @@ final class BackendController extends Controller
 
         $pages = PageMapper::getAll()
             ->where('app', $request->getData('app'))
-            ->execute();
+            ->executeGetArray();
 
         $view->data['list'] = $pages;
 
@@ -168,7 +168,7 @@ final class BackendController extends Controller
 
         $posts = PostMapper::getAll()
             ->where('app', $request->getData('app'))
-            ->execute();
+            ->executeGetArray();
 
         $view->data['list'] = $posts;
 

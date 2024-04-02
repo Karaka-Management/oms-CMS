@@ -501,7 +501,7 @@ final class ApiController extends Controller
         $l11ns = PageL11nMapper::getAll()
             ->where('ref', (int) $request->getData('id'))
             ->where('language', $request->getDataString('language') ?? $request->header->l11n->language)
-            ->execute();
+            ->executeGetArray();
 
         if (empty($l11ns)) {
             $this->createInvalidUpdateResponse($request, $response, []);

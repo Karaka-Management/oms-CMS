@@ -20,8 +20,8 @@ use phpOMS\Uri\UriFactory;
  */
 $list = $this->data['list'] ?? [];
 
-$previous = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&id=' . \reset($list)->id . '&ptype=p';
-$next     = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&id=' . \end($list)->id . '&ptype=n';
+$previous = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&offset=' . \reset($list)->id . '&ptype=p';
+$next     = empty($list) ? '{/base}/cms/application/page?{?}' : '{/base}/cms/application/page?{?}&offset=' . \end($list)->id . '&ptype=n';
 
 echo $this->data['nav']->render();
 ?>
