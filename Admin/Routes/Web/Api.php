@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiCookieConsent',
             'verb'       => RouteVerb::ANY,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
             ],
         ],
@@ -34,7 +34,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationInstall',
             'verb'       => RouteVerb::PUT,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
@@ -47,7 +47,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationTemplateUpdate',
             'verb'       => RouteVerb::SET,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::MODIFY,
@@ -61,7 +61,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiPageCreate',
             'verb'       => RouteVerb::PUT,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
@@ -72,7 +72,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiPageUpdate',
             'verb'       => RouteVerb::SET,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::MODIFY,
@@ -86,7 +86,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiPageL11nCreate',
             'verb'       => RouteVerb::PUT,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
@@ -97,7 +97,7 @@ return [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiPageL11nUpdate',
             'verb'       => RouteVerb::SET,
             'csrf'       => true,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::MODIFY,
