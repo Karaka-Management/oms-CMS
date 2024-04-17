@@ -25,16 +25,16 @@ $l11ns = $page->getL11ns();
 
 $languages = [];
 $l11nNames = [];
-$isNewPage = $page->id === 0;
+$isNew = $page->id === 0;
 
 echo $this->data['nav']->render();
 ?>
 <div class="row">
-    <div class="col-xs-12 col-md-9">
+    <div class="col-xs-12< col-md-9">
         <div id="testEditor" class="m-editor">
             <section class="portlet">
                 <div class="portlet-body">
-                    <form id="fCms" method="<?= $isNewPage ? 'PUT' : 'POST'; ?>" action="<?= UriFactory::build('{/api}cms/page?{?}&csrf={$CSRF}'); ?>">
+                    <form id="fCms" method="<?= $isNew ? 'PUT' : 'POST'; ?>" action="<?= UriFactory::build('{/api}cms/application/page?{?}&csrf={$CSRF}'); ?>">
                         <input id="iTitle" type="text" name="name" value="<?= $page->name; ?>" autocomplete="off">
                     </form>
                 </div>
@@ -54,12 +54,12 @@ echo $this->data['nav']->render();
             ?>
                 <section class="portlet">
                     <div class="portlet-body">
-                        <?= $this->getData('editor')->render('iPage'); ?>
+                        <?= $this->data['editor']->render('iPage'); ?>
                     </div>
                 </section>
 
                 <div class="box wf-100">
-                    <?= $this->getData('editor')
+                    <?= $this->data['editor']
                         ->getData('text')
                         ->render('iPage', 'content', 'fCms', $l11n->content, Markdown::parse($l11n->content));
                     ?>
@@ -72,7 +72,7 @@ echo $this->data['nav']->render();
         <div class="box">
              <table class="layout wf-100">
                 <tr>
-                    <?php if (!$isNewPage) : ?>
+                    <?php if (!$isNew) : ?>
                         <td>
                             <input class="cancel" type="submit" name="deleteButton" id="iDeleteButton" form="fCms" value="<?= $this->getHtml('Delete', '0', '0'); ?>">
                         <td class="rT">
@@ -84,6 +84,7 @@ echo $this->data['nav']->render();
             </table>
         </div>
 
+        <?php if (!$isNew) : ?>
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Content'); ?></div>
             <div class="portlet-body">
@@ -117,32 +118,33 @@ echo $this->data['nav']->render();
 
         <section class="portlet">
             <form id="localizationForm"
-                method="<?= $isNewPage ? 'PUT' : 'POST'; ?>"
-                action="<?= UriFactory::build('{/api}news?' . ($isNewPage ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
+                method="<?= $isNew ? 'PUT' : 'POST'; ?>"
+                action="<?= UriFactory::build('{/api}cms/application/page?' . ($isNew ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
                 <div class="portlet-head"><?= $this->getHtml('Localization'); ?></div>
                 <div class="portlet-body">
                     <div class="form-group">
                         <div class="ipt-wrap">
                             <div class="ipt-first">
                                 <select id="iLanguages" name="settings_language">
-                                    <?php
-                                        $availableLanguages = ISO639Enum::getConstants();
-                                        foreach ($availableLanguages as $code => $language) :
-                                            $code = \strtolower(\substr($code, 1));
-                                            if (\in_array($code, $languages)) {
-                                                continue;
-                                            }
-                                        ?>
-                                            <option value="<?= $this->printHtml($code); ?>"><?= $this->printHtml($language); ?>
-                                        <?php endforeach; ?>
+                                <?php
+                                    $availableLanguages = ISO639Enum::getConstants();
+                                    foreach ($availableLanguages as $code => $language) :
+                                        $code = \strtolower(\substr($code, 1));
+                                        if (\in_array($code, $languages)) {
+                                            continue;
+                                        }
+                                    ?>
+                                        <option value="<?= $this->printHtml($code); ?>"<?= $code === $this->response->header->l11n->language ? ' selected' : ''; ?>><?= $this->printHtml($language); ?>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="ipt-second">
-                                <input type="submit" name="deleteButton" id="iDeleteButton" value="<?= $this->getHtml('Create', '0', '0'); ?>">
+                                <input type="submit" name="createButton" id="iCreateButton" value="<?= $this->getHtml('Create', '0', '0'); ?>">
                             </div>
                         </div>
                     </div>
 
+                    <?php if (!empty($languages)) : ?>
                     <div class="form-group">
                         <div class="ipt-wrap">
                             <div class="ipt-first">
@@ -163,14 +165,15 @@ echo $this->data['nav']->render();
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </form>
         </section>
 
         <section class="portlet">
             <form id="elementForm"
-                method="<?= $isNewPage ? 'PUT' : 'POST'; ?>"
-                action="<?= UriFactory::build('{/api}news?' . ($isNewPage ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
+                method="<?= $isNew ? 'PUT' : 'POST'; ?>"
+                action="<?= UriFactory::build('{/api}cms/application/app?' . ($isNew ? '' : 'id={?id}&') . 'csrf={$CSRF}'); ?>">
                 <div class="portlet-head"><?= $this->getHtml('Element'); ?></div>
                 <div class="portlet-body">
                     <div class="form-group">
@@ -179,11 +182,12 @@ echo $this->data['nav']->render();
                                 <input type="text">
                             </div>
                             <div class="ipt-second">
-                                <input type="submit" name="deleteButton" id="iDeleteButton" value="<?= $this->getHtml('Create', '0', '0'); ?>">
+                                <input type="submit" name="createButton" id="iCreateButton" value="<?= $this->getHtml('Create', '0', '0'); ?>">
                             </div>
                         </div>
                     </div>
 
+                    <?php if (!empty($l11nNames)) : ?>
                     <div class="form-group">
                         <div class="ipt-wrap">
                             <div class="ipt-first">
@@ -198,8 +202,10 @@ echo $this->data['nav']->render();
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </form>
         </section>
+        <?php endif; ?>
     </div>
 </div>

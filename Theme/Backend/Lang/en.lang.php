@@ -29,6 +29,7 @@ return ['CMS' => [
     'Localization'      => 'Localization',
     'Name'              => 'Name',
     'Pages'             => 'Pages',
+    'Posts'             => 'Posts',
     'RejectAll'         => 'Reject All',
     'Submit'            => 'Submit',
     'Templates'         => 'Templates',

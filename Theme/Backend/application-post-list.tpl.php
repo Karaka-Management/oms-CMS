@@ -27,8 +27,8 @@ echo $this->data['nav']->render();
 ?>
 <div class="row">
     <div class="col-xs-12">
-        <div class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Pages'); ?><i class="g-icon download btn end-xs">download</i></div>
+        <section class="portlet">
+            <div class="portlet-head"><?= $this->getHtml('Posts'); ?><i class="g-icon download btn end-xs">download</i></div>
             <div class="slider">
             <table id="postList" class="default sticky">
                 <thead>
@@ -54,6 +54,6 @@ echo $this->data['nav']->render();
                 <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
             </div>
             -->
-        </div>
+        </section>
     </div>
 </div>

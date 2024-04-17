@@ -54,13 +54,15 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-list');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1007802001, $request, $response);
 
-        if ($request->getData('ptype') === 'p') {
-            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('offset') ?? 0, '<')->limit(25)->executeGetArray();
-        } elseif ($request->getData('ptype') === 'n') {
-            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', $request->getDataInt('offset') ?? 0, '>')->limit(25)->executeGetArray();
-        } else {
-            $view->data['applications'] = AppMapper::getAll()->where('type', ApplicationType::WEB)->where('id', 0, '>')->limit(25)->executeGetArray();
-        }
+        $view->data['applications'] = AppMapper::getAll()
+            ->where('type', ApplicationType::WEB)
+            ->limit(25)
+            ->paginate(
+                'id',
+                $request->getData('ptype'),
+                $request->getDataInt('offset')
+            )
+            ->executeGetArray();
 
         return $view;
     }

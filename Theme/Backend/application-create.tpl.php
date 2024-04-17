@@ -17,7 +17,7 @@ echo $this->data['nav']->render(); ?>
 
 <div class="row">
     <div class="col-xs-12 col-md-6">
-        <div class="portlet">
+        <section class="portlet">
             <form id="cms-application-create" action="<?= \phpOMS\Uri\UriFactory::build('{/api}cms/application/upload?csrf={$CSRF}'); ?>" method="PUT">
                 <div class="portlet-head"><?= $this->getHtml('Application'); ?></div>
                 <div class="portlet-body">
@@ -44,6 +44,6 @@ echo $this->data['nav']->render(); ?>
                     <input type="submit" id="iApplicationCreateButton" name="applicationCreateButton" value="<?= $this->getHtml('Create', '0', '0'); ?>">
                 </div>
             </form>
-        </div>
+        </section>
     </div>
 </div>

@@ -42,10 +42,10 @@ echo $this->data['nav']->render();
     <div class="col-xs-12 col-md-4">
         <!--
         @todo Implement
-        <div class="portlet">
+        <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Upload'); ?></div>
             <div class="portlet-body"></div>
-        </div>
+        </section>
         -->
 
         <div class="portlet sticky">
