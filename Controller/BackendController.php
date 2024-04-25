@@ -59,7 +59,7 @@ final class BackendController extends Controller
             ->limit(25)
             ->paginate(
                 'id',
-                $request->getData('ptype'),
+                $request->getDataString('ptype'),
                 $request->getDataInt('offset')
             )
             ->executeGetArray();
