@@ -44,6 +44,23 @@ use phpOMS\Utils\MbStringUtils;
  *      This is also very important for customizing the `Backend` for customers.
  *      Instead of just overwriting them they get backed up in a backup directory.
  *      https://github.com/Karaka-Management/oms-CMS/issues/4
+ *
+ * @feature Allow content changes and saving
+ *      https://github.com/Karaka-Management/oms-CMS/issues/9
+ *
+ * @feature Ideas for applications based on modules
+ *      * monitor/log dashboard
+ *      * sales dashboard
+ *      * calendar
+ *      * support/ticket
+ *      * clocking
+ *      * Q&A
+ *      * Wiki
+ *      * Shop
+ *      https://github.com/Karaka-Management/oms-CMS/issues/8
+ *
+ * @feature Allow different content types (e.g. pages, posts, ...) with individual templates
+ *      https://github.com/Karaka-Management/oms-CMS/issues/5
  */
 final class ApiController extends Controller
 {

@@ -18,6 +18,7 @@ use Modules\Admin\Models\AppMapper;
 use Modules\CMS\Models\PageMapper;
 use Modules\CMS\Models\PostMapper;
 use phpOMS\Application\ApplicationType;
+use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
@@ -33,6 +34,13 @@ use phpOMS\Views\View;
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
+ *
+ * @feature Create general purpose terms, imprint, ... where the content is pulled from the organization definitions.
+ *      Basically you should be able to define a template with wildcards e.g. {{legal_name}}
+ *      https://github.com/Karaka-Management/oms-CMS/issues/14
+ *
+ * @bug Only German localization can be deleted from the pages/posts, why no english?
+ *      https://github.com/Karaka-Management/oms-CMS/issues/15
  */
 final class BackendController extends Controller
 {
@@ -186,10 +194,19 @@ final class BackendController extends Controller
      *
      * @return RenderableInterface
      *
+     * @feature Implement code formatting / syntax highlighting
+     *      https://github.com/Karaka-Management/oms-CMS/issues/6
+     *
      * @since 1.0.0
      */
     public function viewApplicationFile(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
+        $head  = $response->data['Content']->head;
+        $nonce = $this->app->appSettings->getOption('script-nonce');
+
+        $head->addAsset(AssetType::CSS, 'cssOMS/code_textarea.css?v=' . $this->app->version);
+        $head->addAsset(AssetType::JSLATE, 'jsOMS/UI/Component/CodeArea.js?v=' . self::VERSION, ['nonce' => $nonce, 'type' => 'module']);
+
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/CMS/Theme/Backend/application-file');

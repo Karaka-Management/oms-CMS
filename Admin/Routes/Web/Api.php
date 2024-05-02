@@ -29,7 +29,7 @@ return [
         ],
     ],
 
-    '^.*/cms/application/upload$' => [
+    '^.*/cms/application/upload(\?.*|$)$' => [
         [
             'dest'       => '\Modules\CMS\Controller\ApiController:apiApplicationInstall',
             'verb'       => RouteVerb::PUT,
