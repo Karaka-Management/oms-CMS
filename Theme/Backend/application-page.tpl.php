@@ -25,7 +25,7 @@ $l11ns = $page->getL11ns();
 
 $languages = [];
 $l11nNames = [];
-$isNew = $page->id === 0;
+$isNew     = $page->id === 0;
 
 echo $this->data['nav']->render();
 ?>

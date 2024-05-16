@@ -251,13 +251,13 @@ final class BackendController extends Controller
         }
 
         $file   = \realpath($basePath . '/' . \ucfirst(\strtolower($app->name)) . '/' . ($request->getDataString('file') ?? ''));
-        $parent = $file === false || \is_dir($file) ? $request->getDataString('file') ?? '' : \dirname($request->getDataString('file') ?? '');
+        $view->data['parent'] = $file === false || \is_dir($file) ? $request->getDataString('file') ?? '' : \dirname($request->getDataString('file') ?? '');
 
         if ($file === false || !\is_file($file) || \stripos($file, $basePath) !== 0) {
             $file = empty($temp2) ? false : \realpath(\rtrim($path, '/') . '/' . $temp2[0]['name']);
         }
 
-        $fileList = \array_merge($temp1, $temp2);
+        $view->data['list'] = \array_merge($temp1, $temp2);
 
         if ($file === false || !Guard::isSafePath($file)) {
             $view->setTemplate('/Web/Backend/Error/404');
@@ -266,9 +266,10 @@ final class BackendController extends Controller
             return $view;
         }
 
-        $view->data['content'] = $file === false ? '' : \file_get_contents($file);
-        $view->data['parent']  = $parent;
-        $view->data['list']    = $fileList;
+        $view->data['content'] = \file_get_contents($file);
+        if ($view->data['content'] === false) {
+            $view->data['content'] = '';
+        }
 
         return $view;
     }

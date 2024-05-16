@@ -127,7 +127,7 @@
                 "autoincrement": true
             },
             "cms_post_name": {
-                "description": "Used as named id",
+                "comment": "Used as named id",
                 "name": "cms_post_name",
                 "type": "VARCHAR(255)",
                 "null": false
