@@ -30,9 +30,7 @@ return ['CMS' => [
     'Name'              => 'Name',
     'Pages'             => 'Pages',
     'Posts'             => 'Posts',
-    'RejectAll'         => 'Reject All',
     'Submit'            => 'Submit',
-    'Templates'         => 'Templates',
     'Title'             => '',
     'Upload'            => 'Upload',
 ]];
