@@ -29,9 +29,9 @@ $isNew     = $page->id === 0;
 
 echo $this->data['nav']->render();
 ?>
-<div class="row">
-    <div class="col-xs-12< col-md-9">
-        <div id="testEditor" class="m-editor">
+<div class="row col-simple">
+    <div class="col-xs-12 col-md-9 col-simple">
+        <div id="testEditor" class="m-editor col-simple">
             <section class="portlet">
                 <div class="portlet-body">
                     <form id="fCms" method="<?= $isNew ? 'PUT' : 'POST'; ?>" action="<?= UriFactory::build('{/api}cms/application/page?{?}&csrf={$CSRF}'); ?>">
@@ -58,7 +58,7 @@ echo $this->data['nav']->render();
                     </div>
                 </section>
 
-                <div class="box wf-100">
+                <div class="box wf-100 col-simple">
                     <?= $this->data['editor']
                         ->getData('text')
                         ->render('iPage', 'content', 'fCms', $l11n->content, Markdown::parse($l11n->content));
