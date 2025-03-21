@@ -150,7 +150,7 @@ final class BackendController extends Controller
 
         $page = PageMapper::get()
             ->with('l11n')
-            ->where('id', (int) $request->getData('id'))
+            ->where('id', $request->getDataInt('id') ?? 0)
             ->execute();
 
         $view->data['page'] = $page;

@@ -468,7 +468,7 @@ final class ApiController extends Controller
     public function apiApplicationFilesList(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         /** @var App $app */
-        $app  = AppMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $app  = AppMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $path = $request->getDataString('path') ?? '/';
 
         $content = \scandir(__DIR__ . '/../../../Web/' . MbStringUtils::mb_ucfirst(\mb_strtolower($app->name)) . $path);
@@ -503,7 +503,7 @@ final class ApiController extends Controller
         }
 
         /** @var \Modules\CMS\Models\Page $old */
-        $old = PageMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $old = PageMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $new = $this->updatePageFromRequest($request, clone $old);
 
         $this->updateModel($request->header->account, $old, $new, PageMapper::class, 'page', $request->getOrigin());
@@ -516,7 +516,7 @@ final class ApiController extends Controller
 
         /** @var \phpOMS\Localization\BaseStringL11n[] $l11ns */
         $l11ns = PageL11nMapper::getAll()
-            ->where('ref', (int) $request->getData('id'))
+            ->where('ref', $request->getDataInt('id') ?? 0)
             ->where('language', $request->getDataString('language') ?? $request->header->l11n->language)
             ->executeGetArray();
 
@@ -526,7 +526,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $request->setData('page', (int) $request->getData('id'), true);
+        $request->setData('page', $request->getDataInt('id') ?? 0, true);
 
         $contents = $request->getDataJson('content');
         foreach ($contents as $content) {
@@ -603,7 +603,7 @@ final class ApiController extends Controller
         }
 
         /** @var \Modules\CMS\Models\Page $page */
-        $page = PageMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $page = PageMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $this->deleteModel($request->header->account, $page, PageMapper::class, 'page', $request->getOrigin());
         $this->createStandardDeleteResponse($request, $response, $page);
     }
@@ -650,7 +650,7 @@ final class ApiController extends Controller
         }
 
         /** @var BaseStringL11n $old */
-        $old = PageL11nMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $old = PageL11nMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $new = $this->updatePageL11nFromRequest($request, clone $old);
 
         $this->updateModel($request->header->account, $old, $new, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
@@ -737,7 +737,7 @@ final class ApiController extends Controller
         }
 
         /** @var BaseStringL11n $pageL11n */
-        $pageL11n = PageL11nMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $pageL11n = PageL11nMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $this->deleteModel($request->header->account, $pageL11n, PageL11nMapper::class, 'page_l11n', $request->getOrigin());
         $this->createStandardDeleteResponse($request, $response, $pageL11n);
     }
